@@ -1,28 +1,81 @@
 # Framework Benchmark Dashboard
 
-One public Netlify dashboard for reviewed synthetic benchmark summaries from Role-Aware Mockserver, Agentic Playwright, Agentic API and JEV. It displays execution status, missing measurements, import integrity checks, source fingerprints, check outcomes and published run history. The site does not execute tests, call models or accept uploads.
+[Live dashboard](https://framework-benchmarks-balaji.netlify.app) for synthetic
+Role-Aware Mockserver, Agentic Playwright, Agentic API and JEV benchmark evidence.
 
-## Refresh from all repositories
+## Automatic results
 
-Run each framework's documented benchmark first. Create an ignored `sources.local.json` mapping exactly `mockserver`, `harness`, `api`, `jev` to their artifact-bearing checkout directories. Read only these explicit paths; do not point at credentials or private trackers.
+In any enrolled framework checkout, run **`npm run benchmark`**. Its complete
+protocol executes, validates source artifacts and publishes only sanitised
+aggregates to that repo's **`benchmark-results` branch**, in `latest.json`.
+The deployed dashboard reads all four public feeds directly and refreshes every
+minute while visible. GitHub CDN caching can add a few minutes. **No manual import
+or Netlify deployment is needed when results change.** Reloading or returning to
+the tab also refreshes. A disconnected feed is labelled, with previous evidence
+retained rather than presented as a fresh success.
+
+| Project | Source repo | CI benchmark trigger |
+| --- | --- | --- |
+| Mockserver | `balajiregt/plawright-role-aware-mockserver` | Relevant pushes to main; manual dispatch |
+| Playwright | `balajiregt/playwright-harness-framework` | Relevant pushes to main; manual dispatch |
+| API | `balajiregt/agentic-workspace` | Relevant pushes to main; manual dispatch |
+| JEV | `balajiregt/jev-scope-qa` | Manual dispatch only, because live evaluation calls a provider |
+
+Each framework documents dependencies, aliases and recovery in
+`benchmarks/AUTOMATIC-PUBLICATION.md`. Direct ad hoc test commands are not watched.
+`benchmark:collect` republishes trial aggregates after a complete API/harness run.
+`BENCHMARK_PUBLISH=0 npm run benchmark` disables sending for a private/local run.
+`npm run benchmark:publish` retries a failed publication without rerunning tests.
+No credentials are shipped to browsers; no Netlify token or shared PAT is needed
+in the framework repos. Actions uses its repository-scoped token; local runs use
+the existing Git credential helper. CI cannot publish if organization policy or
+branch protection disallows it, and reports failure rather than hiding it.
+
+## Integrity and interpretation
+
+The runner clears old protocol outputs before execution, records each attempt,
+and checks freshness, source hashes, fixed case identities, denominators and retries.
+Failed or incomplete attempts publish failed/unavailable evidence. Last 50 attempts
+per repo are retained; duplicate sends do not add a commit. Concurrent publishers
+merge with bounded, non-force retries; older-started attempts do not replace newer
+ones. Forced termination/network loss can prevent publication; failed local
+publication retains a pending aggregate and returns nonzero. No background daemon
+uploads later. Download public snapshot exports the currently loaded combined data.
+
+The exporter uses a closed public field/text vocabulary. Unexpected free text is
+withheld and unknown keys reject export. Raw reports, traces, prompts, gold labels,
+model output, credentials, absolute local paths and reviewer notes stay private.
+The public vocabulary names/check IDs are only from the already published synthetic
+protocol. New cases require a reviewed protocol/vocabulary update. Execution and
+source checks are self-reported; the browser cannot independently inspect raw files.
+Ordinary browser runtime does not establish AI productivity. Blocked JEV runs have
+no accuracy result. Missing cost and human-effort measurements remain unavailable.
+
+## Development and deployment
 
 ```sh
-npm run import
 npm test
 npm run build
 npm run preview
 ```
 
-The importer only publishes allowlisted aggregate fields. Raw Playwright/Surefire/JEV reports, token payloads, traces, source paths, prompts, gold labels, reviewer notes and credentials are not copied. It checks report hashes, outcome denominators, source XML provenance, retry counts and the seeded-defect report. Missing/malformed sources become unavailable evidence, not passes. The browser's Validate snapshot button checks structural consistency and recorded import results; it cannot recheck private raw files. Refresh published data fetches the deployed snapshot; it does not fetch files from your Mac.
+Node 22, Python 3.10+ and Git are sufficient for dashboard validation. There are no
+browser runtime dependencies. `automation/` contains the common publisher/runner;
+`scripts/install-automation.py` synchronises it to four explicitly enrolled local
+checkouts at `../work/repos/{mockserver,harness,api,jev}`. Update that explicit mapping
+when maintaining from another checkout; do not scan arbitrary private projects.
 
-## Publication
+The original `npm run import` command and ignored `sources.local.json` remain for
+reviewed offline seed snapshots. The live feeds take precedence and feed failures
+are visibly marked. The seed snapshot is a fallback, not a recent execution claim.
 
-Review `public/data/benchmarks.json` after every import. Commit only reviewed public summaries and source code, then build/deploy `dist` to the existing Netlify site. `netlify.toml` supports Git-based deployment using `npm run build` and `dist`; no secrets are needed for site builds. Local imports require Python 3. The static build requires Node 22 and no third-party runtime dependencies. Do not commit `sources.local.json`, `.netlify/`, raw reports or credentials.
+Only **dashboard code changes** need a Netlify build/deployment:
 
-Up to 100 immutable imported records are retained in published history; identical imports deduplicate by public run fingerprint. History reflects published imports, not automatic continuous collection. Never claim AI improvement from ordinary browser runtime. JEV's HTTP 403 run has no model accuracy result. Initial content contains no paired live-agent experiment.
+```sh
+npx netlify-cli deploy --prod --no-build --dir=dist --site=995be9dd-6fcb-494d-8514-9e4f5c1055a4
+```
 
-## Live site
-
-https://framework-benchmarks-balaji.netlify.app
-
-The initial site uses manual CLI deployment to the existing Free team. Future reviewed updates can be published with `npx netlify-cli deploy --prod --no-build --dir=dist --site=995be9dd-6fcb-494d-8514-9e4f5c1055a4`. Import, review, test and build first. Git pushes alone do not currently publish this site. CI validates public code and snapshot builds; it does not read local artifacts or call model providers.
+Build and validate before deploying. Source pushes run validation; hosting source
+is currently deployed through the existing authenticated Netlify CLI. Result-branch
+updates bypass deployment entirely. `netlify.toml` permits read-only browser fetches
+from `raw.githubusercontent.com`. Do not commit `.netlify/` or raw artifacts.
