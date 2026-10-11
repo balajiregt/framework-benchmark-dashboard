@@ -1,0 +1,1 @@
+{"name":"framework-benchmark-dashboard","version":"1.0.0","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"python3 -m unittest discover -s tests -p '*_test.py'","preview":"python3 -m http.server 4397 --bind 127.0.0.1 --directory dist","import":"python3 scripts/import_benchmarks.py --sources sources.local.json"},"engines":{"node":">=22"}}

@@ -1,0 +1,1521 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-10-11T14:25:10.941243+00:00",
+  "runs": [
+    {
+      "project": "mockserver",
+      "title": "Role-Aware Mockserver",
+      "repository": "https://github.com/balajiregt/plawright-role-aware-mockserver",
+      "protocol": "https://github.com/balajiregt/plawright-role-aware-mockserver/blob/main/benchmarks/README.md",
+      "checks": [
+        {
+          "name": "Summary matches source report",
+          "ok": true,
+          "detail": "SHA256 comparison"
+        },
+        {
+          "name": "legacy-interception denominator",
+          "ok": true,
+          "detail": "15 observed journeys"
+        },
+        {
+          "name": "mockserver denominator",
+          "ok": true,
+          "detail": "15 observed journeys"
+        },
+        {
+          "name": "No expected-failure oracles",
+          "ok": true,
+          "detail": "Expected failures cannot qualify as successful oracle evidence"
+        },
+        {
+          "name": "No oracle retries",
+          "ok": true,
+          "detail": "Retry counts checked where browser/JUnit results are supplied"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Passed checks",
+          "value": 33,
+          "unit": " / 33",
+          "note": ""
+        },
+        {
+          "label": "Human setup effort",
+          "value": null,
+          "unit": "ms",
+          "note": ""
+        },
+        {
+          "label": "Debugging time",
+          "value": null,
+          "unit": "ms",
+          "note": ""
+        }
+      ],
+      "limitations": [
+        "Both arms use synthetic local dependencies; no real identity provider comparison.",
+        "Setup is programmatic setup, not human environment preparation.",
+        "No production stability, financial savings or diagnosis-time claim.",
+        "Small sequential samples; timings are descriptive, not causal speedup evidence."
+      ],
+      "cases": [
+        {
+          "name": "legacy-interception | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "direct backend rejects missing and forged tokens @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "direct backend rejects missing and forged tokens @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "direct backend rejects missing and forged tokens @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "summary.json",
+          "sha256": "0e97f6853646555a86a544a57f2d1c4ec489945c09dbb1a5bb1750630f536a17",
+          "fileModifiedAt": "2026-10-11T14:05:29.051297+00:00"
+        },
+        {
+          "file": "playwright.json",
+          "sha256": "a409bc61477474e2e37b4aca4fd35ff079c395104fc5f95e2c4f877f61997a4a",
+          "fileModifiedAt": "2026-10-11T14:03:15.183012+00:00"
+        }
+      ],
+      "runAt": "2026-10-11T14:05:28.954Z",
+      "timeBasis": "summary generated time",
+      "revision": "66f20687539f966796c0f7d5f299f6eefa03465d",
+      "dirtySource": true,
+      "comparison": {
+        "legacy-interception": {
+          "attempted": 15,
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0,
+          "missingMeasurements": 0,
+          "meanSetupMs": 8.97089166666674,
+          "meanJourneyAndOracleMs": 234.52608053333333,
+          "inconsistentScenarios": []
+        },
+        "mockserver": {
+          "attempted": 15,
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0,
+          "missingMeasurements": 0,
+          "meanSetupMs": 3.397835933333469,
+          "meanJourneyAndOracleMs": 170.53524180000005,
+          "inconsistentScenarios": []
+        }
+      },
+      "status": "passed",
+      "integrity": "verified",
+      "runId": "3fd8fd9bfaea946c"
+    },
+    {
+      "project": "harness",
+      "title": "Agentic Playwright",
+      "repository": "https://github.com/balajiregt/playwright-harness-framework",
+      "protocol": "https://github.com/balajiregt/playwright-harness-framework/blob/main/benchmarks/README.md",
+      "checks": [
+        {
+          "name": "Mutation report hash",
+          "ok": true,
+          "detail": "Summary bound to source report"
+        },
+        {
+          "name": "Seeded defect observed",
+          "ok": true,
+          "detail": "Intentional viewer-export bypass must fail its oracle"
+        },
+        {
+          "name": "Trial records consistent",
+          "ok": true,
+          "detail": "Duplicate pairs or malformed records do not qualify"
+        },
+        {
+          "name": "No expected-failure oracles",
+          "ok": true,
+          "detail": "Expected failures cannot qualify as successful oracle evidence"
+        },
+        {
+          "name": "No oracle retries",
+          "ok": true,
+          "detail": "Retry counts checked where browser/JUnit results are supplied"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Passed oracle checks",
+          "value": 4,
+          "unit": " / 4",
+          "note": ""
+        },
+        {
+          "label": "Seeded defects detected",
+          "value": 1,
+          "unit": " / 1",
+          "note": ""
+        },
+        {
+          "label": "Paired live-agent trials",
+          "value": 0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Scripted collector checks",
+          "value": 1,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "AI cost",
+          "value": null,
+          "unit": "",
+          "note": ""
+        }
+      ],
+      "limitations": [
+        "One deliberately seeded defect; not a general defect detection rate.",
+        "Browser runtime is not agent task completion time.",
+        "Agent comparisons require matched task, model/version and target groups; scripted validation is separate."
+      ],
+      "cases": [
+        {
+          "name": "viewer export denied in UI and API",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "manager exports exact account fixture",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "unauthenticated export denied",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "manager direct admin route denied",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "oracle.json",
+          "sha256": "aeaec82bad161c348d15b86f245ff01b9b2033f428c872878e9788f2b8c6c9d1",
+          "fileModifiedAt": "2026-10-11T14:03:13.418792+00:00"
+        },
+        {
+          "file": "mutation-summary.json",
+          "sha256": "7650c7f3170ffa5192ba9c220d5790c65a671be2cd977f6d8fa76fea97f4d97c",
+          "fileModifiedAt": "2026-10-11T14:01:42.588304+00:00"
+        },
+        {
+          "file": "mutant.json",
+          "sha256": "d08f38c866a3242ece8f596a262c5d2e19354c8f4a6e1a69691c28d62f9bc2c7",
+          "fileModifiedAt": "2026-10-11T14:01:42.555446+00:00"
+        }
+      ],
+      "runAt": "2026-10-11T14:03:08.249Z",
+      "timeBasis": "browser run start",
+      "agentTrials": {
+        "liveTrials": 0,
+        "scriptedValidations": 1,
+        "pairedRepeats": 0,
+        "groups": [],
+        "invalidRecords": 0
+      },
+      "status": "passed",
+      "integrity": "verified",
+      "runId": "42eafbfff146d226"
+    },
+    {
+      "project": "api",
+      "title": "Agentic API",
+      "repository": "https://github.com/balajiregt/agentic-workspace",
+      "protocol": "https://github.com/balajiregt/agentic-workspace/blob/main/benchmarks/README.md",
+      "checks": [
+        {
+          "name": "JUnit source: TEST-com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest.xml",
+          "ok": true,
+          "detail": "XML hash checked locally; XML not published"
+        },
+        {
+          "name": "Oracle has test evidence",
+          "ok": true,
+          "detail": "Empty evidence cannot pass"
+        },
+        {
+          "name": "Trial records consistent",
+          "ok": true,
+          "detail": "Duplicate pairs or malformed records do not qualify"
+        },
+        {
+          "name": "No expected-failure oracles",
+          "ok": true,
+          "detail": "Expected failures cannot qualify as successful oracle evidence"
+        },
+        {
+          "name": "No oracle retries",
+          "ok": true,
+          "detail": "Retry counts checked where browser/JUnit results are supplied"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Passed API cases",
+          "value": 5,
+          "unit": " / 5",
+          "note": ""
+        },
+        {
+          "label": "Paired live-agent trials",
+          "value": 0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Scripted collector checks",
+          "value": 0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Human corrections",
+          "value": null,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "AI cost",
+          "value": null,
+          "unit": "",
+          "note": ""
+        }
+      ],
+      "limitations": [
+        "Synthetic sample API; no production result.",
+        "Timestamp is file provenance, not measured agent elapsed time.",
+        "Agent comparisons require matched task, model/version and target groups; scripted validation is separate."
+      ],
+      "cases": [
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskReturnsHighRiskCustomer",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskReturnsMediumRiskCustomer",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskRejectsMissingCustomerId",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskReturnsLowRiskCustomer",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskRejectsBlankCustomerId",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "api-oracle.json",
+          "sha256": "373bb29aa5acf21fb3df82628a33bbfb5e74555c35c55324908b86844c008c3e",
+          "fileModifiedAt": "2026-10-11T14:05:28.907344+00:00"
+        }
+      ],
+      "runAt": "2026-10-11T14:05:28.907344+00:00",
+      "timeBasis": "normalized report file modified time",
+      "agentTrials": {
+        "liveTrials": 0,
+        "scriptedValidations": 0,
+        "pairedRepeats": 0,
+        "groups": [],
+        "invalidRecords": 0
+      },
+      "status": "passed",
+      "integrity": "verified",
+      "runId": "0ef3c2a08e5623c8"
+    },
+    {
+      "project": "jev",
+      "title": "JEV Review",
+      "repository": "https://github.com/balajiregt/jev-scope-qa",
+      "protocol": "https://github.com/balajiregt/jev-scope-qa/blob/main/benchmarks/README.md",
+      "checks": [
+        {
+          "name": "Metrics match source report",
+          "ok": true,
+          "detail": "SHA256 comparison"
+        },
+        {
+          "name": "Unique valid check identities",
+          "ok": true,
+          "detail": "No duplicated or unknown checks"
+        },
+        {
+          "name": "Evaluation denominator",
+          "ok": true,
+          "detail": "Requested and evaluated remain separate"
+        },
+        {
+          "name": "No expected-failure oracles",
+          "ok": true,
+          "detail": "Expected failures cannot qualify as successful oracle evidence"
+        },
+        {
+          "name": "No oracle retries",
+          "ok": true,
+          "detail": "Retry counts checked where browser/JUnit results are supplied"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Evaluated checks",
+          "value": 0,
+          "unit": " / 16",
+          "note": ""
+        },
+        {
+          "label": "Operational errors",
+          "value": 1,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Not evaluated",
+          "value": 15,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Issue precision",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "Issue recall",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "Missed issue rate",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "False alarm rate",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "Exact finding accuracy",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "AI cost",
+          "value": null,
+          "unit": "",
+          "note": ""
+        }
+      ],
+      "limitations": [
+        "Gold labels remain evaluator-only. Authored synthetic CRM evidence is not production evidence.",
+        "Issue detection and exact finding classification are separate metrics.",
+        "Failed/unrun checks count as undetected expected issues in end-to-end recall; exact accuracy is conditional on evaluated rows.",
+        "Raw findings and confidence-routed findings are separate. Null means unmeasured. No cost or human-time inference."
+      ],
+      "cases": [
+        {
+          "name": "viewer-denial:planning:ac",
+          "status": "error",
+          "errorCode": "http_403"
+        },
+        {
+          "name": "viewer-denial:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "hidden-only:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "hidden-only:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "status-only:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "status-only:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "missing-export:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "missing-export:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "missing-helper:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "missing-helper:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "duplicate-denial:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "duplicate-denial:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "duplicate-denial:duplication:s1:s2",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "distinct-boundary:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "distinct-boundary:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "distinct-boundary:duplication:s1:s2",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "workflow-benchmark.json",
+          "sha256": "9fb0ec0807cb3e66eca60f0acd324b2ea3fb5c1644263493b510ef801361a01d",
+          "fileModifiedAt": "2026-10-11T14:00:54.686408+00:00"
+        },
+        {
+          "file": "crm-benchmark-metrics.json",
+          "sha256": "1e5fa27ecdd7ee9ace4ceb0be999da5758d092aff0d33cdbb0a9252edb61a910",
+          "fileModifiedAt": "2026-10-11T14:02:42.215600+00:00"
+        }
+      ],
+      "runAt": "2026-10-11T14:00:53.118Z",
+      "timeBasis": "evaluator report generated time",
+      "status": "blocked",
+      "mode": "live",
+      "stages": {
+        "planning": {
+          "requested": 7,
+          "evaluated": 0
+        },
+        "duplication": {
+          "requested": 2,
+          "evaluated": 0
+        },
+        "implementation": {
+          "requested": 7,
+          "evaluated": 0
+        }
+      },
+      "notice": "Provider HTTP 403 prevented live evaluation. No model quality result.",
+      "integrity": "verified",
+      "runId": "f83963774c2d0569"
+    }
+  ],
+  "history": [
+    {
+      "project": "mockserver",
+      "title": "Role-Aware Mockserver",
+      "repository": "https://github.com/balajiregt/plawright-role-aware-mockserver",
+      "protocol": "https://github.com/balajiregt/plawright-role-aware-mockserver/blob/main/benchmarks/README.md",
+      "checks": [
+        {
+          "name": "Summary matches source report",
+          "ok": true,
+          "detail": "SHA256 comparison"
+        },
+        {
+          "name": "legacy-interception denominator",
+          "ok": true,
+          "detail": "15 observed journeys"
+        },
+        {
+          "name": "mockserver denominator",
+          "ok": true,
+          "detail": "15 observed journeys"
+        },
+        {
+          "name": "No expected-failure oracles",
+          "ok": true,
+          "detail": "Expected failures cannot qualify as successful oracle evidence"
+        },
+        {
+          "name": "No oracle retries",
+          "ok": true,
+          "detail": "Retry counts checked where browser/JUnit results are supplied"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Passed checks",
+          "value": 33,
+          "unit": " / 33",
+          "note": ""
+        },
+        {
+          "label": "Human setup effort",
+          "value": null,
+          "unit": "ms",
+          "note": ""
+        },
+        {
+          "label": "Debugging time",
+          "value": null,
+          "unit": "ms",
+          "note": ""
+        }
+      ],
+      "limitations": [
+        "Both arms use synthetic local dependencies; no real identity provider comparison.",
+        "Setup is programmatic setup, not human environment preparation.",
+        "No production stability, financial savings or diagnosis-time claim.",
+        "Small sequential samples; timings are descriptive, not causal speedup evidence."
+      ],
+      "cases": [
+        {
+          "name": "legacy-interception | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "direct backend rejects missing and forged tokens @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "direct backend rejects missing and forged tokens @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "legacy-interception | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | admin @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | viewer @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | vip @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | downstream-error @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "mockserver | expired-token @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "direct backend rejects missing and forged tokens @benchmark",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "summary.json",
+          "sha256": "0e97f6853646555a86a544a57f2d1c4ec489945c09dbb1a5bb1750630f536a17",
+          "fileModifiedAt": "2026-10-11T14:05:29.051297+00:00"
+        },
+        {
+          "file": "playwright.json",
+          "sha256": "a409bc61477474e2e37b4aca4fd35ff079c395104fc5f95e2c4f877f61997a4a",
+          "fileModifiedAt": "2026-10-11T14:03:15.183012+00:00"
+        }
+      ],
+      "runAt": "2026-10-11T14:05:28.954Z",
+      "timeBasis": "summary generated time",
+      "revision": "66f20687539f966796c0f7d5f299f6eefa03465d",
+      "dirtySource": true,
+      "comparison": {
+        "legacy-interception": {
+          "attempted": 15,
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0,
+          "missingMeasurements": 0,
+          "meanSetupMs": 8.97089166666674,
+          "meanJourneyAndOracleMs": 234.52608053333333,
+          "inconsistentScenarios": []
+        },
+        "mockserver": {
+          "attempted": 15,
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0,
+          "missingMeasurements": 0,
+          "meanSetupMs": 3.397835933333469,
+          "meanJourneyAndOracleMs": 170.53524180000005,
+          "inconsistentScenarios": []
+        }
+      },
+      "status": "passed",
+      "integrity": "verified",
+      "runId": "3fd8fd9bfaea946c"
+    },
+    {
+      "project": "harness",
+      "title": "Agentic Playwright",
+      "repository": "https://github.com/balajiregt/playwright-harness-framework",
+      "protocol": "https://github.com/balajiregt/playwright-harness-framework/blob/main/benchmarks/README.md",
+      "checks": [
+        {
+          "name": "Mutation report hash",
+          "ok": true,
+          "detail": "Summary bound to source report"
+        },
+        {
+          "name": "Seeded defect observed",
+          "ok": true,
+          "detail": "Intentional viewer-export bypass must fail its oracle"
+        },
+        {
+          "name": "Trial records consistent",
+          "ok": true,
+          "detail": "Duplicate pairs or malformed records do not qualify"
+        },
+        {
+          "name": "No expected-failure oracles",
+          "ok": true,
+          "detail": "Expected failures cannot qualify as successful oracle evidence"
+        },
+        {
+          "name": "No oracle retries",
+          "ok": true,
+          "detail": "Retry counts checked where browser/JUnit results are supplied"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Passed oracle checks",
+          "value": 4,
+          "unit": " / 4",
+          "note": ""
+        },
+        {
+          "label": "Seeded defects detected",
+          "value": 1,
+          "unit": " / 1",
+          "note": ""
+        },
+        {
+          "label": "Paired live-agent trials",
+          "value": 0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Scripted collector checks",
+          "value": 1,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "AI cost",
+          "value": null,
+          "unit": "",
+          "note": ""
+        }
+      ],
+      "limitations": [
+        "One deliberately seeded defect; not a general defect detection rate.",
+        "Browser runtime is not agent task completion time.",
+        "Agent comparisons require matched task, model/version and target groups; scripted validation is separate."
+      ],
+      "cases": [
+        {
+          "name": "viewer export denied in UI and API",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "manager exports exact account fixture",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "unauthenticated export denied",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "manager direct admin route denied",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "oracle.json",
+          "sha256": "aeaec82bad161c348d15b86f245ff01b9b2033f428c872878e9788f2b8c6c9d1",
+          "fileModifiedAt": "2026-10-11T14:03:13.418792+00:00"
+        },
+        {
+          "file": "mutation-summary.json",
+          "sha256": "7650c7f3170ffa5192ba9c220d5790c65a671be2cd977f6d8fa76fea97f4d97c",
+          "fileModifiedAt": "2026-10-11T14:01:42.588304+00:00"
+        },
+        {
+          "file": "mutant.json",
+          "sha256": "d08f38c866a3242ece8f596a262c5d2e19354c8f4a6e1a69691c28d62f9bc2c7",
+          "fileModifiedAt": "2026-10-11T14:01:42.555446+00:00"
+        }
+      ],
+      "runAt": "2026-10-11T14:03:08.249Z",
+      "timeBasis": "browser run start",
+      "agentTrials": {
+        "liveTrials": 0,
+        "scriptedValidations": 1,
+        "pairedRepeats": 0,
+        "groups": [],
+        "invalidRecords": 0
+      },
+      "status": "passed",
+      "integrity": "verified",
+      "runId": "42eafbfff146d226"
+    },
+    {
+      "project": "api",
+      "title": "Agentic API",
+      "repository": "https://github.com/balajiregt/agentic-workspace",
+      "protocol": "https://github.com/balajiregt/agentic-workspace/blob/main/benchmarks/README.md",
+      "checks": [
+        {
+          "name": "JUnit source: TEST-com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest.xml",
+          "ok": true,
+          "detail": "XML hash checked locally; XML not published"
+        },
+        {
+          "name": "Oracle has test evidence",
+          "ok": true,
+          "detail": "Empty evidence cannot pass"
+        },
+        {
+          "name": "Trial records consistent",
+          "ok": true,
+          "detail": "Duplicate pairs or malformed records do not qualify"
+        },
+        {
+          "name": "No expected-failure oracles",
+          "ok": true,
+          "detail": "Expected failures cannot qualify as successful oracle evidence"
+        },
+        {
+          "name": "No oracle retries",
+          "ok": true,
+          "detail": "Retry counts checked where browser/JUnit results are supplied"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Passed API cases",
+          "value": 5,
+          "unit": " / 5",
+          "note": ""
+        },
+        {
+          "label": "Paired live-agent trials",
+          "value": 0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Scripted collector checks",
+          "value": 0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Human corrections",
+          "value": null,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "AI cost",
+          "value": null,
+          "unit": "",
+          "note": ""
+        }
+      ],
+      "limitations": [
+        "Synthetic sample API; no production result.",
+        "Timestamp is file provenance, not measured agent elapsed time.",
+        "Agent comparisons require matched task, model/version and target groups; scripted validation is separate."
+      ],
+      "cases": [
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskReturnsHighRiskCustomer",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskReturnsMediumRiskCustomer",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskRejectsMissingCustomerId",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskReturnsLowRiskCustomer",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        },
+        {
+          "name": "com.agentic.workspace.qa.xyz.tests.CustomerRiskApiTest#getCustomerRiskRejectsBlankCustomerId",
+          "status": "passed",
+          "attempts": 1,
+          "expectedStatus": "passed"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "api-oracle.json",
+          "sha256": "373bb29aa5acf21fb3df82628a33bbfb5e74555c35c55324908b86844c008c3e",
+          "fileModifiedAt": "2026-10-11T14:05:28.907344+00:00"
+        }
+      ],
+      "runAt": "2026-10-11T14:05:28.907344+00:00",
+      "timeBasis": "normalized report file modified time",
+      "agentTrials": {
+        "liveTrials": 0,
+        "scriptedValidations": 0,
+        "pairedRepeats": 0,
+        "groups": [],
+        "invalidRecords": 0
+      },
+      "status": "passed",
+      "integrity": "verified",
+      "runId": "0ef3c2a08e5623c8"
+    },
+    {
+      "project": "jev",
+      "title": "JEV Review",
+      "repository": "https://github.com/balajiregt/jev-scope-qa",
+      "protocol": "https://github.com/balajiregt/jev-scope-qa/blob/main/benchmarks/README.md",
+      "checks": [
+        {
+          "name": "Metrics match source report",
+          "ok": true,
+          "detail": "SHA256 comparison"
+        },
+        {
+          "name": "Unique valid check identities",
+          "ok": true,
+          "detail": "No duplicated or unknown checks"
+        },
+        {
+          "name": "Evaluation denominator",
+          "ok": true,
+          "detail": "Requested and evaluated remain separate"
+        },
+        {
+          "name": "No expected-failure oracles",
+          "ok": true,
+          "detail": "Expected failures cannot qualify as successful oracle evidence"
+        },
+        {
+          "name": "No oracle retries",
+          "ok": true,
+          "detail": "Retry counts checked where browser/JUnit results are supplied"
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Evaluated checks",
+          "value": 0,
+          "unit": " / 16",
+          "note": ""
+        },
+        {
+          "label": "Operational errors",
+          "value": 1,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Not evaluated",
+          "value": 15,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Issue precision",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "Issue recall",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "Missed issue rate",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "False alarm rate",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "Exact finding accuracy",
+          "value": null,
+          "unit": "ratio",
+          "note": ""
+        },
+        {
+          "label": "AI cost",
+          "value": null,
+          "unit": "",
+          "note": ""
+        }
+      ],
+      "limitations": [
+        "Gold labels remain evaluator-only. Authored synthetic CRM evidence is not production evidence.",
+        "Issue detection and exact finding classification are separate metrics.",
+        "Failed/unrun checks count as undetected expected issues in end-to-end recall; exact accuracy is conditional on evaluated rows.",
+        "Raw findings and confidence-routed findings are separate. Null means unmeasured. No cost or human-time inference."
+      ],
+      "cases": [
+        {
+          "name": "viewer-denial:planning:ac",
+          "status": "error",
+          "errorCode": "http_403"
+        },
+        {
+          "name": "viewer-denial:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "hidden-only:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "hidden-only:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "status-only:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "status-only:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "missing-export:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "missing-export:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "missing-helper:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "missing-helper:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "duplicate-denial:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "duplicate-denial:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "duplicate-denial:duplication:s1:s2",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "distinct-boundary:planning:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "distinct-boundary:implementation:ac",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        },
+        {
+          "name": "distinct-boundary:duplication:s1:s2",
+          "status": "not_run",
+          "errorCode": "stopped_after_gateway_error"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "workflow-benchmark.json",
+          "sha256": "9fb0ec0807cb3e66eca60f0acd324b2ea3fb5c1644263493b510ef801361a01d",
+          "fileModifiedAt": "2026-10-11T14:00:54.686408+00:00"
+        },
+        {
+          "file": "crm-benchmark-metrics.json",
+          "sha256": "1e5fa27ecdd7ee9ace4ceb0be999da5758d092aff0d33cdbb0a9252edb61a910",
+          "fileModifiedAt": "2026-10-11T14:02:42.215600+00:00"
+        }
+      ],
+      "runAt": "2026-10-11T14:00:53.118Z",
+      "timeBasis": "evaluator report generated time",
+      "status": "blocked",
+      "mode": "live",
+      "stages": {
+        "planning": {
+          "requested": 7,
+          "evaluated": 0
+        },
+        "duplication": {
+          "requested": 2,
+          "evaluated": 0
+        },
+        "implementation": {
+          "requested": 7,
+          "evaluated": 0
+        }
+      },
+      "notice": "Provider HTTP 403 prevented live evaluation. No model quality result.",
+      "integrity": "verified",
+      "runId": "f83963774c2d0569"
+    }
+  ],
+  "scope": "Reviewed public aggregates from synthetic local benchmarks. No raw reports, credentials, traces, prompts or reviewer notes."
+}
