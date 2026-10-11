@@ -1,0 +1,23 @@
+flowchart TD
+    Q[Define a measurable question] --> M[Mockserver: same role journeys]
+    Q --> A[API / Playwright: freeze app, requirements and model settings]
+    Q --> J[JEV: authored cases with independent labels]
+    M --> MB[Legacy interception vs role-aware mockserver]
+    MB --> MO[Role assertions and setup / journey runtime]
+    A --> L[Select one runtime: cloud Codex or local llama.cpp]
+    L --> B[Baseline: plain runner + app source]
+    L --> F[Framework: same inputs + existing helpers and conventions]
+    B --> G[Fresh model response: 3 repeats per arm]
+    F --> G
+    G --> O[Unchanged tests: healthy app + activated hidden faults]
+    O --> T[Completion, quality checks, time and tokens]
+    J --> JO[Review findings vs gold labels]
+    JO --> JM[Precision, recall, missed issues, false alarms]
+    MO --> E[Private raw evidence and source hashes]
+    T --> E
+    JM --> E
+    E --> V[Validate identities, denominators and public schema]
+    V --> P[Publish aggregates to GitHub results branches]
+    P --> D[Deployed Netlify dashboard refreshes feeds]
+    T -. separate human review needed .-> H[Human correction timer: currently unmeasured]
+    T -. standard API rates .-> C[API-equivalent estimate: not actual billed spend]

@@ -79,3 +79,11 @@ Build and validate before deploying. Source pushes run validation; hosting sourc
 is currently deployed through the existing authenticated Netlify CLI. Result-branch
 updates bypass deployment entirely. `netlify.toml` permits read-only browser fetches
 from `raw.githubusercontent.com`. Do not commit `.netlify/` or raw artifacts.
+
+## Live baseline / framework pilot
+
+The dashboard now has a separate **controlled model trial** view with interactive completion, quality, generation-time, token and API-equivalent-cost charts, all trial/check outcomes, hashes and a downloadable architecture diagram. See [the reproducible protocol](trials/README.md). This first pilot measures context-assisted test generation, not the complete autonomous workflow. Human corrections remain unmeasured. Actual spend is unavailable; token-derived API estimates are explicitly labelled.
+
+The two application repositories expose `npm run benchmark:trials`. This runs a complete paired campaign and publishes `benchmark-results/trials.json` plus a campaign archive in each repository. Existing runtime publishers preserve these separate files. The dashboard reads the two campaign feeds alongside the four existing execution feeds, every minute while visible. A failed campaign-feed fetch retains the last loaded campaign and shows an explicit stale warning. The bundled seed is a fallback, never presented as a successful live fetch.
+
+[Diagram (SVG)](public/benchmark-flow.svg) · [Editable Mermaid source](public/benchmark-flow.mmd)

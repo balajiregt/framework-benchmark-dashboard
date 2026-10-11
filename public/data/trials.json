@@ -1,0 +1,958 @@
+{
+  "harness": {
+    "schemaVersion": 1,
+    "project": "harness",
+    "campaignId": "c2efffa6088e40be",
+    "protocol": "one-response-mutation-v1",
+    "runtime": "codex-cli",
+    "createdAt": "2026-10-11T15:19:22.433101+00:00",
+    "updatedAt": "2026-10-11T15:22:28.589159+00:00",
+    "model": "gpt-6.1-sol",
+    "modelVersion": "Alias requested; backend snapshot not exposed by CLI",
+    "reasoning": "low",
+    "cliVersion": "codex-cli 0.162.0-alpha.17.2",
+    "sourceRevision": "a9d3bbe87bfeb8f56e1236045cdc4b6e23452e0a",
+    "targetSha256": "5258fcfcc3e0138fcd12d0ed9d35a73ef050f53a6207e933b7a8974d6ed69395",
+    "planSha256": "c2efffa6088e40be87c48d9b5d31f20113143015ba41a425cee0cf680a3f14d7",
+    "plannedTrials": 6,
+    "pairedRepeats": 3,
+    "arms": {
+      "baseline": {
+        "trials": 3,
+        "evaluated": 3,
+        "correct": 3,
+        "qualityPassed": 15,
+        "qualityTotal": 15,
+        "medianGenerationMs": 13316,
+        "medianEvaluationMs": 14580,
+        "medianHumanCorrectionMs": null,
+        "totalInputTokens": 48342,
+        "totalOutputTokens": 877,
+        "apiEquivalentUSD": 0.105454,
+        "actualCostUSD": null
+      },
+      "framework": {
+        "trials": 3,
+        "evaluated": 3,
+        "correct": 3,
+        "qualityPassed": 15,
+        "qualityTotal": 15,
+        "medianGenerationMs": 12308,
+        "medianEvaluationMs": 14774,
+        "medianHumanCorrectionMs": null,
+        "totalInputTokens": 58363,
+        "totalOutputTokens": 677,
+        "apiEquivalentUSD": 0.123496,
+        "actualCostUSD": null
+      }
+    },
+    "rows": [
+      {
+        "arm": "baseline",
+        "repeat": 1,
+        "startedAt": "2026-10-11T15:19:48.628615+00:00",
+        "finishedAt": "2026-10-11T15:20:01.079715+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 5,
+        "qualityTotal": 5,
+        "timedOut": false,
+        "generationMs": 12451,
+        "evaluationMs": 14580,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 16114,
+        "cachedInputTokens": 0,
+        "outputTokens": 282,
+        "apiEquivalentUSD": 0.035048,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "bba82ae7002c306c6b60cbd9b8d1d012325f174c3645312ead966beb6ec12e9b",
+        "responseSha256": "db9f3fc4e74224fc771be639ac33d4c57eba298f2fdb2a4d5c1ea5b46e9939f6",
+        "eventsSha256": "42984c6dad3361bec34cf089482299def09405c9e1d4e7c4a9168e37ff87b395",
+        "evaluationSha256": "4b2fbb0d85c16518b4d8f1560a6a0704516d273cad5a76fcb74f7b33729a1fb8",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "viewer-http-200",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-error-body",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "enabled-export-button",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "missing-read-only-banner",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "framework",
+        "repeat": 1,
+        "startedAt": "2026-10-11T15:21:24.320336+00:00",
+        "finishedAt": "2026-10-11T15:21:35.220287+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 5,
+        "qualityTotal": 5,
+        "timedOut": false,
+        "generationMs": 10900,
+        "evaluationMs": 13931,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 21865,
+        "cachedInputTokens": 0,
+        "outputTokens": 230,
+        "apiEquivalentUSD": 0.04603,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "5ecd43349b7419eff04c62d639f2dbe1f658a597e32af9778a986457a6f54588",
+        "responseSha256": "383bdb215cc07cde19858d12cd50f4ae9a33a38559f4dc2d077e77ca2056cfe1",
+        "eventsSha256": "6e7a78046f032050a92032643c846e56651bff24fae4a9f52b1f23a7eb64ab19",
+        "evaluationSha256": "491f927ff66f8b3d7cad178007c7717e5b5b8870b51d89499029f674a03dc99d",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "viewer-http-200",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-error-body",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "enabled-export-button",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "missing-read-only-banner",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "framework",
+        "repeat": 2,
+        "startedAt": "2026-10-11T15:21:35.221030+00:00",
+        "finishedAt": "2026-10-11T15:21:47.528908+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 5,
+        "qualityTotal": 5,
+        "timedOut": false,
+        "generationMs": 12308,
+        "evaluationMs": 14774,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 18249,
+        "cachedInputTokens": 0,
+        "outputTokens": 196,
+        "apiEquivalentUSD": 0.038458,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "5ecd43349b7419eff04c62d639f2dbe1f658a597e32af9778a986457a6f54588",
+        "responseSha256": "0e1dcb02e2c3a706d03ac6162a769e50371ce11821875a4aad13c29cb030ae4a",
+        "eventsSha256": "808c1017a6699935de01743290b0a35fa09edb516d240409b5f96e6d0867078c",
+        "evaluationSha256": "33abcada3d80fad8b78a79e5fd4f0fb1be7eafb69eee9378f8276af8656d12d1",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "viewer-http-200",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-error-body",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "enabled-export-button",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "missing-read-only-banner",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "baseline",
+        "repeat": 2,
+        "startedAt": "2026-10-11T15:21:47.530294+00:00",
+        "finishedAt": "2026-10-11T15:22:00.846153+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 5,
+        "qualityTotal": 5,
+        "timedOut": false,
+        "generationMs": 13316,
+        "evaluationMs": 13778,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 16114,
+        "cachedInputTokens": 0,
+        "outputTokens": 283,
+        "apiEquivalentUSD": 0.035058,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "bba82ae7002c306c6b60cbd9b8d1d012325f174c3645312ead966beb6ec12e9b",
+        "responseSha256": "40f86dda93709309c75223184a2446f02852b0d3a8954c3022a898d3c5b217e2",
+        "eventsSha256": "1592ce3364e58ce4f3d4879a167f906f6a13bf9986ae52df16c7d778fa11a198",
+        "evaluationSha256": "f745418f243e5fe715c9444876343e2ad5b0ac60631579b37f867300f402d575",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "viewer-http-200",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-error-body",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "enabled-export-button",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "missing-read-only-banner",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "baseline",
+        "repeat": 3,
+        "startedAt": "2026-10-11T15:22:00.848457+00:00",
+        "finishedAt": "2026-10-11T15:22:16.015860+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 5,
+        "qualityTotal": 5,
+        "timedOut": false,
+        "generationMs": 15168,
+        "evaluationMs": 18287,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 16114,
+        "cachedInputTokens": 0,
+        "outputTokens": 312,
+        "apiEquivalentUSD": 0.035348,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "bba82ae7002c306c6b60cbd9b8d1d012325f174c3645312ead966beb6ec12e9b",
+        "responseSha256": "a40ab7127ce49a80ad626334cfb6862ba8dd09acfd62e002aec1657f2daaf714",
+        "eventsSha256": "eb34ccc34daabebe3c8e5210eb96157e1e60130b6b20d37b0072e5c41936d7a5",
+        "evaluationSha256": "154a47cdd93d48f3de035d0de57e9ae0df74e0677e63b6f861ce12c68a62b798",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "viewer-http-200",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-error-body",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "enabled-export-button",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "missing-read-only-banner",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "framework",
+        "repeat": 3,
+        "startedAt": "2026-10-11T15:22:16.017233+00:00",
+        "finishedAt": "2026-10-11T15:22:28.589159+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 5,
+        "qualityTotal": 5,
+        "timedOut": false,
+        "generationMs": 12572,
+        "evaluationMs": 15192,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 18249,
+        "cachedInputTokens": 0,
+        "outputTokens": 251,
+        "apiEquivalentUSD": 0.039008,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "5ecd43349b7419eff04c62d639f2dbe1f658a597e32af9778a986457a6f54588",
+        "responseSha256": "371bfb8bf85b04ebbf559fb782f8d61146188276c2439099d2efabf592a10b18",
+        "eventsSha256": "96567cdb7ccc9ae606c9ec77cdf33290b445b3e891167cc29dc166117b00c6c2",
+        "evaluationSha256": "9f82edc87b459ba47d4bdd846ee522b7fa28f0d936c53ae5fdf8ff52a9a97b59",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "viewer-http-200",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-error-body",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "enabled-export-button",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "missing-read-only-banner",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      }
+    ],
+    "pricing": {
+      "classification": "API-equivalent estimate, not billed spend",
+      "source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "asOf": "2026-10-11",
+      "currency": "USD",
+      "inputPerMillion": 2,
+      "cachedInputPerMillion": 0.1,
+      "cacheWritePerMillion": 2.5,
+      "outputPerMillion": 10
+    },
+    "limitations": [
+      "One task per application; three repeats per arm, descriptive pilot only.",
+      "Tests are generated in one response with tools disabled; full planning, capture, repair and review workflows were not measured.",
+      "The framework condition adds existing helpers and conventions; context size differs intentionally.",
+      "Generated tests run unchanged against the real sample app via controlled fault injection. Synthetic faults are not production defects.",
+      "Generation wall time includes CLI/provider overhead. Evaluation time is separate; background machine load was not controlled.",
+      "The same model alias and CLI configuration were requested; a fixed backend model snapshot is not exposed.",
+      "Human correction effort and incorrect changes require a human review; neither is inferred from automatic checks.",
+      "Cost is a counterfactual standard-tier API estimate from CLI tokens, including cache counts; actual billed spend, subscription allocation and infrastructure cost are unavailable."
+    ]
+  },
+  "api": {
+    "schemaVersion": 1,
+    "project": "api",
+    "campaignId": "c2efffa6088e40be",
+    "protocol": "one-response-mutation-v1",
+    "runtime": "codex-cli",
+    "createdAt": "2026-10-11T15:19:22.433101+00:00",
+    "updatedAt": "2026-10-11T15:24:32.672967+00:00",
+    "model": "gpt-6.1-sol",
+    "modelVersion": "Alias requested; backend snapshot not exposed by CLI",
+    "reasoning": "low",
+    "cliVersion": "codex-cli 0.162.0-alpha.17.2",
+    "sourceRevision": "4fd603d63c03302a52512a71e7158fc06ca7531a",
+    "targetSha256": "d25ea6dababe7a37a1f464594b3a66027ba205fb4ba8a9359363a0c5d5d45f3d",
+    "planSha256": "c2efffa6088e40be87c48d9b5d31f20113143015ba41a425cee0cf680a3f14d7",
+    "plannedTrials": 6,
+    "pairedRepeats": 3,
+    "arms": {
+      "baseline": {
+        "trials": 3,
+        "evaluated": 3,
+        "correct": 3,
+        "qualityPassed": 24,
+        "qualityTotal": 24,
+        "medianGenerationMs": 19619,
+        "medianEvaluationMs": 40313,
+        "medianHumanCorrectionMs": null,
+        "totalInputTokens": 38178,
+        "totalOutputTokens": 1691,
+        "apiEquivalentUSD": 0.093266,
+        "actualCostUSD": null
+      },
+      "framework": {
+        "trials": 3,
+        "evaluated": 3,
+        "correct": 3,
+        "qualityPassed": 24,
+        "qualityTotal": 24,
+        "medianGenerationMs": 19816,
+        "medianEvaluationMs": 40080,
+        "medianHumanCorrectionMs": null,
+        "totalInputTokens": 39900,
+        "totalOutputTokens": 1799,
+        "apiEquivalentUSD": 0.09779,
+        "actualCostUSD": null
+      }
+    },
+    "rows": [
+      {
+        "arm": "baseline",
+        "repeat": 1,
+        "startedAt": "2026-10-11T15:22:28.590378+00:00",
+        "finishedAt": "2026-10-11T15:22:48.209079+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 8,
+        "qualityTotal": 8,
+        "timedOut": false,
+        "generationMs": 19619,
+        "evaluationMs": 55569,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 12726,
+        "cachedInputTokens": 0,
+        "outputTokens": 521,
+        "apiEquivalentUSD": 0.030662,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "e4a83499c6c54947821bc706cd0d9f4ffc63a5a0d99368bd2b287626cafc5312",
+        "responseSha256": "1aa11ecc319fd4de9221ff816a3422713ba9d39c4691d052e2e479fdb1ff092c",
+        "eventsSha256": "6000a2148bbffe13695ace449310b943634ad4c18e44094ae7d49d2bdac62304",
+        "evaluationSha256": "debd91e4e8c7abf44b16b9bcef8a66714c2510c8edc5c1664af5c816378ddf36",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "wrong-low-category",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-medium-score",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-high-eligibility",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-customer-id",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "wrong-decision-reason",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "accept-missing",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "accept-blank",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "framework",
+        "repeat": 1,
+        "startedAt": "2026-10-11T15:22:48.209906+00:00",
+        "finishedAt": "2026-10-11T15:23:08.025426+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 8,
+        "qualityTotal": 8,
+        "timedOut": false,
+        "generationMs": 19816,
+        "evaluationMs": 38180,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 13300,
+        "cachedInputTokens": 0,
+        "outputTokens": 590,
+        "apiEquivalentUSD": 0.0325,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "372fcdf931119b144ae781120bab31508e863c4b90e767928b9033c541a45442",
+        "responseSha256": "a6919ad8266795df9f1d3fc9391207bc1caab4a23812316ec332f970f7f6c939",
+        "eventsSha256": "78589091c98fd5d5587a5db46cf7db49572bfdbf224132d097b78f8cf4c16439",
+        "evaluationSha256": "3ebb8a4e80ba2782c1521a8868dc733775a93204f6e9090ffe45e949bc651a39",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "wrong-low-category",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-medium-score",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-high-eligibility",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-customer-id",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "wrong-decision-reason",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "accept-missing",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "accept-blank",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "framework",
+        "repeat": 2,
+        "startedAt": "2026-10-11T15:23:08.026095+00:00",
+        "finishedAt": "2026-10-11T15:23:27.412427+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 8,
+        "qualityTotal": 8,
+        "timedOut": false,
+        "generationMs": 19387,
+        "evaluationMs": 40080,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 13300,
+        "cachedInputTokens": 0,
+        "outputTokens": 592,
+        "apiEquivalentUSD": 0.03252,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "372fcdf931119b144ae781120bab31508e863c4b90e767928b9033c541a45442",
+        "responseSha256": "01cd97c4ff547bee225a396148f230ba231fcd281e7fddaec05727d364bb243f",
+        "eventsSha256": "36896cab872fe6cc8e5ec74184f05698de6835cbace08eb2a1c4d9e15e103f83",
+        "evaluationSha256": "65694a9fc704531fe83e116e5b87f073f1841a82d2294867e15b63ff9d5e6010",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "wrong-low-category",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-medium-score",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-high-eligibility",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-customer-id",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "wrong-decision-reason",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "accept-missing",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "accept-blank",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "baseline",
+        "repeat": 2,
+        "startedAt": "2026-10-11T15:23:27.413649+00:00",
+        "finishedAt": "2026-10-11T15:23:45.693149+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 8,
+        "qualityTotal": 8,
+        "timedOut": false,
+        "generationMs": 18280,
+        "evaluationMs": 40313,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 12726,
+        "cachedInputTokens": 0,
+        "outputTokens": 519,
+        "apiEquivalentUSD": 0.030642,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "e4a83499c6c54947821bc706cd0d9f4ffc63a5a0d99368bd2b287626cafc5312",
+        "responseSha256": "8a9970113d607fce71184f52a8c495c852a3ba5a05bf73d405df0702986fa39d",
+        "eventsSha256": "6a3b330a4c6671029861f4b4560ecede1629790e9923c02356acbc40262bca3b",
+        "evaluationSha256": "bf4643b49570cc8e980e244929d585f3eb85d4de9ffc86fe64d96acbacb24d2f",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "wrong-low-category",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-medium-score",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-high-eligibility",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-customer-id",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "wrong-decision-reason",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "accept-missing",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "accept-blank",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "baseline",
+        "repeat": 3,
+        "startedAt": "2026-10-11T15:23:45.694055+00:00",
+        "finishedAt": "2026-10-11T15:24:09.592147+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 8,
+        "qualityTotal": 8,
+        "timedOut": false,
+        "generationMs": 23899,
+        "evaluationMs": 38691,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 12726,
+        "cachedInputTokens": 0,
+        "outputTokens": 651,
+        "apiEquivalentUSD": 0.031962,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "e4a83499c6c54947821bc706cd0d9f4ffc63a5a0d99368bd2b287626cafc5312",
+        "responseSha256": "7bdeae7401c5006ed033ea5f04889b90aa10889843c141f8271a96a3befae090",
+        "eventsSha256": "43415f048c7e422cfcb00ce2366fc0bdc60a2a5d09f8462cefd35cf529559e9a",
+        "evaluationSha256": "9a4b8195caff228712ee2239bbedebf49a4fb15b5a9284eb1e5121ecb46ba782",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "wrong-low-category",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-medium-score",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-high-eligibility",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-customer-id",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "wrong-decision-reason",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "accept-missing",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "accept-blank",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      },
+      {
+        "arm": "framework",
+        "repeat": 3,
+        "startedAt": "2026-10-11T15:24:09.596594+00:00",
+        "finishedAt": "2026-10-11T15:24:32.672967+00:00",
+        "failureKind": "none",
+        "operationalStatus": "evaluated",
+        "correct": true,
+        "qualityPassed": 8,
+        "qualityTotal": 8,
+        "timedOut": false,
+        "generationMs": 23077,
+        "evaluationMs": 64450,
+        "humanCorrectionMs": null,
+        "incorrectChanges": null,
+        "inputTokens": 13300,
+        "cachedInputTokens": 0,
+        "outputTokens": 617,
+        "apiEquivalentUSD": 0.03277,
+        "actualCostUSD": null,
+        "apiFeeUSD": null,
+        "generationTokensPerSecond": null,
+        "promptSha256": "372fcdf931119b144ae781120bab31508e863c4b90e767928b9033c541a45442",
+        "responseSha256": "160efadd4e014ab6166256ba5a39964e2f00493c27714e78b1e0ff9a0194f9ac",
+        "eventsSha256": "abcdd5291d0f7cb9d12531be6163ddbf01daf25f18a18ad07af99c67a7e8ddc1",
+        "evaluationSha256": "222b9e6cb0666180379ba2705889d101f3dfccaef82ad77427e2320a68a5bc1c",
+        "checks": [
+          {
+            "name": "healthy",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 0
+          },
+          {
+            "name": "wrong-low-category",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-medium-score",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-high-eligibility",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "wrong-customer-id",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "wrong-decision-reason",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 3
+          },
+          {
+            "name": "accept-missing",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          },
+          {
+            "name": "accept-blank",
+            "passed": true,
+            "outcome": "satisfied",
+            "injectedResponses": 1
+          }
+        ]
+      }
+    ],
+    "pricing": {
+      "classification": "API-equivalent estimate, not billed spend",
+      "source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "asOf": "2026-10-11",
+      "currency": "USD",
+      "inputPerMillion": 2,
+      "cachedInputPerMillion": 0.1,
+      "cacheWritePerMillion": 2.5,
+      "outputPerMillion": 10
+    },
+    "limitations": [
+      "One task per application; three repeats per arm, descriptive pilot only.",
+      "Tests are generated in one response with tools disabled; full planning, capture, repair and review workflows were not measured.",
+      "The framework condition adds existing helpers and conventions; context size differs intentionally.",
+      "Generated tests run unchanged against the real sample app via controlled fault injection. Synthetic faults are not production defects.",
+      "Generation wall time includes CLI/provider overhead. Evaluation time is separate; background machine load was not controlled.",
+      "The same model alias and CLI configuration were requested; a fixed backend model snapshot is not exposed.",
+      "Human correction effort and incorrect changes require a human review; neither is inferred from automatic checks.",
+      "Cost is a counterfactual standard-tier API estimate from CLI tokens, including cache counts; actual billed spend, subscription allocation and infrastructure cost are unavailable."
+    ]
+  }
+}
