@@ -39,7 +39,7 @@ Raw prompts, model code, provider event streams, test logs and machine paths sta
 
 ## First campaign implementation notes
 
-The outer filesystem sandbox initially prevented CLI initialization before any model request. That startup failure is retained separately. The approved CLI execution uses read-only model sandboxing and disabled shell tools. One grader field-name collision was corrected before completed grading; generated submissions were not changed. Generation and grading overlapped on the same machine for part of the campaign, so measured wall times are descriptive only.
+The outer filesystem sandbox initially prevented CLI initialization before any model request. That startup failure is retained separately. The approved CLI execution uses read-only model sandboxing and disabled shell tools. One grader field-name collision was corrected before completed grading; generated submissions were not changed. The local grader initially rejected a `NumberFormatException` catch in port parsing because its guard matched every catch clause. That guard was narrowed to permit this specific configuration error handler while still rejecting catches that can hide assertion failures. The original rejection is retained privately, and the same unmodified submission was graded again; no model call was repeated. Generation and grading overlapped on the same machine for part of the campaign, so measured wall times are descriptive only.
 
 Official references: [Codex non-interactive mode](https://learn.chatgpt.com/docs/non-interactive-mode), [systematic skill evaluation](https://developers.openai.com/blog/eval-skills), [GPT-6.1 Sol rates](https://developers.openai.com/api/docs/models/gpt-6.1-sol), verified 11 October 2026.
 
@@ -57,3 +57,21 @@ python3 trials/publish.py --output ../private-local-campaign --project api
 The publisher detects the local runtime and writes `benchmark-results/local-trials.json`, preserving the cloud campaign in `trials.json`. The dashboard reads both independently. Report measured prompt/output tokens, wall time, generation tokens/second, healthy-app checks and fault detection. No external inference API fee is incurred by these loopback calls; total operating cost is **unknown**, not zero. Electricity and hardware depreciation are not instrumented.
 
 This is the generation slice of the local Pi + llama.cpp architecture. Pi's tool-calling/editing loop is not exercised by this protocol. Within-local baseline/framework comparisons share model and request settings. Cloud/local comparisons also change the model, tokenizer and provider wrapper, so a difference cannot be attributed only to locality or hardware. The local model is already loaded; cold-start and model-loading time are excluded.
+
+## Measured pilot: 11 October 2026
+
+All 18 planned attempts are retained. Human correction effort is unmeasured for this batch by the participant's choice. Generation times below are medians of three attempts, not end-to-end task or human working time.
+
+| Runtime / task | Baseline correct | Framework correct | Baseline generation | Framework generation |
+| --- | --- | --- | --- | --- |
+| Cloud GPT-6.1 Sol / CRM | 3/3 | 3/3 | 13.316 s | 12.308 s |
+| Cloud GPT-6.1 Sol / API | 3/3 | 3/3 | 19.619 s | 19.816 s |
+| Local Gemma / API | 0/3 | 0/3 | 138.087 s | 170.002 s |
+
+The cloud CRM submissions passed 30/30 planned healthy/fault criteria in total; cloud API submissions passed 48/48. These easy tasks show a ceiling effect: no observed quality advantage from framework context. The cloud API-equivalent estimate is $0.420006 across 12 calls; actual billed spend is unknown.
+
+The local API campaign produced five submissions that failed Java compilation and one framework attempt that timed out at the 180-second client deadline (181.359 seconds observed elapsed time). Compilation errors included incompatible RestAssured response types, nonexistent query methods and missing Hamcrest matchers. None reached an executable test suite, so local 0/48 means unsatisfied completion criteria, **not measured defect recall**. The timeout's tokens are unknown. Local API fees were zero; total operating cost is unmeasured. Attempt medians include the timeout; they are not successful-completion latency.
+
+This tests the existing quantized Gemma 4 E2B model via llama.cpp on an Apple M1 with 8 GiB RAM. It does not establish a result for all local models or for Pi's multi-step repair loop. Cloud/local differences confound model, tokenizer, provider wrapper and execution environment. Keep these failures as a baseline for a separately versioned experiment with a repair budget or another model; do not replace these attempts.
+
+Public campaigns: [CRM](https://raw.githubusercontent.com/balajiregt/playwright-harness-framework/benchmark-results/campaigns/c2efffa6088e40be.json), [cloud API](https://raw.githubusercontent.com/balajiregt/agentic-workspace/benchmark-results/campaigns/c2efffa6088e40be.json), [local API](https://raw.githubusercontent.com/balajiregt/agentic-workspace/benchmark-results/campaigns/58852fdc96b3e21d.json). Each contains the per-attempt results and evidence fingerprints.

@@ -21,4 +21,8 @@ class TrialEvidenceTests(unittest.TestCase):
   self.assertTrue(forbidden("import {test} from '../fixtures/base.fixture'",'harness','baseline'))
   self.assertTrue(forbidden("test.skip('x')",'harness','framework'))
   self.assertFalse(forbidden("import {test} from '../fixtures/base.fixture'",'harness','framework'))
+ def test_numeric_configuration_catch_does_not_hide_assertions(self):
+  self.assertFalse(forbidden('try { Integer.parseInt(port); } catch (NumberFormatException e) { throw new RuntimeException(); }','api','baseline'))
+  self.assertTrue(forbidden('catch (AssertionError e) {}','api','baseline'))
+  self.assertTrue(forbidden('catch (Exception e) {}','api','baseline'))
 if __name__=='__main__':unittest.main()

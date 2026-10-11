@@ -66,7 +66,7 @@ def app(project,repo,folder):
     try:p.wait(timeout=10)
     except subprocess.TimeoutExpired:os.killpg(p.pid,signal.SIGKILL);p.wait()
 def forbidden(code,project,arm):
- patterns=[r'\b(?:exec|spawn|readFile|writeFile)\s*\(',r'node:(?:fs|child_process)',r'java\.(?:nio\.file|io\.(?:File|FileInputStream))',r'Runtime\.',r'ProcessBuilder',r'System\.getenv',r'process\.env',r'\bcatch\s*\(',r'\b(?:test|describe)\.(?:skip|only|fail|fixme)',r'@Disabled',r'waitForTimeout',r'Thread\.sleep',r'\.route\s*\(']
+ patterns=[r'\b(?:exec|spawn|readFile|writeFile)\s*\(',r'node:(?:fs|child_process)',r'java\.(?:nio\.file|io\.(?:File|FileInputStream))',r'Runtime\.',r'ProcessBuilder',r'System\.getenv',r'process\.env',r'\bcatch\s*\((?!\s*NumberFormatException\b)',r'\b(?:test|describe)\.(?:skip|only|fail|fixme)',r'@Disabled',r'waitForTimeout',r'Thread\.sleep',r'\.route\s*\(']
  if arm=='baseline':patterns += [r'fixtures/base.fixture',r'com\.agentic\.workspace\.qa\.(?:client|config|fixtures|assertions)']
  return any(re.search(p,code) for p in patterns)
 def playwright_result(path):
