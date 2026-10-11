@@ -1,5 +1,11 @@
 # Controlled test-generation trials
 
+This is the preserved **one-response generation pilot**. The next experiment is
+the [context-guided QA workflow design](../workflows/README.md), covering creating,
+updating and validating with tools and feedback in both conditions. Its outcomes
+will be reported separately; the measurements below do not evaluate the full
+context delivery or agent workflow.
+
 This complements the existing runtime benchmarks. It asks whether supplying framework context changes the quality, generation time and token cost of newly generated tests on the existing sample CRM and Java customer-risk API.
 
 ## Current protocol: one-response-mutation-v1

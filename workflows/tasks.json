@@ -1,0 +1,253 @@
+{
+  "protocol": "qa-context-workflow-v2-draft1",
+  "status": "prepared-design-not-executed",
+  "contextEvidence": {
+    "api": [
+      "AGENTS.md",
+      "LOOP.md",
+      "contexts/current/service-context.yml",
+      "contexts/current/resolved-context.yml",
+      "skills/microservice-change/SKILL.md",
+      "scripts/resolve_context.py",
+      "scripts/context_efficiency_report.py",
+      "local-agents/run-agent.sh",
+      "local-agents/config/model-profiles.json"
+    ],
+    "harness": [
+      "AGENTS.md",
+      ".github/copilot-instructions.md",
+      "contexts/agent-loop.yml",
+      "contexts/app-under-test.yml",
+      "contexts/command-map.yml",
+      "contexts/source-map.yml",
+      "contexts/coverage-map.yml",
+      "contexts/duplication-rules.yml",
+      "contexts/capture-map.yml",
+      "contexts/capture-recipes.yml",
+      "scripts/run-capture-recipe.mjs",
+      "scripts/graph-coverage.mjs"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "api-create-normalization",
+      "project": "api",
+      "operation": "create",
+      "title": "Cover customer identifier normalization",
+      "request": "Add focused API test coverage showing that GET /xyz accepts customerId \" cust-1001 \", normalizes it to CUST-1001 and returns the existing low-risk decision. Derive all response expectations from the service and contract. Inspect existing coverage before adding a scenario. Keep this a test-only change, preserve existing coverage, run focused verification and report the evidence used.",
+      "evidence": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/java/com/agentic/workspace/qa/xyz/tests/CustomerRiskApiTest.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/service/CustomerRiskService.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/api/CustomerRiskController.java",
+        "projects/microservices/xyz-service/src/main/resources/openapi/xyz-service.openapi.yml",
+        "projects/microservices/qa-steps/src/main/java/com/agentic/workspace/qa/assertions/JsonFieldAssertions.java"
+      ],
+      "allowedSourceRoots": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/",
+        "projects/microservices/qa-steps/src/main/java/"
+      ],
+      "sourceEditsAllowed": true,
+      "evaluatorCriteria": [
+        "A genuinely missing normalization scenario is added using the existing Java API test project.",
+        "The raw input contains lowercase letters and surrounding spaces; the assertion checks normalized customerId and the low-risk decision fields from source.",
+        "Healthy execution succeeds; independent response faults for customerId and decision fields are detected by relevant assertions.",
+        "Existing tests/assertions remain effective and no product, contract, deployment or unrelated source is changed."
+      ]
+    },
+    {
+      "id": "api-update-high-score",
+      "project": "api",
+      "operation": "update",
+      "title": "Strengthen the existing high-risk test",
+      "request": "Update the existing high-risk customer API test to verify its exact score and decision reason in addition to its current assertions. Confirm expected values from source and contract. Reuse the owning test rather than adding a duplicate scenario. Keep this test-only, run focused verification and report changed files and evidence.",
+      "evidence": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/java/com/agentic/workspace/qa/xyz/tests/CustomerRiskApiTest.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/service/CustomerRiskService.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/api/CustomerRiskController.java",
+        "projects/microservices/xyz-service/src/main/resources/openapi/xyz-service.openapi.yml",
+        "projects/microservices/qa-steps/src/main/java/com/agentic/workspace/qa/assertions/JsonFieldAssertions.java"
+      ],
+      "allowedSourceRoots": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/",
+        "projects/microservices/qa-steps/src/main/java/"
+      ],
+      "sourceEditsAllowed": true,
+      "evaluatorCriteria": [
+        "The existing high-risk test is extended with score 91 and decisionReason \"Customer requires manual review before eligibility.\".",
+        "Customer ID, eligibility, risk category and status checks are preserved; no equivalent duplicate test is created.",
+        "Healthy execution succeeds; independent wrong-score and wrong-reason responses are detected.",
+        "Changes stay in the owning test/support layers; unrelated tests and application behaviour are preserved."
+      ]
+    },
+    {
+      "id": "api-validate-format",
+      "project": "api",
+      "operation": "validate",
+      "title": "Assess an unsupported rejection expectation",
+      "request": "Read-only analysis: a proposed GET /xyz test expects HTTP 400 for customerId=NOT-ID because the identifier does not match CUST followed by a number. Is that expectation supported by the current OpenAPI and service implementation? Explain the evidence and what would need clarification or change. Do not modify product or test source.",
+      "evidence": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/java/com/agentic/workspace/qa/xyz/tests/CustomerRiskApiTest.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/service/CustomerRiskService.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/api/CustomerRiskController.java",
+        "projects/microservices/xyz-service/src/main/resources/openapi/xyz-service.openapi.yml",
+        "projects/microservices/qa-steps/src/main/java/com/agentic/workspace/qa/assertions/JsonFieldAssertions.java"
+      ],
+      "allowedSourceRoots": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/",
+        "projects/microservices/qa-steps/src/main/java/"
+      ],
+      "sourceEditsAllowed": false,
+      "evaluatorCriteria": [
+        "Explains that OpenAPI requires a nonempty string but specifies no CUST-number pattern.",
+        "Explains that the current source normalizes this input and produces a normal low-risk decision rather than rejecting its format.",
+        "Classifies the proposed rejection as unsupported by the present contract/implementation; distinguishes a proposed requirement from an established application bug.",
+        "Cites actual contract/controller/service evidence and makes no product/test/helper source edits."
+      ]
+    },
+    {
+      "id": "api-validate-existing",
+      "project": "api",
+      "operation": "validate",
+      "title": "Decide whether medium-risk coverage already exists",
+      "request": "Read-only analysis: we have been asked to add API coverage for customer CUST-5000, including status, customerId, eligibility, riskCategory, score and decisionReason. Inspect the existing tests and helpers. Is a new test needed, is an assertion missing, or is this already covered? Support the decision with evidence; do not modify source.",
+      "evidence": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/java/com/agentic/workspace/qa/xyz/tests/CustomerRiskApiTest.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/service/CustomerRiskService.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/api/CustomerRiskController.java",
+        "projects/microservices/xyz-service/src/main/resources/openapi/xyz-service.openapi.yml",
+        "projects/microservices/qa-steps/src/main/java/com/agentic/workspace/qa/assertions/JsonFieldAssertions.java"
+      ],
+      "allowedSourceRoots": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/",
+        "projects/microservices/qa-steps/src/main/java/"
+      ],
+      "sourceEditsAllowed": false,
+      "evaluatorCriteria": [
+        "Identifies the existing medium-risk API test and its exact six requested outcome checks.",
+        "Concludes the requested coverage already exists in the inspected snapshot and avoids proposing duplicate coverage as necessary.",
+        "Checks implementation/assertions rather than relying only on a test title or path.",
+        "Makes no product/test/helper source changes and does not invent execution evidence."
+      ]
+    },
+    {
+      "id": "ui-create-manager-denial",
+      "project": "harness",
+      "operation": "create",
+      "title": "Cover manager direct-route denial",
+      "request": "Add missing CRM coverage for a manager navigating directly to /crm/leads and /crm/admin/users. Verify that both show the permission-denied page and the relevant denied path. Inspect existing coverage, sign in through the real login flow, and preserve allowed manager journeys. Keep application behaviour unchanged; use the existing Playwright project, run focused verification and report evidence.",
+      "evidence": [
+        "tests/sample-crm.spec.ts",
+        "pages/sample-crm.page.ts",
+        "assertions/sample-crm.assertions.ts",
+        "fixtures/base.fixture.ts",
+        "examples/sample-crm-app/public/assets/app.js",
+        "examples/sample-crm-app/api.mjs"
+      ],
+      "allowedSourceRoots": [
+        "tests/",
+        "pages/",
+        "assertions/",
+        "fixtures/",
+        "specs/"
+      ],
+      "sourceEditsAllowed": true,
+      "evaluatorCriteria": [
+        "Adds the missing direct-navigation behaviours, either in a focused new scenario or a clearly appropriate existing scenario without duplication.",
+        "Uses a real manager login and an explicit ready signal before directly navigating to each restricted route.",
+        "Checks denial and the relevant path for both routes; disabled navigation controls alone are insufficient.",
+        "Healthy execution passes and independent denial-page faults are detected; existing allowed-flow coverage and application source are preserved."
+      ]
+    },
+    {
+      "id": "ui-update-viewer-export",
+      "project": "harness",
+      "operation": "update",
+      "title": "Add API enforcement to the existing viewer flow",
+      "request": "Extend the existing viewer read-only Accounts flow to check that a direct authenticated GET /api/accounts/export is denied with HTTP 403 and JSON {\"error\":\"Access denied\"}. Preserve the current read-only UI and admin-denial checks. Use the real login session, keep the app unchanged, avoid a duplicate viewer flow and run focused verification.",
+      "evidence": [
+        "tests/sample-crm.spec.ts",
+        "pages/sample-crm.page.ts",
+        "assertions/sample-crm.assertions.ts",
+        "fixtures/base.fixture.ts",
+        "examples/sample-crm-app/public/assets/app.js",
+        "examples/sample-crm-app/api.mjs"
+      ],
+      "allowedSourceRoots": [
+        "tests/",
+        "pages/",
+        "assertions/",
+        "fixtures/",
+        "specs/"
+      ],
+      "sourceEditsAllowed": true,
+      "evaluatorCriteria": [
+        "Extends the owning viewer test/support code without duplicating the entire existing flow.",
+        "The HTTP request shares the viewer session created by real login; a 401 from missing authentication is not accepted.",
+        "Checks exact 403 and denial JSON, preserving read-only banner, disabled export control and admin denial.",
+        "Healthy execution passes and the hidden viewer-export bypass/wrong-denial-body faults are detected; no response mocking or application changes."
+      ]
+    },
+    {
+      "id": "ui-validate-manager-coverage",
+      "project": "harness",
+      "operation": "validate",
+      "title": "Check whether a passing title proves denied routes",
+      "request": "Read-only analysis: the existing manager test titled \"manager can use allowed action buttons and is denied restricted routes\" is claimed to prove that direct navigation to Leads and Admin users is denied. Inspect its body and referenced helpers. Does that test actually prove both direct-route denials? Explain what is present or missing without changing source.",
+      "evidence": [
+        "tests/sample-crm.spec.ts",
+        "pages/sample-crm.page.ts",
+        "assertions/sample-crm.assertions.ts",
+        "fixtures/base.fixture.ts",
+        "examples/sample-crm-app/public/assets/app.js",
+        "examples/sample-crm-app/api.mjs"
+      ],
+      "allowedSourceRoots": [
+        "tests/",
+        "pages/",
+        "assertions/",
+        "fixtures/",
+        "specs/"
+      ],
+      "sourceEditsAllowed": false,
+      "evaluatorCriteria": [
+        "Distinguishes the test title from its actual Accounts/Opportunities/Reports actions.",
+        "Traces the navigation helper and recognizes that disabled navigation controls do not establish direct URL denial.",
+        "Reports the direct-route assertion gap in this specified test; does not claim the application is necessarily broken.",
+        "Cites body/helper evidence, makes no source edits and does not fabricate a live browser run."
+      ]
+    },
+    {
+      "id": "ui-validate-existing",
+      "project": "harness",
+      "operation": "validate",
+      "title": "Avoid duplicating manager navigation coverage",
+      "request": "Read-only analysis: a request proposes a new manager test checking that Dashboard, Accounts, Opportunities and Reports navigation is enabled, while Leads and Admin users navigation is disabled with aria-disabled=true. Inspect the existing CRM tests and helpers. Is this already covered or does it need new coverage? Explain with evidence and do not modify source.",
+      "evidence": [
+        "tests/sample-crm.spec.ts",
+        "pages/sample-crm.page.ts",
+        "assertions/sample-crm.assertions.ts",
+        "fixtures/base.fixture.ts",
+        "examples/sample-crm-app/public/assets/app.js",
+        "examples/sample-crm-app/api.mjs"
+      ],
+      "allowedSourceRoots": [
+        "tests/",
+        "pages/",
+        "assertions/",
+        "fixtures/",
+        "specs/"
+      ],
+      "sourceEditsAllowed": false,
+      "evaluatorCriteria": [
+        "Finds the existing manager navigation test and follows expectManagerNavigationAccess into its assertion helper.",
+        "Recognizes that enabled/disabled state, visibility and aria-disabled checks already cover the requested navigation behaviour.",
+        "Concludes this requested scenario is already covered without confusing it with direct-route authorization.",
+        "Makes no source changes and does not recommend a redundant new scenario as required coverage."
+      ]
+    }
+  ],
+  "sourceRevisions": {
+    "api": "05307710c9568182507faedbceec5f2ce1c22c9f",
+    "harness": "2ac1d1a13ddd3aab9282edbb91349c78d690cb35"
+  }
+}
