@@ -1,4 +1,5 @@
 import importlib.util, json, pathlib, sys, tempfile, unittest
+from unittest.mock import patch
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'automation'))
 import publish as m
@@ -13,6 +14,7 @@ class AutomationTests(unittest.TestCase):
   with self.assertRaises(ValueError):m.sanitize({'metrics':[{'value':float('nan')}]},vocabulary)
  def test_history_dedup_and_late_old_run_do_not_replace_newer(self):
   newer=self.run_record('b'*16,'2026-10-11T11:00:00+00:00');data=m.merge(None,newer);data=m.merge(data,self.run_record());self.assertEqual(data['run'],newer);self.assertEqual(len(m.merge(data,newer)['history']),2)
+ @patch.dict(m.os.environ,{'GITHUB_ACTIONS':'false'})
  def test_real_git_publication_is_idempotent_and_fast_forward(self):
   with tempfile.TemporaryDirectory() as folder:
    remote=str(pathlib.Path(folder)/'remote.git');m.git(['init','--bare',remote],folder)
