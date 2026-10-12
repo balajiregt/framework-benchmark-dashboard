@@ -3,7 +3,27 @@
 [Live dashboard](https://framework-benchmarks-balaji.netlify.app) for synthetic
 Role-Aware Mockserver, Agentic Playwright, Agentic API and JEV benchmark evidence.
 
-## Automatic results
+## Context-assisted QA workflows
+
+The new [workflow comparison](https://framework-benchmarks-balaji.netlify.app/#workflow-trials)
+measures real repository work: creating tests, updating existing tests and assessing
+whether a proposed scenario is supported. Both conditions keep the same helpers;
+one adds the framework's actual context and guidance. A local Gemma agent can
+inspect, edit, verify and repair within fixed limits. Independent grading checks
+the resulting work; semantic conclusions remain pending until reviewed.
+
+The first API pilot uses three paired tasks, one repeat each. Timing watchdogs and a separate validity audit exclude host interruptions from model performance while retaining every started attempt. It is distinct from
+the earlier one-response generation campaigns and from runtime-only benchmarks.
+See [setup, budgets and grading](workflows/README.md), the
+[context audit](workflows/context-audit.md) and [flow diagram](public/workflow-flow.svg).
+
+`npm run workflow:run -- --repo <pinned-api-repo> --output <prepared-campaign>`
+executes a frozen campaign and publishes its closed summary to `workflow-results.json`
+automatically. The deployed dashboard reads that feed every minute; new workflow
+results need no manual import or dashboard redeploy. This local-model workflow
+is not silently invoked by a framework's ordinary `npm run benchmark` or by cloud CI.
+
+## Automatic runtime results
 
 In any enrolled framework checkout, run **`npm run benchmark`**. Its complete
 protocol executes, validates source artifacts and publishes only sanitised
@@ -82,13 +102,10 @@ from `raw.githubusercontent.com`. Do not commit `.netlify/` or raw artifacts.
 
 ## Live baseline / framework pilot
 
-The next experiment is being redesigned around the actual context-guided QA
-workflow: creating coverage, updating owning tests and validating scenarios.
-Read the [new protocol and offline task preparation](workflows/README.md) and
-[source inspection](workflows/context-audit.md). It has eight defined tasks and
-**no executed workflow results yet**. Existing generation/runtime results stay
-separate; a plain-repository agent will retain the same helpers and tools as the
-context-guided agent.
+The [implemented workflow protocol](workflows/README.md) measures repository
+work with context guidance. Its six-run API pilot is shown separately from the
+historical generation results below. The eight-task catalog defines expansion
+work, not additional completed trials.
 
 The dashboard now has a separate **controlled model trial** view with interactive completion, quality, generation-time, token and API-equivalent-cost charts, all trial/check outcomes, hashes and a downloadable architecture diagram. See [the reproducible protocol](trials/README.md). This first pilot measures context-assisted test generation, not the complete autonomous workflow. Human corrections remain unmeasured. Actual spend is unavailable; token-derived API estimates are explicitly labelled.
 

@@ -1,7 +1,9 @@
 # Context-assisted QA workflow benchmark
 
-Status: **protocol design and task preparation; no agent trials executed**.
-Protocol: `qa-context-workflow-v2-draft1`. Prepared on 11 October 2026.
+Status: **runner, enforced budgets, grading and live dashboard implemented**.
+API pilot protocol: `qa-context-workflow-v2-api-pilot-4`; public schema: `qa-context-workflow-v2`.
+Implemented on 11–12 October 2026. The eight-task catalog remains the expansion plan;
+this first campaign runs six API workflows (three tasks × two conditions).
 
 The question is: **Does the framework's context and guidance help the same agent
 complete realistic QA work correctly, with less avoidable effort?**
@@ -34,7 +36,7 @@ initial prompt. Let the agent find and read them through its assigned environmen
 
 ## Isolated trial environment
 
-The future runner must materialize two disposable, manifest-listed projections
+The API runner materializes two disposable, manifest-listed projections
 from the same pinned repository revision. Original working copies are read-only
 inputs, never experimental workspaces. Preserve unrelated local edits.
 
@@ -94,12 +96,12 @@ Local Gemma is the first model cohort. A cloud cohort uses the same tasks and
 rules but remains separate because model, tokenizer and provider differ. Do not
 interpret a local/cloud difference as the effect of the context framework.
 
-## Proposed fixed work budget
+## Enforced fixed work budget
 
 Freeze these limits before collecting the first counted workflow run:
 
 - 15 minutes total task wall time, including context discovery and execution.
-- At most 36 model responses and 80 tool invocations, whichever stops first.
+- At most 36 model calls and 80 tool invocations, whichever stops first.
 - At most three verification cycles: initial submission plus two repairs.
   A cycle evaluates one source snapshot using the task's prescribed focused
   gates; changing source after feedback consumes a repair. Multiple commands on
@@ -113,9 +115,11 @@ Freeze these limits before collecting the first counted workflow run:
   No automatic replacement of timeout, truncation or tool-call failures.
 - Validation-only tasks get the same overall budget but no source repair work.
 
-These are planned controls, not evidence of an implemented enforcement mechanism.
-The adapter must demonstrate that every model/tool call and verification cycle
-can be observed and limited before the campaign starts. If the framework's real
+The Pi host enforces these controls before executing calls; the fixed command
+adapter is the only test execution path. Unit tests cover counter exhaustion,
+snapshot reuse, scope and traversal. Separate preflight checks exercised real
+Gemma reads, edits and verification, the context resolver, filesystem/network
+denials, and positive/negative grading controls before the counted campaign. If the framework's real
 bootstrap cannot fit the context window, report that condition rather than
 silently summarizing it with a stronger model. Any revised budget creates a new
 protocol/campaign for both arms. Log compaction, truncation and hidden retries.
@@ -146,8 +150,10 @@ agent. No human approval or assessment is fabricated.
 
 ## Measurements and denominators
 
-Primary: correct tasks / all started tasks, split by operation and model. Retain
-timeouts, tool failures and exhausted budgets. Separately show scheduled tasks
+Primary: correct tasks / valid started tasks, split by operation and model. All started
+attempts remain visible. Separately exclude infrastructure-invalid attempts from
+quality and timing aggregates; never call them model failures. Retain properly
+enforced timeouts, tool failures and exhausted budgets in the valid denominator. Separately show scheduled tasks
 that could not start, with the preflight/infrastructure reason. Per-criterion
 outcomes can be satisfied, unsatisfied, not evaluated or pending review. A missing
 result is never silently dropped or counted as a pass.
@@ -199,8 +205,8 @@ Do not add JEV only to one arm of this context comparison.
 
 ## Dashboard contract
 
-Add a future **QA workflow outcomes** view, distinct from existing model generation
-and runtime views. Planned charts: task success by create/update/validate;
+The deployed **QA workflow outcomes** view is separate from model generation
+and runtime views. It reports: task success by create/update/validate;
 completion within budget; repair recovery by cycle; context discovery/read cost;
 scope/duplicate decisions; time/tokens with observed denominators. Drill-down:
 task -> condition -> evidence read -> action -> verification -> final outcome.
@@ -209,8 +215,8 @@ Use a new `workflow-results.json` feed and `qa-context-workflow-v2` schema. Do n
 shoehorn workflow evidence into `trials.json` or overwrite original Gemma results.
 Public exports should contain reviewed task identifiers, structured outcomes,
 counts, costs and hashes only. Raw code, paths, prompts, tool traces, labels and
-human reviews remain private. The future reader can use the existing automatic
-feed pattern, but this design does not claim that feed or dashboard view exists.
+human reviews remain private. The dashboard reads this feed every minute and retains the last known campaign
+with a visible stale warning if a feed fails. A new result needs no site redeploy.
 
 ## Offline preparation
 
@@ -230,3 +236,131 @@ enforce the projection/evaluator separation described above before execution.
 The current fixtures are authored from known sample applications, not a blinded
 holdout. After this pilot, add independently specified tasks and new application
 revisions before making general productivity claims.
+
+
+## Run and publish the API pilot
+
+Requirements for this host: macOS `sandbox-exec`, Node 22, Python 3.12 + PyYAML,
+Maven, Java 17, cached Maven dependencies, Pi coding agent 0.73.1 and the existing
+local llama.cpp server at port 8080. The server must expose the expected Gemma
+GGUF with 8192 context and one slot. This runner does not download a model,
+reconfigure the server, load global Pi settings or call a cloud provider.
+The host paths for these installed runtimes are explicit in the adapter; adjust
+and re-freeze the protocol before using a different host.
+
+```sh
+npm test
+npm run workflow:prepare -- --repo ../work/repos/api --output ../work/workflow-campaign
+npm run workflow:run -- --repo ../work/repos/api --output ../work/workflow-campaign
+```
+
+Preparation refuses dirty/unpinned input and an existing output directory. It
+hashes the model, runner, evaluator, configurations and initial projections.
+The runner rechecks frozen inputs, alternates condition order and runs sequentially.
+An interrupted started trial cannot silently resume as a fresh attempt. Finished,
+graded trials are skipped on resume. A changed runner requires a new campaign.
+
+`--publish` performs the closed public export after all six outcomes exist, then
+commits `workflow-results.json` and an immutable `workflow-campaigns/<id>.json`
+to the API repository's `benchmark-results` branch. It preserves runtime and
+older generation feeds. Publication requires the existing authorized Git access;
+no credentials belong in prompts or deployment assets. A failed publication is
+reported and the local campaign remains available. Publish an already completed
+campaign with `python3 workflows/publish.py --campaign <directory>`.
+
+Both conditions expose the same seven bounded tools: directory listing, path
+search, literal content search, paged file reads, exact edits, file writes and
+controlled execution. The execution tool accepts only `verify`, `probe` and the
+context condition's real `context:resolve`. It cannot execute model-supplied
+shell text. Test/helper Java edits are scoped; validation tasks cannot edit source.
+The original framework instructions and skill discovery bootstrap are installed
+only in the context condition. The task YAML uses the neutral request verbatim,
+never evaluator titles or classification labels.
+
+The fixed test process inherits a macOS filesystem/network sandbox. Only the
+trial workspace is writable; file-content reads are confined to it and installed
+OS/Java/Maven/Python runtimes and dependency cache. Loader access to the literal
+root directory does not permit reading its descendants. Synthetic denial checks
+confirmed the sibling grading folder is unreadable/unwritable and the model
+server port is inaccessible from tests. Java uses IPv4 and may reach only the
+local API proxy on port 4383. This is a controlled engineering harness, not a
+claim of a general adversarial security sandbox.
+
+The sample application runs unchanged behind the proxy. During agent work it
+returns healthy responses. After the submission freezes, the independent grader
+injects one response fault at a time; an activated fault must produce an assertion
+failure, not a compiler error, socket error or skipped test. Every verification
+recompiles the test/support modules to prevent stale classes from passing a gate.
+Full output stays private; bounded tool output explicitly identifies truncation.
+There is no automatic context compaction or provider retry. Time spent grading
+is recorded separately from the agent's task time. A small process-cleanup grace
+period follows the deadline; no new agent work is allowed after the budget ends.
+
+The preflight edit task hit its shorter infrastructure deadline after making an
+edit; a separate verification-tool preflight executed that edited source and
+passed. These checks are not performance samples. One initial campaign attempt
+was interrupted when inspection found a validation summary that could reveal its
+classification only to the context arm. Its evidence is retained as invalid protocol evidence. A second setup campaign
+exposed a stock Pi discovery hint that requested `read` and absolute paths,
+conflicting with this bounded host. Its two started attempts are retained as
+setup-invalid. The final campaign uses neutral summaries, adapts only the
+host-specific skill discovery boilerplate to `repo_read` and repository-relative
+paths, and supplies identical execution-command mappings to both conditions.
+Regression checks cover both issues. The framework skill file itself is unchanged.
+
+See [the workflow diagram](../public/workflow-flow.svg) and its
+[Mermaid source](../public/workflow-flow.mmd). Raw transcripts, source diffs,
+per-verification snapshots, evaluator logs and review material stay in the private
+campaign directory. Public hashes identify those artifacts; hashes are not an
+independent audit or proof that an unreviewed conclusion is correct.
+
+Provider finish reason `length` is recorded as `output-limit` and displayed as
+“Truncated response.” It does not by itself distinguish the requested output cap
+from a server context-capacity constraint. The raw provider response and usage
+remain private evidence; no automatic continuation or replacement run is added.
+The preflight server reported llama.cpp build `b10050-b15ca938a`. Pi compaction
+is disabled; server-internal context handling is not separately instrumented.
+This is a shared development machine, not a dedicated performance test host.
+
+Token totals sum provider-reported usage across actual outbound requests; repeated
+conversation history is charged again in those totals. A controller-only stop
+message is excluded because it did not call the model. If any real request lacks
+usage, the campaign row reports incomplete usage rather than inventing zero.
+The repair counter denotes additional verified source snapshots after the first;
+a recovered failure requires a recorded failed cycle followed by a passing cycle.
+Successful write calls are actions, not proof of a useful source change.
+
+## Timing validity and interruptions
+
+Protocol revision 4 adds two wall-clock watchdogs: a 100 ms agent-host check and
+an independent Python process monitor. It stops new work at a deadline, cancels
+the provider request, and allows at most two seconds before forced shutdown when
+cancellation does not settle. A temporary `caffeinate -i` assertion lasts only for
+the campaign; it prevents idle sleep, not lid closure or forced sleep. A clock
+jump/pause over ten seconds invalidates an attempt. No elapsed value is clamped.
+
+The timing auditor requires clock telemetry, checks total and per-response elapsed
+time with a five-second cleanup tolerance, and checks for work started after the
+deadline. Cleanup tolerance is not extra model work. The public projection repeats
+this audit from the raw artifacts; the browser refuses a valid label when wall time,
+response time, pause telemetry or counters violate their limits. An invalid attempt
+has no quality outcome. Its observed submission gates may still be inspected, but
+it contributes to neither success/failure counts nor median attempt time.
+
+Three earlier campaigns have nine started attempts retained outside this cohort:
+one setup attempt with a context-summary defect; two setup attempts with a host
+skill-discovery mismatch; and six runs with untrustworthy timing after interruption.
+Five of the latter exceeded a response or total deadline; one lasted overnight.
+The exact host/provider cause was not established. The entire paired campaign was
+excluded, including its one apparently on-time baseline. This is disclosed attrition,
+not replacement samples silently added to the same protocol. Revision 4 changes
+runner controls only; tasks, model, context contents and nominal budgets are unchanged.
+A separate one-second response-deadline preflight stopped at 1.244 seconds.
+
+If the host is interrupted again, inspect retained artifacts and the validity audit.
+Do not restart an incomplete trial under its old identity or publish a time overrun
+as evidence that either context condition is slower. Frozen runner copies and plan
+hashes preserve the executed implementation; any runner changes require a new campaign.
+
+The retained field name `modelResponses` counts reserved model-call attempts,
+including failed or cancelled calls; it does not imply 36 completed responses.

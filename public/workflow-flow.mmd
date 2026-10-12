@@ -1,0 +1,17 @@
+flowchart TD
+  A[Freeze task, source, tests and helpers] --> B[Baseline: ordinary repository discovery]
+  A --> C[Context: instructions, skill and resolver]
+  B --> D[Same Gemma model and bounded tools]
+  C --> D
+  D --> E[Read evidence and edit or decide]
+  E --> F[Controlled verification]
+  F -->|Feedback, within retry budget| E
+  F --> G[Freeze final submission]
+  G --> V{Timing audit valid?}
+  V -->|No| X[Keep visible as invalid infrastructure]
+  V -->|Yes| H[Independent healthy, fault and scope checks]
+  H --> I[Semantic review or explicit pending state]
+  I --> J[Private evidence to public summary]
+  X --> J
+  J --> K[GitHub workflow result feed]
+  K --> L[Deployed dashboard refresh]

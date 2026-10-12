@@ -81,3 +81,9 @@ The local API campaign produced five submissions that failed Java compilation an
 This tests the existing quantized Gemma 4 E2B model via llama.cpp on an Apple M1 with 8 GiB RAM. It does not establish a result for all local models or for Pi's multi-step repair loop. Cloud/local differences confound model, tokenizer, provider wrapper and execution environment. Keep these failures as a baseline for a separately versioned experiment with a repair budget or another model; do not replace these attempts.
 
 Public campaigns: [CRM](https://raw.githubusercontent.com/balajiregt/playwright-harness-framework/benchmark-results/campaigns/c2efffa6088e40be.json), [cloud API](https://raw.githubusercontent.com/balajiregt/agentic-workspace/benchmark-results/campaigns/c2efffa6088e40be.json), [local API](https://raw.githubusercontent.com/balajiregt/agentic-workspace/benchmark-results/campaigns/58852fdc96b3e21d.json). Each contains the per-attempt results and evidence fingerprints.
+
+
+The [implemented context-assisted workflow runner](../workflows/README.md) now
+exercises repository discovery, controlled tools, edits and repair budgets. Its
+results use a separate workflow feed and dashboard section; this generation
+protocol and its historical results remain unchanged.

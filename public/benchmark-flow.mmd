@@ -1,6 +1,13 @@
 flowchart TD
     Q[Define a measurable question] --> M[Mockserver: same role journeys]
     Q --> A[API / Playwright: freeze app, requirements and model settings]
+    Q --> W[QA workflow: same tasks, helpers, source and budget]
+    W --> WB[Baseline repository discovery]
+    W --> WC[Framework instructions, skill and context resolver]
+    WB --> WL[Read, edit or decide, verify and repair]
+    WC --> WL
+    WL --> WG[Independent task grading and pending semantic review]
+    WG --> E
     Q --> J[JEV: authored cases with independent labels]
     M --> MB[Legacy interception vs role-aware mockserver]
     MB --> MO[Role assertions and setup / journey runtime]
