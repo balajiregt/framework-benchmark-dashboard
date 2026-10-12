@@ -27,6 +27,8 @@ def export(folder):
   complete=bool(usage) and len(usage)==a.get('modelResponses') and all(u is not None for u in usage)
   metric=lambda key:sum(u.get(key,0) for u in usage) if complete else None
   validity=assess(d,plan['budget']);valid=validity['status']=='valid'
+  review_method=g.get('reviewMethod','pending' if g['correct'] is None else 'automated-gates')
+  if review_method not in ['pending','automated-gates','independent-assistant-review']:raise ValueError('Unknown review method')
   checks=[{'name':x['name'],'passed':x['passed'],'evaluated':not x.get('notEvaluated',False)} for x in g['checks']]
   entry={'instructions':any(r['path']=='AGENTS.md' for r in reads) or (trial['arm']=='context' and bool(events('bootstrap'))),
          'skill':any(r['path']=='skills/microservice-change/SKILL.md' for r in reads),
@@ -34,7 +36,7 @@ def export(folder):
          'resolver':any(e.get('name')=='run' and e.get('params',{}).get('command')=='context:resolve' for e in tools),
          'resolvedContext':any(r['path']=='contexts/current/resolved-context.yml' for r in reads)}
   rows.append({'taskId':trial['taskId'],'operation':trial['operation'],'arm':trial['arm'],'status':a['status'],
-    'correct':g['correct'] if valid else None,'reviewStatus':g['reviewStatus'] if valid else 'invalid-infrastructure','checks':checks,'validity':validity,
+    'correct':g['correct'] if valid else None,'reviewStatus':g['reviewStatus'] if valid else 'invalid-infrastructure','checks':checks,'validity':validity,'reviewMethod':review_method,
     'elapsedMs':a.get('elapsedMs'),'gradingMs':g.get('gradingMs'),'modelResponses':a.get('modelResponses'),'toolCalls':a.get('toolCalls'),
     'verificationCycles':a.get('verificationCycles'),'repairs':a.get('repairs'),'sourceEdits':a.get('edits'),
     'changedFiles':len(g['changedSourceFiles']),'scopeViolations':len(g['outOfScopeChanges']),
@@ -47,7 +49,7 @@ def export(folder):
     'inputTokens':metric('input'),'outputTokens':metric('output'),'cacheReadTokens':metric('cacheRead'),'usageComplete':complete,
     'humanCorrectionMs':None,'apiFeeUSD':0,'operatingCostUSD':None,'entrypoints':entry,
     'cycles':[{'cycle':v['cycle'],'passed':v['result']['passed'],'elapsedMs':v['result']['elapsedMs'],'sourceSha256':v['sourceHash']} for v in a.get('verification',[])],
-    'evidence':{name:digest((d/file).read_bytes()) if (d/file).exists() else None for name,file in [('traceSha256','trace.jsonl'),('submissionSha256','agent-result.json'),('gradeSha256','grade.json')]}})
+    'evidence':{name:digest((d/file).read_bytes()) if (d/file).exists() else None for name,file in [('traceSha256','trace.jsonl'),('submissionSha256','agent-result.json'),('gradeSha256','grade.json'),('reviewSha256','review.json')]}})
  arms={}
  for arm in ['baseline','context']:
   all_rs=[r for r in rows if r['arm']==arm];rs=[r for r in all_rs if r['validity']['status']=='valid']

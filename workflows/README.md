@@ -14,6 +14,43 @@ unchanged. They are not measurements of this workflow. See the
 [repository inspection](context-audit.md) for the actual entry points and
 [task catalog](tasks.json) for concrete create, update and validate assignments.
 
+## Results · 12 October 2026
+
+Campaign `d3928716d37016d0`: six timing-valid attempts, one pair per task.
+Both conditions completed **0/3 full tasks**. All attempts remain visible; none
+was replaced inside this campaign. Human correction time and operating cost are
+unmeasured. Local inference API fee was $0.
+
+| Task | Baseline | Context-guided |
+| --- | --- | --- |
+| Create normalization coverage | 773.5 s; no edit; ran the original five tests; 6/13 gates | 357.7 s; truncated response after unsuccessful edit attempts; 6/13 gates |
+| Strengthen high-risk assertions | 559.3 s; wrong-scope unit-test edits blocked; 7/10 gates | 375.1 s; failed to locate the owning API test; 7/10 gates |
+| Validate proposed format rejection | 236.4 s; incorrectly treated format rejection as supported intent; 2/5 gates | 189.9 s; correctly rejected the unsupported expectation, but omitted the actual low-risk response; 4/5 gates |
+
+Gate counts include preserved starting coverage and scope checks; they are not a
+score for newly written tests or defect recall. No trial applied a source edit.
+Only the baseline create attempt ran agent-requested verification; it passed the
+unchanged original suite. No failed-to-passed compilation repair was demonstrated.
+
+The context-guided validation used the real resolver and read its derived context.
+The other two context attempts did not invoke it; one read the skill late. In total:
+skill read 1/3, resolver invoked 1/3, resolved context read 1/3. Guidance availability
+therefore did not guarantee adherence. The validation conclusion is a useful partial
+finding, not a completed task or a general framework advantage. The context answer
+also presented resolver metadata as OpenAPI fields and suggested an imprecise
+format regex. Both scenario answers were independently reviewed by the supervising
+assistant against the predeclared criteria and pinned source; this was not human review.
+
+Median attempt time: baseline 559.331 s, context-guided 357.709 s. These are durations
+of incomplete work on a shared development laptop with uncontrolled background
+load. They do not establish faster successful completion or financial savings.
+The first improvement target is reliable context routing and evidence use; any
+changed bootstrap, model or budget must be evaluated as a new campaign. The original
+single-response generation results remain separate.
+
+[Public evidence feed](https://raw.githubusercontent.com/balajiregt/agentic-workspace/benchmark-results/workflow-results.json)
+· [Immutable campaign](https://raw.githubusercontent.com/balajiregt/agentic-workspace/benchmark-results/workflow-campaigns/d3928716d37016d0.json)
+
 ## What the comparison changes
 
 | Common to both conditions | Plain repository condition | Context-guided condition |
@@ -292,8 +329,8 @@ injects one response fault at a time; an activated fault must produce an asserti
 failure, not a compiler error, socket error or skipped test. Every verification
 recompiles the test/support modules to prevent stale classes from passing a gate.
 Full output stays private; bounded tool output explicitly identifies truncation.
-There is no automatic context compaction or provider retry. Time spent grading
-is recorded separately from the agent's task time. A small process-cleanup grace
+There is no automatic context compaction or provider retry. Automated grading time
+is recorded separately from the agent's task time; semantic review time is unmeasured. A small process-cleanup grace
 period follows the deadline; no new agent work is allowed after the budget ends.
 
 The preflight edit task hit its shorter infrastructure deadline after making an
@@ -364,3 +401,11 @@ hashes preserve the executed implementation; any runner changes require a new ca
 
 The retained field name `modelResponses` counts reserved model-call attempts,
 including failed or cancelled calls; it does not imply 36 completed responses.
+
+Semantic review records identify the supervising assistant separately from trial
+Gemma, preserve the original automated grade, and hash a private `review.json`.
+Each predeclared criterion is assessed against the frozen submission and actual
+contract/controller/service evidence. Public rows expose `reviewMethod` and the
+review fingerprint; this is an assistant assessment, not a human certification.
+`gradingMs` covers automated gates only. Neither semantic review time nor human
+correction time is inferred from it. A scope-only pass stays pending until reviewed.

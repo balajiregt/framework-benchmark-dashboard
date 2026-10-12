@@ -1,0 +1,705 @@
+{
+  "schemaVersion": 1,
+  "protocol": "qa-context-workflow-v2",
+  "campaignId": "d3928716d37016d0",
+  "planSha256": "d3928716d37016d0561643be0e0882adc2e648add85df6e88234a6ed36b32043",
+  "project": "api",
+  "runnerProtocol": "qa-context-workflow-v2-api-pilot-4",
+  "updatedAt": "2026-10-12T15:38:24.623835+00:00",
+  "sourceRevision": "05307710c9568182507faedbceec5f2ce1c22c9f",
+  "model": {
+    "name": "Gemma 4 E2B IT QAT UD-Q4_K_XL",
+    "modelSha256": "e531007218dfab990486a5de7676a6932d6ea8dea233d1f698d7c21cf8a16889",
+    "contextWindow": 8192,
+    "maxOutputTokens": 4096,
+    "slots": 1,
+    "temperature": 0.2,
+    "seed": 1,
+    "runtime": "Pi 0.73.1 / llama.cpp",
+    "hardware": "Apple M1",
+    "memoryBytes": 8589934592
+  },
+  "budget": {
+    "wallMs": 900000,
+    "modelResponses": 36,
+    "toolCalls": 80,
+    "verificationCycles": 3,
+    "responseMs": 180000
+  },
+  "plannedTrials": 6,
+  "pairedRepeats": 1,
+  "rows": [
+    {
+      "taskId": "api-create-normalization",
+      "operation": "create",
+      "arm": "baseline",
+      "status": "agent-finished",
+      "correct": false,
+      "reviewStatus": "failed-automated-checks",
+      "checks": [
+        {
+          "name": "healthy-suite",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "existing-test-identities-preserved",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "source-change-present",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "new-normalization-request-observed",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-id",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-score",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-category",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-eligible",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-reason",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "old-medium-category",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "old-high-eligible",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "old-low-category",
+          "passed": true,
+          "evaluated": true
+        }
+      ],
+      "validity": {
+        "status": "valid",
+        "reasons": [],
+        "maxClockGapMs": 3618,
+        "maxResponseMs": 98393,
+        "cleanupGraceMs": 5000
+      },
+      "reviewMethod": "automated-gates",
+      "elapsedMs": 773527,
+      "gradingMs": 60571,
+      "modelResponses": 15,
+      "toolCalls": 14,
+      "verificationCycles": 1,
+      "repairs": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "scopeViolations": 0,
+      "uniqueFilesRead": 1,
+      "readCalls": 1,
+      "returnedReadBytes": 418,
+      "searches": 3,
+      "invalidReads": 1,
+      "toolErrors": 4,
+      "truncatedOutputs": 0,
+      "compactions": 0,
+      "firstEvidenceMs": null,
+      "firstEditMs": null,
+      "firstVerificationMs": 659164,
+      "inputTokens": 44606,
+      "outputTokens": 4740,
+      "cacheReadTokens": 0,
+      "usageComplete": true,
+      "humanCorrectionMs": null,
+      "apiFeeUSD": 0,
+      "operatingCostUSD": null,
+      "entrypoints": {
+        "instructions": false,
+        "skill": false,
+        "taskContext": false,
+        "resolver": false,
+        "resolvedContext": false
+      },
+      "cycles": [
+        {
+          "cycle": 1,
+          "passed": true,
+          "elapsedMs": 15150,
+          "sourceSha256": "81e46d28d88b7e5ba1b221de0bee7a5d86092b6573617c2a199ba19b5d221e3b"
+        }
+      ],
+      "evidence": {
+        "traceSha256": "0bb5c8500f2e4e086a051c1b8ebcf446b5511b1ed0be7cd46ca0b3f1e1ccd69a",
+        "submissionSha256": "afe3d66ed17d3894a1dda91ddcaae3a0bc003dd9b37f975f9ab9dc53bf481195",
+        "gradeSha256": "24d9e6fbd580fe9d873f01ddbf95d7f926911f6645eeb098317aaa86df2bc350",
+        "reviewSha256": null
+      }
+    },
+    {
+      "taskId": "api-create-normalization",
+      "operation": "create",
+      "arm": "context",
+      "status": "output-limit",
+      "correct": false,
+      "reviewStatus": "failed-automated-checks",
+      "checks": [
+        {
+          "name": "healthy-suite",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "existing-test-identities-preserved",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "source-change-present",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "new-normalization-request-observed",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-id",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-score",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-category",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-eligible",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "normalize-reason",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "old-medium-category",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "old-high-eligible",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "old-low-category",
+          "passed": true,
+          "evaluated": true
+        }
+      ],
+      "validity": {
+        "status": "valid",
+        "reasons": [],
+        "maxClockGapMs": 486,
+        "maxResponseMs": 110752,
+        "cleanupGraceMs": 5000
+      },
+      "reviewMethod": "automated-gates",
+      "elapsedMs": 357709,
+      "gradingMs": 58846,
+      "modelResponses": 8,
+      "toolCalls": 7,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "scopeViolations": 0,
+      "uniqueFilesRead": 1,
+      "readCalls": 2,
+      "returnedReadBytes": 8076,
+      "searches": 1,
+      "invalidReads": 0,
+      "toolErrors": 1,
+      "truncatedOutputs": 0,
+      "compactions": 0,
+      "firstEvidenceMs": 138831,
+      "firstEditMs": null,
+      "firstVerificationMs": null,
+      "inputTokens": 29406,
+      "outputTokens": 3163,
+      "cacheReadTokens": 0,
+      "usageComplete": true,
+      "humanCorrectionMs": null,
+      "apiFeeUSD": 0,
+      "operatingCostUSD": null,
+      "entrypoints": {
+        "instructions": true,
+        "skill": false,
+        "taskContext": false,
+        "resolver": false,
+        "resolvedContext": false
+      },
+      "cycles": [],
+      "evidence": {
+        "traceSha256": "5582deb53be8af0dcefc5e91ae42ce877265fd20da16293266eca5a598623349",
+        "submissionSha256": "9f9164a3809899917b4296e22bfc8f0800a4edba89672968d9fd39c58cefb704",
+        "gradeSha256": "ae0b1c2a0fec8a2a9d825dbcf1af9a7bc48aea73b9d59ec9204a1dfa850e6a2a",
+        "reviewSha256": null
+      }
+    },
+    {
+      "taskId": "api-update-high-score",
+      "operation": "update",
+      "arm": "context",
+      "status": "agent-finished",
+      "correct": false,
+      "reviewStatus": "failed-automated-checks",
+      "checks": [
+        {
+          "name": "healthy-suite",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "existing-test-identities-preserved",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "source-change-present",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "no-new-test-identities",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "high-score",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "high-reason",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "old-medium-category",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "old-high-eligible",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "old-low-category",
+          "passed": true,
+          "evaluated": true
+        }
+      ],
+      "validity": {
+        "status": "valid",
+        "reasons": [],
+        "maxClockGapMs": 778,
+        "maxResponseMs": 72750,
+        "cleanupGraceMs": 5000
+      },
+      "reviewMethod": "automated-gates",
+      "elapsedMs": 375119,
+      "gradingMs": 64952,
+      "modelResponses": 12,
+      "toolCalls": 11,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "scopeViolations": 0,
+      "uniqueFilesRead": 2,
+      "readCalls": 2,
+      "returnedReadBytes": 6920,
+      "searches": 2,
+      "invalidReads": 1,
+      "toolErrors": 1,
+      "truncatedOutputs": 0,
+      "compactions": 0,
+      "firstEvidenceMs": 206072,
+      "firstEditMs": null,
+      "firstVerificationMs": null,
+      "inputTokens": 31735,
+      "outputTokens": 2271,
+      "cacheReadTokens": 0,
+      "usageComplete": true,
+      "humanCorrectionMs": null,
+      "apiFeeUSD": 0,
+      "operatingCostUSD": null,
+      "entrypoints": {
+        "instructions": true,
+        "skill": true,
+        "taskContext": false,
+        "resolver": false,
+        "resolvedContext": false
+      },
+      "cycles": [],
+      "evidence": {
+        "traceSha256": "4dda5aad93c32e207058794d719d8e771239adddc9f1003fd1e7590ffe0f90e3",
+        "submissionSha256": "681cdbe969c19612df7cc5490cc066193f533d15eda7e95dd2c2e0dbda431523",
+        "gradeSha256": "554bdea8840c7b913809ccace7ab30398658d56024a86c019dcefd1ec185c9b7",
+        "reviewSha256": null
+      }
+    },
+    {
+      "taskId": "api-update-high-score",
+      "operation": "update",
+      "arm": "baseline",
+      "status": "agent-finished",
+      "correct": false,
+      "reviewStatus": "failed-automated-checks",
+      "checks": [
+        {
+          "name": "healthy-suite",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "existing-test-identities-preserved",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "source-change-present",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "no-new-test-identities",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "high-score",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "high-reason",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "old-medium-category",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "old-high-eligible",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "old-low-category",
+          "passed": true,
+          "evaluated": true
+        }
+      ],
+      "validity": {
+        "status": "valid",
+        "reasons": [],
+        "maxClockGapMs": 3445,
+        "maxResponseMs": 99667,
+        "cleanupGraceMs": 5000
+      },
+      "reviewMethod": "automated-gates",
+      "elapsedMs": 559331,
+      "gradingMs": 72623,
+      "modelResponses": 14,
+      "toolCalls": 13,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "scopeViolations": 0,
+      "uniqueFilesRead": 1,
+      "readCalls": 1,
+      "returnedReadBytes": 1152,
+      "searches": 2,
+      "invalidReads": 1,
+      "toolErrors": 4,
+      "truncatedOutputs": 0,
+      "compactions": 0,
+      "firstEvidenceMs": null,
+      "firstEditMs": null,
+      "firstVerificationMs": null,
+      "inputTokens": 29155,
+      "outputTokens": 4735,
+      "cacheReadTokens": 0,
+      "usageComplete": true,
+      "humanCorrectionMs": null,
+      "apiFeeUSD": 0,
+      "operatingCostUSD": null,
+      "entrypoints": {
+        "instructions": false,
+        "skill": false,
+        "taskContext": false,
+        "resolver": false,
+        "resolvedContext": false
+      },
+      "cycles": [],
+      "evidence": {
+        "traceSha256": "5fb9710402064e1db966dd6a48914545f5b27c493adc0d2bb982c8d78b6b1bd0",
+        "submissionSha256": "36a92a66f51f38294addb5babe44ab1426fb6babe0210671f151e333d5d96e29",
+        "gradeSha256": "3e31bc840cc33ba6ff9b1af24463eafbe7eb1b4745ba487b2f015cc6c8bdda26",
+        "reviewSha256": null
+      }
+    },
+    {
+      "taskId": "api-validate-format",
+      "operation": "validate",
+      "arm": "baseline",
+      "status": "agent-finished",
+      "correct": false,
+      "reviewStatus": "reviewed",
+      "checks": [
+        {
+          "name": "source-unchanged",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "contract-no-identifier-pattern",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "implementation-normal-low-risk-response",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "unsupported-expectation-distinguished-from-new-requirement",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "actual-contract-controller-service-evidence-cited",
+          "passed": true,
+          "evaluated": true
+        }
+      ],
+      "validity": {
+        "status": "valid",
+        "reasons": [],
+        "maxClockGapMs": 489,
+        "maxResponseMs": 107896,
+        "cleanupGraceMs": 5000
+      },
+      "reviewMethod": "independent-assistant-review",
+      "elapsedMs": 236380,
+      "gradingMs": 24,
+      "modelResponses": 9,
+      "toolCalls": 8,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "scopeViolations": 0,
+      "uniqueFilesRead": 0,
+      "readCalls": 0,
+      "returnedReadBytes": 0,
+      "searches": 1,
+      "invalidReads": 0,
+      "toolErrors": 0,
+      "truncatedOutputs": 0,
+      "compactions": 0,
+      "firstEvidenceMs": null,
+      "firstEditMs": null,
+      "firstVerificationMs": null,
+      "inputTokens": 14960,
+      "outputTokens": 2878,
+      "cacheReadTokens": 0,
+      "usageComplete": true,
+      "humanCorrectionMs": null,
+      "apiFeeUSD": 0,
+      "operatingCostUSD": null,
+      "entrypoints": {
+        "instructions": false,
+        "skill": false,
+        "taskContext": false,
+        "resolver": false,
+        "resolvedContext": false
+      },
+      "cycles": [],
+      "evidence": {
+        "traceSha256": "1d63090be9af57e3a475f6b5cb7a6e7b4e07fd2171d60fc087871a2752319bd1",
+        "submissionSha256": "03e585c36ebff3b54c59776e265ce2351c6fa1531f018e968d9df8546da0f45c",
+        "gradeSha256": "1a8310708c0ab0cd730d4da2bbc90cb5252cf8fd037554c02438ef7cbdf21d29",
+        "reviewSha256": "5a2c71cda452fa352c0cc8b3081f57db8d346a7b50fdb8825c668e64257041f2"
+      }
+    },
+    {
+      "taskId": "api-validate-format",
+      "operation": "validate",
+      "arm": "context",
+      "status": "agent-finished",
+      "correct": false,
+      "reviewStatus": "reviewed",
+      "checks": [
+        {
+          "name": "source-unchanged",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "contract-no-identifier-pattern",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "implementation-normal-low-risk-response",
+          "passed": false,
+          "evaluated": true
+        },
+        {
+          "name": "unsupported-expectation-distinguished-from-new-requirement",
+          "passed": true,
+          "evaluated": true
+        },
+        {
+          "name": "actual-contract-controller-service-evidence-cited",
+          "passed": true,
+          "evaluated": true
+        }
+      ],
+      "validity": {
+        "status": "valid",
+        "reasons": [],
+        "maxClockGapMs": 210,
+        "maxResponseMs": 91705,
+        "cleanupGraceMs": 5000
+      },
+      "reviewMethod": "independent-assistant-review",
+      "elapsedMs": 189897,
+      "gradingMs": 28,
+      "modelResponses": 6,
+      "toolCalls": 5,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "scopeViolations": 0,
+      "uniqueFilesRead": 1,
+      "readCalls": 1,
+      "returnedReadBytes": 4386,
+      "searches": 0,
+      "invalidReads": 1,
+      "toolErrors": 2,
+      "truncatedOutputs": 0,
+      "compactions": 0,
+      "firstEvidenceMs": null,
+      "firstEditMs": null,
+      "firstVerificationMs": null,
+      "inputTokens": 14062,
+      "outputTokens": 2176,
+      "cacheReadTokens": 0,
+      "usageComplete": true,
+      "humanCorrectionMs": null,
+      "apiFeeUSD": 0,
+      "operatingCostUSD": null,
+      "entrypoints": {
+        "instructions": true,
+        "skill": false,
+        "taskContext": false,
+        "resolver": true,
+        "resolvedContext": true
+      },
+      "cycles": [],
+      "evidence": {
+        "traceSha256": "e328fcc4914cc8fdf03dd036b0b5c1998fd92d3b8082b0bb962f2e9593b1a77a",
+        "submissionSha256": "b74df3ea83929507e3f4fc1fbd9f31176f0259f846f913902cd2f5d4cba8b19e",
+        "gradeSha256": "f618557f70f801b20a431e8a13b925ea527d0d166aee7a4bd73e13af6b6a1fab",
+        "reviewSha256": "f9e04ad155599d4f821e6410d3963f3496763243250915641ceee9b93b59f83b"
+      }
+    }
+  ],
+  "arms": {
+    "baseline": {
+      "trials": 3,
+      "validTrials": 3,
+      "invalidTrials": 0,
+      "confirmedCorrect": 0,
+      "failed": 3,
+      "pending": 0,
+      "medianAttemptMs": 559331,
+      "toolCalls": 35
+    },
+    "context": {
+      "trials": 3,
+      "validTrials": 3,
+      "invalidTrials": 0,
+      "confirmedCorrect": 0,
+      "failed": 3,
+      "pending": 0,
+      "medianAttemptMs": 357709,
+      "toolCalls": 23
+    }
+  },
+  "limitations": [
+    "One paired repeat per task; three tasks, descriptive engineering pilot.",
+    "Nine prior started attempts across three campaigns are excluded and retained privately: three setup-invalid attempts (context-summary leakage/tool-discovery mismatch), then a six-attempt campaign with violated response/wall deadlines after host interruption. No comparative claim uses those attempts. This campaign adds pause detection and wall-clock watchdogs; tasks and model settings are unchanged.",
+    "Pi host uses bounded repository tools and controlled Maven execution, not an unrestricted terminal.",
+    "The API context resolver and skill are exercised; UI capture and JEV review are outside this first batch.",
+    "Human corrections and operating cost are unmeasured.",
+    "Semantic task decisions require review; unreviewed outcomes remain pending.",
+    "Compaction and retries are disabled; context-limit failures remain in the denominator."
+  ]
+}

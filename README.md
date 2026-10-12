@@ -14,7 +14,9 @@ the resulting work; semantic conclusions remain pending until reviewed.
 
 The first API pilot uses three paired tasks, one repeat each. Timing watchdogs and a separate validity audit exclude host interruptions from model performance while retaining every started attempt. It is distinct from
 the earlier one-response generation campaigns and from runtime-only benchmarks.
-See [setup, budgets and grading](workflows/README.md), the
+The 12 October pilot completed 0/3 full tasks in each condition; context-guided
+validation reached the correct central decision but missed a required behavior explanation.
+See [results, setup, budgets and grading](workflows/README.md), the
 [context audit](workflows/context-audit.md) and [flow diagram](public/workflow-flow.svg).
 
 `npm run workflow:run -- --repo <pinned-api-repo> --output <prepared-campaign>`
