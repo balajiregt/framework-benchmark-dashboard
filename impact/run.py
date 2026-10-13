@@ -4,7 +4,7 @@ from engine import *
 from campaign import model_info,awake
 from validity import assess
 PI=pathlib.Path.home()/'.npm-global/lib/node_modules/@mariozechner/pi-coding-agent'
-IMPLEMENTATION=['impact/agent.mjs','impact/engine.py','impact/run.py','impact/audit.py','impact/tasks.json','workflows/runtime.py','workflows/controls.mjs','workflows/validity.py']
+IMPLEMENTATION=['impact/agent.mjs','impact/engine.py','impact/run.py','impact/audit.py','impact/tasks.json','workflows/runtime.py','workflows/controls.mjs','workflows/validity.py','workflows/campaign.py']
 
 def prepare(sources,out,audit_path):
  if out.exists():raise ValueError('Campaign already exists')
@@ -44,9 +44,13 @@ def run_agent(folder,budget):
      break
     time.sleep(.1)
   except BaseException:
-   if p.poll() is None:os.killpg(p.pid,signal.SIGTERM);p.wait(timeout=3)
+   if p.poll() is None:
+    try:os.killpg(p.pid,signal.SIGTERM);p.wait(timeout=3)
+    except (ProcessLookupError,PermissionError,subprocess.TimeoutExpired):pass
    raise
- write(folder/'host-clock.json',{'elapsedMs':round((time.time()-began)*1000),'maxClockGapMs':round(max_gap*1000)})
+  finally:
+   # Preserve the independent clock receipt even when process cleanup fails.
+   write(folder/'host-clock.json',{'elapsedMs':round((time.time()-began)*1000),'maxClockGapMs':round(max_gap*1000)})
  if not (folder/'agent-result.json').exists():write(folder/'agent-result.json',{'status':'host-failed','elapsedMs':round((time.time()-began)*1000),'finalText':'','modelResponses':None,'toolCalls':None,'verificationCycles':None,'repairs':None,'edits':None,'filesRead':[],'bytesRead':None})
  return read(folder/'agent-result.json')
 
@@ -71,15 +75,22 @@ def grade(folder,task,proxy=None):
  result={'gradedAt':now(),'automatedChecks':checks,'changedSourceFiles':source,'outOfScopeChanges':forbidden,'decisionReview':None,'taskReview':None,'complete':False if not all(c['passed'] for c in checks) else None,'reviewStatus':'pending-independent-review','gradingMs':round((time.monotonic()-start)*1000),'submissionSha256':digest((folder/'agent-result.json').read_bytes()),'finalSnapshotSha256':digest(json.dumps(after,sort_keys=True))}
  write(folder/'grade.json',result);return result
 
+def halt_on_invalid(out,trial_id,assessment):
+ if assessment['status']!='valid':
+  write(out/'halted.json',{'haltedAt':now(),'trial':trial_id,'reason':'infrastructure-invalid; remaining trials were not launched','validity':assessment})
+  raise RuntimeError('Campaign halted after infrastructure interruption; retain started attempts and recheck host before a new campaign')
+
 def run(sources,out):
  plan=read(out/'plan.json')
+ if (out/'halted.json').exists():raise RuntimeError('Campaign already halted; preserve it and prepare a fresh campaign after host recovery')
  for n,h in plan['implementationSha256'].items():
   if digest((ROOT.parent/n).read_bytes())!=h:raise ValueError('Frozen runner changed: '+n)
  if digest((out/'context-audit.json').read_bytes())!=plan['contextAuditSha256']:raise ValueError('Audit changed')
  with awake(),api.service(sources['api'],out) as proxy,ui_service(sources['harness'],out):
   for trial in plan['runs']:
    folder=out/trial['id']
-   if (folder/'grade.json').exists():continue
+   if (folder/'grade.json').exists():
+    halt_on_invalid(out,trial['id'],read(folder/'validity.json'));continue
    for name,expected in [('config.json',trial['configSha256']),('initial.json',trial['initialSha256'])]:
     if digest((folder/name).read_bytes())!=expected:raise ValueError('Configuration changed')
    if not (folder/'agent-result.json').exists():
@@ -88,7 +99,7 @@ def run(sources,out):
     slots=json.load(urllib.request.urlopen('http://127.0.0.1:8080/slots',timeout=5))
     if any(s.get('is_processing') for s in slots):raise RuntimeError('Local model busy; no new attempt started')
     print('Starting '+trial['id'],flush=True);a=run_agent(folder,plan['budget']);print(json.dumps({'trial':trial['id'],**{k:a.get(k) for k in ['status','elapsedMs','modelResponses','toolCalls','edits']}}),flush=True)
-   audit=assess(folder,plan['budget']);write(folder/'validity.json',audit);g=grade(folder,trial['task'],proxy);print(json.dumps({'trial':trial['id'],'validity':audit['status'],'automatedChecks':g['automatedChecks']}),flush=True)
+   audit=assess(folder,plan['budget']);write(folder/'validity.json',audit);g=grade(folder,trial['task'],proxy);print(json.dumps({'trial':trial['id'],'validity':audit['status'],'automatedChecks':g['automatedChecks']}),flush=True);halt_on_invalid(out,trial['id'],audit)
 
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','run']);p.add_argument('--api',type=pathlib.Path,required=True);p.add_argument('--harness',type=pathlib.Path,required=True);p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--audit',type=pathlib.Path);p.add_argument('--publish',action='store_true');a=p.parse_args();sources={'api':a.api.resolve(),'harness':a.harness.resolve()};out=a.output.resolve()

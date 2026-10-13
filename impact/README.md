@@ -77,7 +77,13 @@ automatic compaction and test-runner retries are disabled. Arm order alternates
 by task. A successful unrelated read/edit/read preflight verifies tool wiring.
 
 The runner stores every start and refuses to silently replace an interrupted
-attempt. A 100-ms watchdog and separate host-clock audit identify infrastructure
+attempt. After the first campaign exposed repeated host pauses, the launcher was
+changed to halt remaining launches after any infrastructure-invalid result. A
+halted campaign requires a new preparation after host recovery. The independent
+clock receipt is now written even if process cleanup raises an error. The first
+campaign used the runner committed at `10b4341`; later plans freeze this revised
+launcher and the shared campaign utilities as well. Agent tools and budgets are
+unchanged. A 100-ms watchdog and separate host-clock audit identify infrastructure
 interruptions. Invalid attempts stay visible and are excluded from performance
 totals. Completion differences use only matched pairs whose two timings are valid;
 an unmatched valid attempt remains visible in its arm but cannot inflate that
