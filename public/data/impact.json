@@ -1,0 +1,1324 @@
+{
+  "schemaVersion": 1,
+  "protocol": "framework-impact-v1",
+  "campaignId": "db8af4c03b14d269",
+  "planSha256": "db8af4c03b14d269a458381f34bb9bfd21c72d6fb7fe11b82602c6860f320a55",
+  "updatedAt": "2026-10-12T22:25:50.704759+00:00",
+  "sourceRevisions": {
+    "api": "05307710c9568182507faedbceec5f2ce1c22c9f",
+    "harness": "546c089a0670f640c652559d706c294203cc2311"
+  },
+  "model": {
+    "name": "Gemma 4 E2B IT QAT UD-Q4_K_XL",
+    "modelSha256": "e531007218dfab990486a5de7676a6932d6ea8dea233d1f698d7c21cf8a16889",
+    "contextWindow": 8192,
+    "maxOutputTokens": 4096,
+    "slots": 1,
+    "temperature": 0.2,
+    "seed": 1,
+    "runtime": "Pi 0.73.1 / llama.cpp",
+    "hardware": "Apple M1",
+    "memoryBytes": 8589934592
+  },
+  "budget": {
+    "wallMs": 900000,
+    "modelResponses": 36,
+    "toolCalls": 80,
+    "verificationCycles": 3,
+    "responseMs": 180000
+  },
+  "pairedRepeats": 1,
+  "plannedTrials": 12,
+  "contextAudit": {
+    "schemaVersion": 1,
+    "protocol": "context-audit-v1",
+    "createdAt": "2026-10-12T16:19:01.571675+00:00",
+    "sources": {
+      "api": "05307710c9568182507faedbceec5f2ce1c22c9f",
+      "harness": "546c089a0670f640c652559d706c294203cc2311"
+    },
+    "projects": [
+      {
+        "project": "api",
+        "revision": "05307710c9568182507faedbceec5f2ce1c22c9f",
+        "checks": [
+          {
+            "id": "path-controller",
+            "label": "Resolves controller",
+            "status": "pass",
+            "evidence": "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/api/CustomerRiskController.java"
+          },
+          {
+            "id": "path-service",
+            "label": "Resolves service",
+            "status": "pass",
+            "evidence": "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/service/CustomerRiskService.java"
+          },
+          {
+            "id": "path-openapi",
+            "label": "Resolves openapi",
+            "status": "pass",
+            "evidence": "projects/microservices/xyz-service/src/main/resources/openapi/xyz-service.openapi.yml"
+          },
+          {
+            "id": "path-api_test",
+            "label": "Resolves api test",
+            "status": "pass",
+            "evidence": "projects/microservices/qa-projects/xyz-service-api-tests/src/test/java/com/agentic/workspace/qa/xyz/tests/CustomerRiskApiTest.java"
+          },
+          {
+            "id": "path-shared_fixtures",
+            "label": "Resolves shared fixtures",
+            "status": "pass",
+            "evidence": "projects/microservices/qa-steps/src/main/java/com/agentic/workspace/qa/fixtures/CustomerFixtures.java"
+          },
+          {
+            "id": "path-shared_assertions",
+            "label": "Resolves shared assertions",
+            "status": "pass",
+            "evidence": "projects/microservices/qa-steps/src/main/java/com/agentic/workspace/qa/assertions/JsonFieldAssertions.java"
+          },
+          {
+            "id": "query-contract",
+            "label": "Required nonempty customerId; no format pattern",
+            "status": "pass",
+            "evidence": "Compared with the OpenAPI customerId schema."
+          },
+          {
+            "id": "normalization-signals",
+            "label": "Trim/case normalization and no regex signal",
+            "status": "pass",
+            "evidence": "Compared with the controller and CustomerRiskService implementation."
+          },
+          {
+            "id": "verification-owner",
+            "label": "Verification targets the separate QA project",
+            "status": "pass",
+            "evidence": "Compared with Maven module ownership and the frozen local runtime."
+          },
+          {
+            "id": "runtime-freshness",
+            "label": "Automatic staleness detection",
+            "status": "unmeasured",
+            "evidence": "Generated output has a timestamp but no complete dependency fingerprint. This audit regenerates it from the pinned source; no general freshness guarantee is inferred."
+          }
+        ],
+        "generationMs": 133,
+        "artifactSha256": [
+          "82e8e90b5857e4f8cd25498fdfd25f6708508b5994c2ea45cbaa8a0b9f93a989"
+        ],
+        "sourceStatus": "pinned-clean",
+        "notes": "Source-grounded component audit; these checks do not establish agent productivity or generalisation."
+      },
+      {
+        "project": "harness",
+        "revision": "546c089a0670f640c652559d706c294203cc2311",
+        "checks": [
+          {
+            "id": "role-routes",
+            "label": "Manifest preserves viewer and manager route permissions",
+            "status": "pass",
+            "evidence": "Compared with the current app routeConfig and seeded users."
+          },
+          {
+            "id": "owning-files",
+            "label": "Graph identifies the test, page and assertion owners",
+            "status": "pass",
+            "evidence": "Compared with the actual imports and class implementations."
+          },
+          {
+            "id": "existing-manager-routes",
+            "label": "Graph records existing manager direct-route steps",
+            "status": "pass",
+            "evidence": "The current manager test already contains both route visits and path-specific denial assertions."
+          },
+          {
+            "id": "helper-evidence",
+            "label": "Framework tells the agent to inspect helper implementations",
+            "status": "pass",
+            "evidence": "Graphs are navigation hints; body/helper inspection remains necessary."
+          },
+          {
+            "id": "api-auth-context",
+            "label": "Manifest describes the API session requirement",
+            "status": "fail",
+            "evidence": "The manifest says localStorage only. Live API observation: unauthenticated export returns 401, viewer login creates HttpOnly cookie, authenticated export returns 403."
+          },
+          {
+            "id": "capture-api-session",
+            "label": "Capture workflow establishes the API session",
+            "status": "fail",
+            "evidence": "Current runner injects localStorage only; this can establish UI state but does not create the HttpOnly API session."
+          },
+          {
+            "id": "capture-freshness",
+            "label": "Existing captures tied to the current source revision",
+            "status": "unmeasured",
+            "evidence": "Committed capture existence does not establish freshness. No source fingerprint is available for the saved page snapshots."
+          }
+        ],
+        "generationMs": 771,
+        "artifactSha256": [
+          "e2afcdd26daeb5c67351b4dd9bf15b8aea7d68e45e10230f577b476d8527e68d",
+          "3b091d940274f2d4007676c193020ca40cea8d69ab207f0cb0172dd9ebd03398",
+          "2ca3e80d3858d161bf26564fbd4cc32648dd7515d9c62ad7d93ad3800321ee83"
+        ],
+        "sourceStatus": "pinned-clean",
+        "notes": "Source-grounded component audit; these checks do not establish agent productivity or generalisation."
+      }
+    ]
+  },
+  "rows": [
+    {
+      "id": "api-create-normalization-baseline",
+      "taskId": "api-create-normalization",
+      "title": "Cover customer identifier normalization",
+      "project": "api",
+      "operation": "create",
+      "arm": "baseline",
+      "repeat": 1,
+      "status": "output-limit",
+      "validity": {
+        "status": "valid",
+        "reasons": [],
+        "maxClockGapMs": 1733,
+        "maxResponseMs": 127031,
+        "cleanupGraceMs": 5000
+      },
+      "complete": false,
+      "decisions": {
+        "ownership": false,
+        "action": false,
+        "grounding": false
+      },
+      "reviewed": true,
+      "reviewMethod": "supervising-assistant",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "change",
+          "label": "Requested source change exists",
+          "passed": false
+        },
+        {
+          "id": "execution",
+          "label": "Work executes successfully against the sample app",
+          "passed": true
+        },
+        {
+          "id": "requested-input",
+          "label": "Execution includes the requested whitespace input",
+          "passed": false
+        }
+      ],
+      "taskChecks": [
+        false,
+        false,
+        false,
+        true
+      ],
+      "taskCriteria": [
+        "A genuinely missing normalization scenario is added using the existing Java API test project.",
+        "The raw input contains lowercase letters and surrounding spaces; the assertion checks normalized customerId and the low-risk decision fields from source.",
+        "Healthy execution succeeds; source inspection confirms the new scenario asserts the requested normalized identifier and source-derived decision fields.",
+        "Existing tests/assertions remain effective and no product, contract, deployment or unrelated source is changed."
+      ],
+      "elapsedMs": 690240,
+      "modelCalls": 15,
+      "toolCalls": 14,
+      "toolErrors": 2,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": true,
+        "input": 38942,
+        "output": 4005,
+        "cacheRead": 0
+      },
+      "contextUse": {
+        "instructionsAssigned": false,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": 198847
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "d8382fd24fa3bcf708f376c14f8f1af6149d207207a2cf8848d92221dfbff777",
+        "traceSha256": "e4f1c6cb093109b09437adc9ff9c648622d545294df648d778039763df74230d",
+        "gradeSha256": "544ced90eeae877d3eb090fd58cbf2dfd0e58df9fb03d1145aeaa43ed735bb9a",
+        "reviewSha256": "bb08ed662d5eb74d417b0f52433f61b502f0d484893ccdf4aeb8429964d94b5c"
+      }
+    },
+    {
+      "id": "api-create-normalization-context",
+      "taskId": "api-create-normalization",
+      "title": "Cover customer identifier normalization",
+      "project": "api",
+      "operation": "create",
+      "arm": "context",
+      "repeat": 1,
+      "status": "output-limit",
+      "validity": {
+        "status": "valid",
+        "reasons": [],
+        "maxClockGapMs": 1079,
+        "maxResponseMs": 122662,
+        "cleanupGraceMs": 5000
+      },
+      "complete": false,
+      "decisions": {
+        "ownership": false,
+        "action": false,
+        "grounding": false
+      },
+      "reviewed": true,
+      "reviewMethod": "supervising-assistant",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "change",
+          "label": "Requested source change exists",
+          "passed": false
+        },
+        {
+          "id": "execution",
+          "label": "Work executes successfully against the sample app",
+          "passed": true
+        },
+        {
+          "id": "requested-input",
+          "label": "Execution includes the requested whitespace input",
+          "passed": false
+        }
+      ],
+      "taskChecks": [
+        false,
+        false,
+        false,
+        true
+      ],
+      "taskCriteria": [
+        "A genuinely missing normalization scenario is added using the existing Java API test project.",
+        "The raw input contains lowercase letters and surrounding spaces; the assertion checks normalized customerId and the low-risk decision fields from source.",
+        "Healthy execution succeeds; source inspection confirms the new scenario asserts the requested normalized identifier and source-derived decision fields.",
+        "Existing tests/assertions remain effective and no product, contract, deployment or unrelated source is changed."
+      ],
+      "elapsedMs": 692956,
+      "modelCalls": 13,
+      "toolCalls": 12,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": true,
+        "input": 57089,
+        "output": 2369,
+        "cacheRead": 0
+      },
+      "contextUse": {
+        "instructionsAssigned": true,
+        "contextFilesRead": 2,
+        "generationRequested": false,
+        "firstContextReadMs": 86790,
+        "firstDirectEvidenceReadMs": 570079
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "df4c26ff9997b35d40a70db31e7212a412032275a772f8b935acbba6feeddaf8",
+        "traceSha256": "454768030c05fe4a8f49088caa1515659a7264400abb917957a11c80d216ce54",
+        "gradeSha256": "294116f3811c58cc3d28a1109417cbb3cd8c796838373ccc1da2b9dbe4454d93",
+        "reviewSha256": "c151d77813d7814b14c7831173ed0da3927f42bc98e8375acd62fe5bd57805c8"
+      }
+    },
+    {
+      "id": "api-update-high-score-context",
+      "taskId": "api-update-high-score",
+      "title": "Strengthen the existing high-risk test",
+      "project": "api",
+      "operation": "update",
+      "arm": "context",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "missing-clock-watchdog",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": null,
+        "maxResponseMs": 906304,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "change",
+          "label": "Requested source change exists",
+          "passed": false
+        },
+        {
+          "id": "execution",
+          "label": "Work executes successfully against the sample app",
+          "passed": true
+        },
+        {
+          "id": "no-duplicate",
+          "label": "Existing scenario count retained",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "The existing high-risk test is extended with score 91 and decisionReason \"Customer requires manual review before eligibility.\".",
+        "Customer ID, eligibility, risk category and status checks are preserved; no equivalent duplicate test is created.",
+        "Healthy execution succeeds; source inspection confirms exact score and reason assertions in the existing high-risk scenario.",
+        "Changes stay in the owning test/support layers; unrelated tests and application behaviour are preserved."
+      ],
+      "elapsedMs": 1266340,
+      "modelCalls": 13,
+      "toolCalls": 12,
+      "toolErrors": 1,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": true,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "8a7a3a000ee5c98ebe09671bbdd52226a49bd97594ec9c5e3127affdc5501bfe",
+        "traceSha256": "a261b19714e4bbd55ec8bcca4e43124cc082aee6ddf6cc9a87610c170ed2acec",
+        "gradeSha256": "a892161e4e3666ede1284c5d80d3650028a09e9048f1b94db1661919fd33d0ce",
+        "reviewSha256": null
+      }
+    },
+    {
+      "id": "api-update-high-score-baseline",
+      "taskId": "api-update-high-score",
+      "title": "Strengthen the existing high-risk test",
+      "project": "api",
+      "operation": "update",
+      "arm": "baseline",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": 900759,
+        "maxResponseMs": 918145,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "change",
+          "label": "Requested source change exists",
+          "passed": false
+        },
+        {
+          "id": "execution",
+          "label": "Work executes successfully against the sample app",
+          "passed": true
+        },
+        {
+          "id": "no-duplicate",
+          "label": "Existing scenario count retained",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "The existing high-risk test is extended with score 91 and decisionReason \"Customer requires manual review before eligibility.\".",
+        "Customer ID, eligibility, risk category and status checks are preserved; no equivalent duplicate test is created.",
+        "Healthy execution succeeds; source inspection confirms exact score and reason assertions in the existing high-risk scenario.",
+        "Changes stay in the owning test/support layers; unrelated tests and application behaviour are preserved."
+      ],
+      "elapsedMs": 918209,
+      "modelCalls": 1,
+      "toolCalls": 0,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": false,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "6642bd8c7c847fe3a2650b205e9e237ec6878d7c8d5842cb6605b6f638c5d54f",
+        "traceSha256": "397d5ad6fda7392386918f9a780f40d7eaf857a058b7fb1dff4c790eab232608",
+        "gradeSha256": "beac9991362c299c65411f3347d6a24f435e698b33325063c91df36e0c74249f",
+        "reviewSha256": null
+      }
+    },
+    {
+      "id": "api-validate-format-baseline",
+      "taskId": "api-validate-format",
+      "title": "Assess an unsupported rejection expectation",
+      "project": "api",
+      "operation": "validate",
+      "arm": "baseline",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": 900762,
+        "maxResponseMs": 901974,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "read-only",
+          "label": "Source remains unchanged",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "Explains that OpenAPI requires a nonempty string but specifies no CUST-number pattern.",
+        "Explains that the current source normalizes this input and produces a normal low-risk decision rather than rejecting its format.",
+        "Classifies the proposed rejection as unsupported by the present contract/implementation; distinguishes a proposed requirement from an established application bug.",
+        "Cites actual contract/controller/service evidence and makes no product/test/helper source edits."
+      ],
+      "elapsedMs": 936418,
+      "modelCalls": 2,
+      "toolCalls": 1,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": false,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "41fda5a97ebfd5857363588d5ccbdd9fc756481468cbf46c9b7d03b57ef88b55",
+        "traceSha256": "31d23b7b6ef66bd26c4d33df59f29df0df51876886922a2365f99ff9788bdfae",
+        "gradeSha256": "7d37ec5aa1b85edf344b1e17bc7a3de77f9c78ef87efc6411080be72531e17f3",
+        "reviewSha256": null
+      }
+    },
+    {
+      "id": "api-validate-format-context",
+      "taskId": "api-validate-format",
+      "title": "Assess an unsupported rejection expectation",
+      "project": "api",
+      "operation": "validate",
+      "arm": "context",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": 900023,
+        "maxResponseMs": 915433,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "read-only",
+          "label": "Source remains unchanged",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "Explains that OpenAPI requires a nonempty string but specifies no CUST-number pattern.",
+        "Explains that the current source normalizes this input and produces a normal low-risk decision rather than rejecting its format.",
+        "Classifies the proposed rejection as unsupported by the present contract/implementation; distinguishes a proposed requirement from an established application bug.",
+        "Cites actual contract/controller/service evidence and makes no product/test/helper source edits."
+      ],
+      "elapsedMs": 941762,
+      "modelCalls": 2,
+      "toolCalls": 1,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": true,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "e171849e1d5047fe0124eaedae60cc7e03ca1ce0c4b3a0d4ef4d87d95e07a6d5",
+        "traceSha256": "a3f327fb139217a9d03cc03639c241b09e7d3db4f154d386a7327aefb36e1b4a",
+        "gradeSha256": "cda0c14b2bc748faa2d01456838ddca22fef44fc6ccf1f395fcd3e922f3071bb",
+        "reviewSha256": null
+      }
+    },
+    {
+      "id": "ui-create-viewer-denial-context",
+      "taskId": "ui-create-viewer-denial",
+      "title": "Create viewer direct-route coverage",
+      "project": "harness",
+      "operation": "create",
+      "arm": "context",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": 899972,
+        "maxResponseMs": 944607,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "change",
+          "label": "Requested source change exists",
+          "passed": false
+        },
+        {
+          "id": "execution",
+          "label": "Work executes successfully against the sample app",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "Adds previously absent viewer direct-route checks for Leads and Reports using the existing project.",
+        "Uses a real viewer login, waits for authenticated readiness and visits both restricted routes.",
+        "Verifies denial and the relevant path for both routes; preserves existing coverage and app source."
+      ],
+      "elapsedMs": 944689,
+      "modelCalls": 1,
+      "toolCalls": 0,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": true,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "1da18bea84de10208fc8889d1ef82f7e9ee16e7379d956fd88c19e095eed45d7",
+        "traceSha256": "c4618920cc9a14247939491a32a8afe710c047636c6c459b2c8c7a21fe2016bd",
+        "gradeSha256": "9f1ea7b263419e21f513a78c26c384bce25750e6122fb985a11e3243a91477c5",
+        "reviewSha256": null
+      }
+    },
+    {
+      "id": "ui-create-viewer-denial-baseline",
+      "taskId": "ui-create-viewer-denial",
+      "title": "Create viewer direct-route coverage",
+      "project": "harness",
+      "operation": "create",
+      "arm": "baseline",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": 900735,
+        "maxResponseMs": 938405,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "change",
+          "label": "Requested source change exists",
+          "passed": false
+        },
+        {
+          "id": "execution",
+          "label": "Work executes successfully against the sample app",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "Adds previously absent viewer direct-route checks for Leads and Reports using the existing project.",
+        "Uses a real viewer login, waits for authenticated readiness and visits both restricted routes.",
+        "Verifies denial and the relevant path for both routes; preserves existing coverage and app source."
+      ],
+      "elapsedMs": 938472,
+      "modelCalls": 1,
+      "toolCalls": 0,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": false,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "aadebb470a9ef1d86a09705c1ade115d688eb805335ebb77dfa5751f2e7e1309",
+        "traceSha256": "258b8df846e53603f72852bed39aac3d9d9d70348013678674dd77e5af1974cd",
+        "gradeSha256": "c1d52452a9a32e158dc7f7a9515e87138a687d0a060e1ab256031a3ff8d7c342",
+        "reviewSha256": null
+      }
+    },
+    {
+      "id": "ui-update-viewer-export-baseline",
+      "taskId": "ui-update-viewer-export",
+      "title": "Add API enforcement to the existing viewer flow",
+      "project": "harness",
+      "operation": "update",
+      "arm": "baseline",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": 900618,
+        "maxResponseMs": 909607,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "change",
+          "label": "Requested source change exists",
+          "passed": false
+        },
+        {
+          "id": "execution",
+          "label": "Work executes successfully against the sample app",
+          "passed": true
+        },
+        {
+          "id": "no-duplicate",
+          "label": "Existing scenario count retained",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "Extends the owning viewer test/support code without duplicating the entire existing flow.",
+        "The HTTP request shares the viewer session created by real login; a 401 from missing authentication is not accepted.",
+        "Checks exact 403 and denial JSON, preserving read-only banner, disabled export control and admin denial.",
+        "Healthy execution passes; source inspection confirms the authenticated request and its assertions are awaited, with no response mocking or application changes."
+      ],
+      "elapsedMs": 929471,
+      "modelCalls": 2,
+      "toolCalls": 1,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": false,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "c4001e7eebcbc1295110284e25a82179910df3246dad20fccc2f79256d7e2a1d",
+        "traceSha256": "a0f74bb9cca9ae499e2329318dee8d7c828a772e0b9b7449a6f1651415dc475e",
+        "gradeSha256": "9540f0c7cd12d391e58cd71825e47c0144105062826b5a3d43c1c4e1a84cb167",
+        "reviewSha256": null
+      }
+    },
+    {
+      "id": "ui-update-viewer-export-context",
+      "taskId": "ui-update-viewer-export",
+      "title": "Add API enforcement to the existing viewer flow",
+      "project": "harness",
+      "operation": "update",
+      "arm": "context",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": 900124,
+        "maxResponseMs": 918993,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "change",
+          "label": "Requested source change exists",
+          "passed": false
+        },
+        {
+          "id": "execution",
+          "label": "Work executes successfully against the sample app",
+          "passed": true
+        },
+        {
+          "id": "no-duplicate",
+          "label": "Existing scenario count retained",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "Extends the owning viewer test/support code without duplicating the entire existing flow.",
+        "The HTTP request shares the viewer session created by real login; a 401 from missing authentication is not accepted.",
+        "Checks exact 403 and denial JSON, preserving read-only banner, disabled export control and admin denial.",
+        "Healthy execution passes; source inspection confirms the authenticated request and its assertions are awaited, with no response mocking or application changes."
+      ],
+      "elapsedMs": 919057,
+      "modelCalls": 1,
+      "toolCalls": 0,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": true,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "bcc8b2570bd8d6798bd72410949a71bedb1a2054f18793c5cf4a419686af6118",
+        "traceSha256": "162b5debf1fcffdeb8c6e7c094a6d38e6731826a4c44d95a86e77f3165608192",
+        "gradeSha256": "c2a3e996d8442879225cb052da3298fa9f5d876f83bd2f3cfd8daf5fe24ad850",
+        "reviewSha256": null
+      }
+    },
+    {
+      "id": "ui-validate-manager-coverage-context",
+      "taskId": "ui-validate-manager-coverage",
+      "title": "Recognise existing manager direct-route coverage",
+      "project": "harness",
+      "operation": "validate",
+      "arm": "context",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": 900700,
+        "maxResponseMs": 932200,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "read-only",
+          "label": "Source remains unchanged",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "Identifies the owning manager test and follows gotoLeads/gotoAdminUsers and expectPermissionDeniedForPath into their implementations.",
+        "Recognises both direct routes and their explicit denial/path checks are already covered in this snapshot.",
+        "Explains what is established without claiming execution or complete backend authorization coverage; makes no edits."
+      ],
+      "elapsedMs": 932276,
+      "modelCalls": 1,
+      "toolCalls": 0,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": true,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "5c6fd86b328255102939b531d1ba3867535448d72e220ca6d9da39340d927795",
+        "traceSha256": "806d74e3aabaac15bed89f84415c7fd0f2304bddea96df438f4b6b628a8caae4",
+        "gradeSha256": "b22aa5269bd3f07f7b7791aeb9f40d59f55b7c10d94be86037016ede27a5f41d",
+        "reviewSha256": null
+      }
+    },
+    {
+      "id": "ui-validate-manager-coverage-baseline",
+      "taskId": "ui-validate-manager-coverage",
+      "title": "Recognise existing manager direct-route coverage",
+      "project": "harness",
+      "operation": "validate",
+      "arm": "baseline",
+      "repeat": 1,
+      "status": "host-interrupted",
+      "validity": {
+        "status": "invalid-infrastructure",
+        "reasons": [
+          "host-failure",
+          "host-pause-detected",
+          "response-deadline-exceeded",
+          "wall-deadline-exceeded"
+        ],
+        "maxClockGapMs": 900698,
+        "maxResponseMs": 910562,
+        "cleanupGraceMs": 5000
+      },
+      "complete": null,
+      "decisions": {
+        "ownership": null,
+        "action": null,
+        "grounding": null
+      },
+      "reviewed": false,
+      "reviewMethod": "pending",
+      "automatedChecks": [
+        {
+          "id": "scope",
+          "label": "Changes stay within task scope",
+          "passed": true
+        },
+        {
+          "id": "read-only",
+          "label": "Source remains unchanged",
+          "passed": true
+        }
+      ],
+      "taskChecks": null,
+      "taskCriteria": [
+        "Identifies the owning manager test and follows gotoLeads/gotoAdminUsers and expectPermissionDeniedForPath into their implementations.",
+        "Recognises both direct routes and their explicit denial/path checks are already covered in this snapshot.",
+        "Explains what is established without claiming execution or complete backend authorization coverage; makes no edits."
+      ],
+      "elapsedMs": 945114,
+      "modelCalls": 3,
+      "toolCalls": 2,
+      "toolErrors": 0,
+      "sourceEdits": 0,
+      "changedFiles": 0,
+      "verificationCycles": 0,
+      "repairs": 0,
+      "usage": {
+        "complete": false,
+        "input": null,
+        "output": null,
+        "cacheRead": null
+      },
+      "contextUse": {
+        "instructionsAssigned": false,
+        "contextFilesRead": 0,
+        "generationRequested": false,
+        "firstContextReadMs": null,
+        "firstDirectEvidenceReadMs": null
+      },
+      "cost": {
+        "externalInferenceUSD": 0,
+        "operatingUSD": null,
+        "humanCorrectionMs": null
+      },
+      "evidence": {
+        "submissionSha256": "50953665ba4bfb57094293673af81205ef9a350bc15760bd9b827344e0d5cca1",
+        "traceSha256": "2c6e9b697c70a5bfa4c8e226154298ad4a6e22328ee25e8971cccc1fcfeaf455",
+        "gradeSha256": "c53039b3e20e98a95168d6562263e487d0ad906968c131207bdfe7e0f19891f0",
+        "reviewSha256": null
+      }
+    }
+  ],
+  "summary": {
+    "api": {
+      "baseline": {
+        "started": 3,
+        "valid": 1,
+        "invalid": 2,
+        "complete": 0,
+        "incomplete": 1,
+        "pending": 0,
+        "medianAttemptMs": 690240,
+        "medianCompletedMs": null,
+        "decisions": {
+          "ownership": {
+            "correct": 0,
+            "reviewed": 1
+          },
+          "action": {
+            "correct": 0,
+            "reviewed": 1
+          },
+          "grounding": {
+            "correct": 0,
+            "reviewed": 1
+          }
+        }
+      },
+      "context": {
+        "started": 3,
+        "valid": 1,
+        "invalid": 2,
+        "complete": 0,
+        "incomplete": 1,
+        "pending": 0,
+        "medianAttemptMs": 692956,
+        "medianCompletedMs": null,
+        "decisions": {
+          "ownership": {
+            "correct": 0,
+            "reviewed": 1
+          },
+          "action": {
+            "correct": 0,
+            "reviewed": 1
+          },
+          "grounding": {
+            "correct": 0,
+            "reviewed": 1
+          }
+        }
+      }
+    },
+    "harness": {
+      "baseline": {
+        "started": 3,
+        "valid": 0,
+        "invalid": 3,
+        "complete": 0,
+        "incomplete": 0,
+        "pending": 0,
+        "medianAttemptMs": null,
+        "medianCompletedMs": null,
+        "decisions": {
+          "ownership": {
+            "correct": 0,
+            "reviewed": 0
+          },
+          "action": {
+            "correct": 0,
+            "reviewed": 0
+          },
+          "grounding": {
+            "correct": 0,
+            "reviewed": 0
+          }
+        }
+      },
+      "context": {
+        "started": 3,
+        "valid": 0,
+        "invalid": 3,
+        "complete": 0,
+        "incomplete": 0,
+        "pending": 0,
+        "medianAttemptMs": null,
+        "medianCompletedMs": null,
+        "decisions": {
+          "ownership": {
+            "correct": 0,
+            "reviewed": 0
+          },
+          "action": {
+            "correct": 0,
+            "reviewed": 0
+          },
+          "grounding": {
+            "correct": 0,
+            "reviewed": 0
+          }
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Six source-grounded tasks, one paired run per task; descriptive pilot, not a statistically established benefit.",
+    "API tasks were used in the earlier pilot; this is not an unseen holdout. UI task expectations were rechecked against the actual pinned source.",
+    "Playwright context has a known authentication mismatch, retained and reported rather than silently repaired in one condition.",
+    "Same model, ordinary tools, task source and limits in both conditions. Framework guidance and its resolver/graph commands are the intervention.",
+    "Native-style tool names with confined execution; not an unrestricted production coding agent.",
+    "Shared Apple M1 laptop; background load is not controlled. Human correction time and total operating cost remain unmeasured.",
+    "All semantic decisions are reviewed by the supervising assistant against a frozen rubric, not certified by a human.",
+    "Mockserver and JEV are outside this campaign and retain separate evidence tracks."
+  ]
+}

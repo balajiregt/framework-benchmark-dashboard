@@ -1,8 +1,14 @@
 # Context-assisted QA workflow benchmark
 
+**Historical API pilot.** New API/Playwright paired campaigns use
+[framework-impact-v1](../impact/README.md). The unexecuted manager create/validate
+entries in this older catalog were based on an incorrect missing-coverage
+assumption and are retired; do not use them to grade agent performance.
+
+
 Status: **runner, enforced budgets, grading and live dashboard implemented**.
 API pilot protocol: `qa-context-workflow-v2-api-pilot-4`; public schema: `qa-context-workflow-v2`.
-Implemented on 11–12 October 2026. The eight-task catalog remains the expansion plan;
+Implemented on 11–12 October 2026. The older catalog is retained for history, with incorrect UI entries retired;
 this first campaign runs six API workflows (three tasks × two conditions).
 
 The question is: **Does the framework's context and guidance help the same agent

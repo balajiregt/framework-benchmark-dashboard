@@ -3,6 +3,21 @@
 [Live dashboard](https://framework-benchmarks-balaji.netlify.app) for synthetic
 Role-Aware Mockserver, Agentic Playwright, Agentic API and JEV benchmark evidence.
 
+## Framework impact: context, decisions and delivered work
+
+[Open the framework-impact view](https://framework-benchmarks-balaji.netlify.app/#framework-impact).
+The new campaign first checks whether API and Playwright context agrees with
+source and live authentication, then runs the same create/update/validate requests
+with and without each framework. It reports ownership, action and evidence
+judgments separately from completed work, elapsed time, provider usage and cost.
+
+See [the protocol and reproduction commands](impact/README.md) and
+[actual results](impact/RESULTS.md): two timing-valid attempts and ten host
+interruptions; no valid Playwright comparison yet. One pair per task
+is a descriptive pilot. Reading context, making edits or passing an unchanged
+suite does not establish successful delivery. Human correction time and total
+local operating cost remain unmeasured. Historical evidence below is retained.
+
 ## Context-assisted QA workflows
 
 The new [workflow comparison](https://framework-benchmarks-balaji.netlify.app/#workflow-trials)

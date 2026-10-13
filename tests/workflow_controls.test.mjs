@@ -35,3 +35,13 @@ test('skill discovery matches the bounded host tool and path interface',()=>{
  const stock="Use the read tool to load a skill's file when the task matches its description.\nWhen a skill file references a relative path, resolve it against the skill directory (parent of SKILL.md / dirname of the path) and use that absolute path in tool commands.";
  const adapted=skillInstructions(stock);assert.match(adapted,/repo_read/);assert.match(adapted,/repository-relative/);assert.doesNotMatch(adapted,/absolute path|Use the read tool/);
 });
+
+test('TypeScript writes require explicit extension and owning-root scope',()=>{
+ const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'impact-scope-')));
+ try {
+  assert.throws(()=>confinedPath(root,'tests/example.ts',{write:true,sourceEditsAllowed:true,allowedSourceRoots:['tests/']}));
+  assert.equal(confinedPath(root,'tests/example.ts',{write:true,sourceEditsAllowed:true,allowedSourceRoots:['tests/'],allowedExtensions:['.ts']}),path.join(root,'tests/example.ts'));
+  assert.throws(()=>confinedPath(root,'examples/app.ts',{write:true,sourceEditsAllowed:true,allowedSourceRoots:['tests/'],allowedExtensions:['.ts']}));
+  assert.throws(()=>confinedPath(root,'.runtime/config.ts'));
+ } finally {fs.rmSync(root,{recursive:true,force:true});}
+});

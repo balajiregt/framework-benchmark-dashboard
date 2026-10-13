@@ -76,10 +76,11 @@ Readiness observations:
 - Playwright config can retry in CI and sample tests can skip without a base URL.
   The evaluator must set a real local URL, enforce no test retries, check nonempty
   executed test identities and distinguish agent repair from test-runner retry.
-- The existing manager allowed-action test's title mentions denied routes, but
-  its body visits Accounts, Opportunities and Reports. Its navigation helper
-  checks disabled links; it does not prove direct URL denial. This is a useful
-  scenario-validation task and illustrates why title/graph matching is not proof.
+- **Correction, 12 October 2026:** the earlier inspection incorrectly described
+  the manager flow as lacking direct-route checks. Its body already calls
+  `gotoLeads` and `gotoAdminUsers`, followed by `expectPermissionDeniedForPath`.
+  The new campaign verifies these helper bodies and expects an already-covered
+  decision. The inaccurate earlier task is not reused as a missing-work example.
 
 ## Role-Aware Mockserver: deterministic environment, not prompt retrieval
 
@@ -119,3 +120,7 @@ feedback as well. Both arms retain the same helpers and tools. Framework assets
 must be consumed through their real entry points rather than a researcher-selected
 source bundle. The full workflow runner and independent task evaluators are the
 next implementation work, not completed capabilities of this design package.
+
+The executed follow-up audit and paired campaign are documented in
+[Framework impact](../impact/README.md). This historical design document is not
+the current runner specification.

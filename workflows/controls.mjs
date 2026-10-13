@@ -17,17 +17,17 @@ export class Budget {
  }
 }
 
-export function confinedPath(root,relative,{write=false,sourceEditsAllowed=false,allowedSourceRoots=[]}={}) {
+export function confinedPath(root,relative,{write=false,sourceEditsAllowed=false,allowedSourceRoots=[],allowedExtensions=['.java']}={}) {
  if(typeof relative!=='string'||path.isAbsolute(relative)||relative.split(/[\\/]/).includes('..'))throw Error('Repository-relative path required');
  const p=path.resolve(root,relative);
  if(p!==root&&!p.startsWith(root+path.sep))throw Error('Outside workspace');
- if(relative.split(/[\\/]/).some(x=>['.git','target','.tmp','.home'].includes(x)))throw Error('Generated/private path is not exposed');
+ if(relative.split(/[\\/]/).some(x=>['.git','target','.tmp','.home','node_modules','.runtime','.reports','playwright-report','test-results'].includes(x)))throw Error('Generated/private path is not exposed');
  let current=p;while(!fs.existsSync(current))current=path.dirname(current);
  const real=fs.realpathSync(current);if(real!==root&&!real.startsWith(root+path.sep))throw Error('External link blocked');
  if(write){
   if(!sourceEditsAllowed)throw Error('Read-only scenario validation: source edits prohibited');
   const normalized=path.relative(root,p);
-  if(!normalized.endsWith('.java')||!allowedSourceRoots.some(x=>normalized.startsWith(x.endsWith('/')?x:x+'/')))throw Error('Source edit outside task scope');
+  if(!allowedExtensions.some(x=>normalized.endsWith(x))||!allowedSourceRoots.some(x=>normalized.startsWith(x.endsWith('/')?x:x+'/')))throw Error('Source edit outside task scope');
  }
  return p;
 }

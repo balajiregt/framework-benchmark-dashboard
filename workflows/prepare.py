@@ -21,7 +21,7 @@ def source_file(root, relative):
 def prepare(catalog, sources, output):
     if output.exists():
         raise ValueError('Output already exists; preserve the previous preparation')
-    tasks = catalog['tasks']
+    tasks = [task for task in catalog['tasks'] if not task.get('retired', False)]
     ids = [t['id'] for t in tasks]
     if len(ids) != len(set(ids)):
         raise ValueError('Duplicate task identity')

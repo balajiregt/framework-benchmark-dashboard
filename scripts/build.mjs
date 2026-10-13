@@ -1,4 +1,6 @@
 import fs from 'node:fs';
+import {validateImpact} from '../public/impact.js';
+validateImpact(JSON.parse(fs.readFileSync('public/data/impact.json','utf8')));
 const data=JSON.parse(fs.readFileSync('public/data/benchmarks.json','utf8'));
 if(data.schemaVersion!==1||data.runs.length!==4||new Set(data.runs.map(r=>r.project)).size!==4)throw Error('Require four unique benchmark records');
 for(const name of fs.readdirSync('public',{recursive:true})){const file='public/'+name;if(!fs.statSync(file).isFile())continue;if(/\/Users\/|AI_GATEWAY_API_KEY|resumeHash|reviewerEvidence|sk-[A-Za-z0-9]{15}/.test(fs.readFileSync(file,'utf8')))throw Error('Private content detected in deploy assets');}

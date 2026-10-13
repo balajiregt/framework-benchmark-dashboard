@@ -156,7 +156,9 @@
         "Uses a real manager login and an explicit ready signal before directly navigating to each restricted route.",
         "Checks denial and the relevant path for both routes; disabled navigation controls alone are insufficient.",
         "Healthy execution passes and independent denial-page faults are detected; existing allowed-flow coverage and application source are preserved."
-      ]
+      ],
+      "retired": true,
+      "retirementReason": "Incorrect missing-coverage assumption: direct manager Leads/Admin checks already exist. Use the re-audited impact catalog."
     },
     {
       "id": "ui-update-viewer-export",
@@ -214,7 +216,9 @@
         "Traces the navigation helper and recognizes that disabled navigation controls do not establish direct URL denial.",
         "Reports the direct-route assertion gap in this specified test; does not claim the application is necessarily broken.",
         "Cites body/helper evidence, makes no source edits and does not fabricate a live browser run."
-      ]
+      ],
+      "retired": true,
+      "retirementReason": "Incorrect missing-coverage assumption: direct manager Leads/Admin checks already exist. Use the re-audited impact catalog."
     },
     {
       "id": "ui-validate-existing",
@@ -249,5 +253,6 @@
   "sourceRevisions": {
     "api": "05307710c9568182507faedbceec5f2ce1c22c9f",
     "harness": "2ac1d1a13ddd3aab9282edbb91349c78d690cb35"
-  }
+  },
+  "historicalStatus": "Superseded by impact/tasks.json for new API/Playwright impact campaigns. Two unexecuted manager task assumptions were incorrect."
 }

@@ -10,7 +10,11 @@
     "import": "python3 scripts/import_benchmarks.py --sources sources.local.json",
     "workflow:prepare": "python3 workflows/campaign.py prepare",
     "workflow:run": "python3 workflows/campaign.py run --publish",
-    "workflow:publish": "python3 workflows/publish.py"
+    "workflow:publish": "python3 workflows/publish.py",
+    "impact:audit": "python3 impact/audit.py",
+    "impact:prepare": "python3 impact/run.py prepare",
+    "impact:run": "python3 impact/run.py run --publish",
+    "impact:publish": "python3 impact/publish.py"
   },
   "engines": {
     "node": ">=22"

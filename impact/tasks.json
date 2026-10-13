@@ -1,0 +1,249 @@
+{
+  "protocol": "framework-impact-v1",
+  "sourceRevisions": {
+    "api": "05307710c9568182507faedbceec5f2ce1c22c9f",
+    "harness": "546c089a0670f640c652559d706c294203cc2311"
+  },
+  "tasks": [
+    {
+      "id": "api-create-normalization",
+      "project": "api",
+      "operation": "create",
+      "title": "Cover customer identifier normalization",
+      "request": "Add focused API test coverage showing that GET /xyz accepts customerId \" cust-1001 \", normalizes it to CUST-1001 and returns the existing low-risk decision. Derive all response expectations from the service and contract. Inspect existing coverage before adding a scenario. Keep this a test-only change, preserve existing coverage, run focused verification and report the evidence used.\nFinish with a short report: decision (create, update, already-covered, unsupported or blocked), owning files, evidence supporting that decision, changes made, verification actually performed and remaining limitations.",
+      "evidence": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/java/com/agentic/workspace/qa/xyz/tests/CustomerRiskApiTest.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/service/CustomerRiskService.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/api/CustomerRiskController.java",
+        "projects/microservices/xyz-service/src/main/resources/openapi/xyz-service.openapi.yml",
+        "projects/microservices/qa-steps/src/main/java/com/agentic/workspace/qa/assertions/JsonFieldAssertions.java"
+      ],
+      "allowedSourceRoots": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/",
+        "projects/microservices/qa-steps/src/main/java/"
+      ],
+      "sourceEditsAllowed": true,
+      "evaluatorCriteria": [
+        "A genuinely missing normalization scenario is added using the existing Java API test project.",
+        "The raw input contains lowercase letters and surrounding spaces; the assertion checks normalized customerId and the low-risk decision fields from source.",
+        "Healthy execution succeeds; source inspection confirms the new scenario asserts the requested normalized identifier and source-derived decision fields.",
+        "Existing tests/assertions remain effective and no product, contract, deployment or unrelated source is changed."
+      ],
+      "decisionChecks": [
+        "ownership",
+        "action",
+        "grounding"
+      ],
+      "expectedAction": "create",
+      "allowedExtensions": [
+        ".java"
+      ]
+    },
+    {
+      "id": "api-update-high-score",
+      "project": "api",
+      "operation": "update",
+      "title": "Strengthen the existing high-risk test",
+      "request": "Update the existing high-risk customer API test to verify its exact score and decision reason in addition to its current assertions. Confirm expected values from source and contract. Reuse the owning test rather than adding a duplicate scenario. Keep this test-only, run focused verification and report changed files and evidence.\nFinish with a short report: decision (create, update, already-covered, unsupported or blocked), owning files, evidence supporting that decision, changes made, verification actually performed and remaining limitations.",
+      "evidence": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/java/com/agentic/workspace/qa/xyz/tests/CustomerRiskApiTest.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/service/CustomerRiskService.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/api/CustomerRiskController.java",
+        "projects/microservices/xyz-service/src/main/resources/openapi/xyz-service.openapi.yml",
+        "projects/microservices/qa-steps/src/main/java/com/agentic/workspace/qa/assertions/JsonFieldAssertions.java"
+      ],
+      "allowedSourceRoots": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/",
+        "projects/microservices/qa-steps/src/main/java/"
+      ],
+      "sourceEditsAllowed": true,
+      "evaluatorCriteria": [
+        "The existing high-risk test is extended with score 91 and decisionReason \"Customer requires manual review before eligibility.\".",
+        "Customer ID, eligibility, risk category and status checks are preserved; no equivalent duplicate test is created.",
+        "Healthy execution succeeds; source inspection confirms exact score and reason assertions in the existing high-risk scenario.",
+        "Changes stay in the owning test/support layers; unrelated tests and application behaviour are preserved."
+      ],
+      "decisionChecks": [
+        "ownership",
+        "action",
+        "grounding"
+      ],
+      "expectedAction": "update",
+      "allowedExtensions": [
+        ".java"
+      ]
+    },
+    {
+      "id": "api-validate-format",
+      "project": "api",
+      "operation": "validate",
+      "title": "Assess an unsupported rejection expectation",
+      "request": "Read-only analysis: a proposed GET /xyz test expects HTTP 400 for customerId=NOT-ID because the identifier does not match CUST followed by a number. Is that expectation supported by the current OpenAPI and service implementation? Explain the evidence and what would need clarification or change. Do not modify product or test source.\nFinish with a short report: decision (create, update, already-covered, unsupported or blocked), owning files, evidence supporting that decision, changes made, verification actually performed and remaining limitations.",
+      "evidence": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/java/com/agentic/workspace/qa/xyz/tests/CustomerRiskApiTest.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/service/CustomerRiskService.java",
+        "projects/microservices/xyz-service/src/main/java/com/agentic/workspace/xyz/api/CustomerRiskController.java",
+        "projects/microservices/xyz-service/src/main/resources/openapi/xyz-service.openapi.yml",
+        "projects/microservices/qa-steps/src/main/java/com/agentic/workspace/qa/assertions/JsonFieldAssertions.java"
+      ],
+      "allowedSourceRoots": [
+        "projects/microservices/qa-projects/xyz-service-api-tests/src/test/",
+        "projects/microservices/qa-steps/src/main/java/"
+      ],
+      "sourceEditsAllowed": false,
+      "evaluatorCriteria": [
+        "Explains that OpenAPI requires a nonempty string but specifies no CUST-number pattern.",
+        "Explains that the current source normalizes this input and produces a normal low-risk decision rather than rejecting its format.",
+        "Classifies the proposed rejection as unsupported by the present contract/implementation; distinguishes a proposed requirement from an established application bug.",
+        "Cites actual contract/controller/service evidence and makes no product/test/helper source edits."
+      ],
+      "decisionChecks": [
+        "ownership",
+        "action",
+        "grounding"
+      ],
+      "expectedAction": "unsupported",
+      "allowedExtensions": [
+        ".java"
+      ]
+    },
+    {
+      "id": "ui-create-viewer-denial",
+      "project": "harness",
+      "operation": "create",
+      "title": "Create viewer direct-route coverage",
+      "request": "Add focused CRM coverage for a viewer navigating directly to /crm/leads and /crm/reports. Verify the permission-denied page and the relevant denied path for both routes. Inspect existing coverage, use the real login flow and wait for sign-in to complete. Keep application behaviour and existing coverage unchanged. Use the existing Playwright project and run focused verification.\nFinish with a short report: decision (create, update, already-covered, unsupported or blocked), owning files, evidence supporting that decision, changes made, verification actually performed and remaining limitations.",
+      "evidence": [
+        "tests/sample-crm.spec.ts",
+        "pages/sample-crm.page.ts",
+        "assertions/sample-crm.assertions.ts",
+        "fixtures/base.fixture.ts",
+        "examples/sample-crm-app/public/assets/app.js",
+        "examples/sample-crm-app/api.mjs"
+      ],
+      "allowedSourceRoots": [
+        "tests/",
+        "pages/",
+        "assertions/",
+        "fixtures/",
+        "specs/"
+      ],
+      "sourceEditsAllowed": true,
+      "evaluatorCriteria": [
+        "Adds previously absent viewer direct-route checks for Leads and Reports using the existing project.",
+        "Uses a real viewer login, waits for authenticated readiness and visits both restricted routes.",
+        "Verifies denial and the relevant path for both routes; preserves existing coverage and app source."
+      ],
+      "decisionChecks": [
+        "ownership",
+        "action",
+        "grounding"
+      ],
+      "expectedAction": "create",
+      "allowedExtensions": [
+        ".ts",
+        ".md"
+      ]
+    },
+    {
+      "id": "ui-update-viewer-export",
+      "project": "harness",
+      "operation": "update",
+      "title": "Add API enforcement to the existing viewer flow",
+      "request": "Extend the existing viewer read-only Accounts flow to check that a direct authenticated GET /api/accounts/export is denied with HTTP 403 and JSON {\"error\":\"Access denied\"}. Preserve the current read-only UI and admin-denial checks. Use the real login session, keep the app unchanged, avoid a duplicate viewer flow and run focused verification.\nFinish with a short report: decision (create, update, already-covered, unsupported or blocked), owning files, evidence supporting that decision, changes made, verification actually performed and remaining limitations.",
+      "evidence": [
+        "tests/sample-crm.spec.ts",
+        "pages/sample-crm.page.ts",
+        "assertions/sample-crm.assertions.ts",
+        "fixtures/base.fixture.ts",
+        "examples/sample-crm-app/public/assets/app.js",
+        "examples/sample-crm-app/api.mjs"
+      ],
+      "allowedSourceRoots": [
+        "tests/",
+        "pages/",
+        "assertions/",
+        "fixtures/",
+        "specs/"
+      ],
+      "sourceEditsAllowed": true,
+      "evaluatorCriteria": [
+        "Extends the owning viewer test/support code without duplicating the entire existing flow.",
+        "The HTTP request shares the viewer session created by real login; a 401 from missing authentication is not accepted.",
+        "Checks exact 403 and denial JSON, preserving read-only banner, disabled export control and admin denial.",
+        "Healthy execution passes; source inspection confirms the authenticated request and its assertions are awaited, with no response mocking or application changes."
+      ],
+      "decisionChecks": [
+        "ownership",
+        "action",
+        "grounding"
+      ],
+      "expectedAction": "update",
+      "allowedExtensions": [
+        ".ts",
+        ".md"
+      ]
+    },
+    {
+      "id": "ui-validate-manager-coverage",
+      "project": "harness",
+      "operation": "validate",
+      "title": "Recognise existing manager direct-route coverage",
+      "request": "Read-only analysis: the manager test titled \"manager can use allowed action buttons and is denied restricted routes\" is claimed to prove that direct navigation to Leads and Admin users is denied. Inspect its current body and referenced helpers. Is the requested direct-route coverage already present, or is work still needed? Cite the actual evidence and explain what the checks establish. Do not change source.\nFinish with a short report: decision (create, update, already-covered, unsupported or blocked), owning files, evidence supporting that decision, changes made, verification actually performed and remaining limitations.",
+      "evidence": [
+        "tests/sample-crm.spec.ts",
+        "pages/sample-crm.page.ts",
+        "assertions/sample-crm.assertions.ts",
+        "fixtures/base.fixture.ts",
+        "examples/sample-crm-app/public/assets/app.js",
+        "examples/sample-crm-app/api.mjs"
+      ],
+      "allowedSourceRoots": [
+        "tests/",
+        "pages/",
+        "assertions/",
+        "fixtures/",
+        "specs/"
+      ],
+      "sourceEditsAllowed": false,
+      "evaluatorCriteria": [
+        "Identifies the owning manager test and follows gotoLeads/gotoAdminUsers and expectPermissionDeniedForPath into their implementations.",
+        "Recognises both direct routes and their explicit denial/path checks are already covered in this snapshot.",
+        "Explains what is established without claiming execution or complete backend authorization coverage; makes no edits."
+      ],
+      "decisionChecks": [
+        "ownership",
+        "action",
+        "grounding"
+      ],
+      "expectedAction": "already-covered",
+      "allowedExtensions": [
+        ".ts",
+        ".md"
+      ]
+    }
+  ],
+  "budget": {
+    "wallMs": 900000,
+    "modelResponses": 36,
+    "toolCalls": 80,
+    "verificationCycles": 3,
+    "responseMs": 180000
+  },
+  "pairedRepeats": 1,
+  "decisionRubric": {
+    "ownership": "Correctly identifies the owning test and relevant supporting source/helper, evidenced by paths or an actual correctly placed change.",
+    "action": "Chooses the appropriate create/update/already-covered/unsupported decision with justification. Blocked is not automatically the correct requested decision.",
+    "grounding": "Uses accurate source/contract/helper facts that substantiate the decision; no material invented requirements or execution claims."
+  },
+  "limitations": [
+    "Six source-grounded tasks, one paired run per task; descriptive pilot, not a statistically established benefit.",
+    "API tasks were used in the earlier pilot; this is not an unseen holdout. UI task expectations were rechecked against the actual pinned source.",
+    "Playwright context has a known authentication mismatch, retained and reported rather than silently repaired in one condition.",
+    "Same model, ordinary tools, task source and limits in both conditions. Framework guidance and its resolver/graph commands are the intervention.",
+    "Native-style tool names with confined execution; not an unrestricted production coding agent.",
+    "Shared Apple M1 laptop; background load is not controlled. Human correction time and total operating cost remain unmeasured.",
+    "All semantic decisions are reviewed by the supervising assistant against a frozen rubric, not certified by a human.",
+    "Mockserver and JEV are outside this campaign and retain separate evidence tracks."
+  ]
+}

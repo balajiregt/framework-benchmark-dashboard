@@ -26,7 +26,11 @@ class WorkflowPreparationTests(unittest.TestCase):
                 plan = module.prepare(catalog, {'api': str(root), 'harness': str(root)}, output)
             self.assertEqual(plan['agentRuns'], 0)
             for task in catalog['tasks']:
-                packet = (output / 'agent-tasks' / (task['id'] + '.md')).read_text()
+                packet_path = output / 'agent-tasks' / (task['id'] + '.md')
+                if task.get('retired'):
+                    self.assertFalse(packet_path.exists())
+                    continue
+                packet = packet_path.read_text()
                 self.assertEqual(packet, task['request'] + '\n')
                 for criterion in task['evaluatorCriteria']:
                     self.assertNotIn(criterion, packet)
