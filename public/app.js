@@ -1,3 +1,4 @@
+import {loadComparisonFeed,bindComparisonImport} from './comparisons.js';
 import {loadTeamEvaluations,bindTeamImport} from './team-evaluations.js';
 import {loadDecisions,getPublicDecisions} from './decisions.js';
 import {loadImpact,getPublicImpact,validateImpact} from './impact.js';
@@ -13,7 +14,7 @@ async function load(){
  if(loading)return false;loading=true;$('refresh').disabled=true;
  try{
   if(!dataset){const response=await fetch('/data/benchmarks.json',{cache:'no-store'});if(!response.ok)throw Error('Initial snapshot unavailable');dataset=await response.json();render();}
-  const updated=await refreshFeeds(dataset);dataset=updated.dataset;feedStates=updated.states;render();await Promise.all([loadTrials(),loadWorkflows(),loadImpact(),loadDecisions(),loadTeamEvaluations()]);
+  const updated=await refreshFeeds(dataset);dataset=updated.dataset;feedStates=updated.states;render();await Promise.all([loadTrials(),loadWorkflows(),loadImpact(),loadDecisions(),loadTeamEvaluations(),loadComparisonFeed()]);
   const offline=Object.entries(feedStates).filter(([,s])=>!s.connected).map(([id])=>id);
   $('announcement').textContent=offline.length?'Feed unavailable: '+offline.join(', ')+'. Showing previously loaded evidence for those projects; it may be out of date.':'All three runtime feeds connected. Automatically checks every minute while this page is visible; GitHub caching may delay new results a few minutes.';
   if(downloadURL)URL.revokeObjectURL(downloadURL);downloadURL=URL.createObjectURL(new Blob([JSON.stringify({...dataset,controlledCampaigns:getPublicCampaigns(),workflowCampaign:getPublicWorkflow(),frameworkImpact:getPublicImpact(),decisionBench:getPublicDecisions()},null,2)],{type:'application/json'}));$('download').href=downloadURL;
@@ -28,6 +29,7 @@ $('detail').innerHTML=`<article class="panel"><div class="detail-head"><div><h2>
 for(const bar of $('detail').querySelectorAll('[data-width]'))bar.style.width=bar.dataset.width+'%';}
 $('filter').addEventListener('change',render);$('refresh').addEventListener('click',load);$('validate').addEventListener('click',()=>{if(!dataset)return;const issues=validate(dataset);for(const [id,c] of Object.entries(getPublicCampaigns())){try{validateCampaign(c,id);}catch(e){issues.push(id+' trial: '+e.message);}}const impact=getPublicImpact();if(impact){try{validateImpact(impact);}catch(e){issues.push('Framework impact: '+e.message);}}else issues.push('Framework impact unavailable');const workflow=getPublicWorkflow();if(workflow){try{validateWorkflow(workflow);}catch(e){issues.push('Workflow: '+e.message);}}else issues.push('Workflow evidence unavailable');$('announcement').textContent=issues.length?'Snapshot needs attention: '+issues.join('; '):'Loaded runtime, generation, workflow and framework-impact checks are consistent. Timing, decision and outcome totals passed validation. Unavailable metrics are not zero. Raw-source hashes were verified at import, not independently in this browser.';});
 bindTeamImport();
+bindComparisonImport();
 await load();
 setInterval(()=>{if(!document.hidden)load();},60000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)load();});

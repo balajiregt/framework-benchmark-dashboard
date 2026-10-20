@@ -19,6 +19,19 @@ and `benchmark-results/team-metrics.json` feed. Additional text or private field
 are rejected. Unreviewed estimates, synthetic fixtures, provider failures and
 missing accuracy/runtime measurements remain explicitly labelled.
 
+## Jev / local Laya comparison
+
+The [comparison panel](https://framework-benchmarks-balaji.netlify.app/#jev-laya-comparison)
+accepts the evaluator's version 2 aggregate `metrics.json`. It reads the separate
+`benchmark-results/comparison-metrics.json` feed after explicit `qa publish`.
+Browser import is temporary and sends no file contents to a server.
+
+Completion, common-pair reviewed quality, low-probability decisions, critical
+gaps and measured smoke execution remain separate. Missing reviewer labels mean
+accuracy is unavailable. Detailed `comparison.json` belongs in the private
+[QA Metrics Viewer](https://agentic-qa-metrics-viewer.netlify.app/); this dashboard
+rejects it. See the [comparison guide](https://github.com/balajiregt/playwright-decision-bench/blob/main/docs/jev-laya-comparison.md).
+
 ## Framework impact: context, decisions and delivered work
 
 [Open the framework-impact view](https://framework-benchmarks-balaji.netlify.app/#framework-impact).
