@@ -129,3 +129,11 @@ The dashboard now has a separate **controlled model trial** view with interactiv
 The two application repositories expose `npm run benchmark:trials`. This runs a complete paired campaign and publishes `benchmark-results/trials.json` plus a campaign archive in each repository. Existing runtime publishers preserve these separate files. The dashboard reads the two campaign feeds alongside the three existing execution feeds, every minute while visible. A failed campaign-feed fetch retains the last loaded campaign and shows an explicit stale warning. The bundled seed is a fallback, never presented as a successful live fetch.
 
 [Diagram (SVG)](public/benchmark-flow.svg) · [Editable Mermaid source](public/benchmark-flow.mmd)
+
+## Decision-model pilot
+
+The decision section reads `playwright-decision-bench/benchmark-results/decision-bench.json`,
+validates counts and provenance, and falls back to `public/data/decisions.json` with
+a stale-feed notice. It shows the local Laya/Qwen pilot, pending OpenAI measurements,
+author-label limitations and unmeasured Playwright runtime. It is separate from the
+three existing execution feeds. No prompts, credentials or raw responses are published.

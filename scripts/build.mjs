@@ -1,4 +1,6 @@
 import fs from 'node:fs';
+import {validateDecisions} from '../public/decisions.js';
+validateDecisions(JSON.parse(fs.readFileSync('public/data/decisions.json','utf8')));
 import {validateImpact} from '../public/impact.js';
 validateImpact(JSON.parse(fs.readFileSync('public/data/impact.json','utf8')));
 const data=JSON.parse(fs.readFileSync('public/data/benchmarks.json','utf8'));

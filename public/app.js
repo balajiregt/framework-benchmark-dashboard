@@ -1,3 +1,4 @@
+import {loadDecisions,getPublicDecisions} from './decisions.js';
 import {loadImpact,getPublicImpact,validateImpact} from './impact.js';
 import {loadWorkflows,getPublicWorkflow,validateWorkflow} from './workflows.js';
 import {loadTrials,getPublicCampaigns,validateCampaign} from './trials.js';
@@ -11,10 +12,10 @@ async function load(){
  if(loading)return false;loading=true;$('refresh').disabled=true;
  try{
   if(!dataset){const response=await fetch('/data/benchmarks.json',{cache:'no-store'});if(!response.ok)throw Error('Initial snapshot unavailable');dataset=await response.json();render();}
-  const updated=await refreshFeeds(dataset);dataset=updated.dataset;feedStates=updated.states;render();await Promise.all([loadTrials(),loadWorkflows(),loadImpact()]);
+  const updated=await refreshFeeds(dataset);dataset=updated.dataset;feedStates=updated.states;render();await Promise.all([loadTrials(),loadWorkflows(),loadImpact(),loadDecisions()]);
   const offline=Object.entries(feedStates).filter(([,s])=>!s.connected).map(([id])=>id);
   $('announcement').textContent=offline.length?'Feed unavailable: '+offline.join(', ')+'. Showing previously loaded evidence for those projects; it may be out of date.':'All three runtime feeds connected. Automatically checks every minute while this page is visible; GitHub caching may delay new results a few minutes.';
-  if(downloadURL)URL.revokeObjectURL(downloadURL);downloadURL=URL.createObjectURL(new Blob([JSON.stringify({...dataset,controlledCampaigns:getPublicCampaigns(),workflowCampaign:getPublicWorkflow(),frameworkImpact:getPublicImpact()},null,2)],{type:'application/json'}));$('download').href=downloadURL;
+  if(downloadURL)URL.revokeObjectURL(downloadURL);downloadURL=URL.createObjectURL(new Blob([JSON.stringify({...dataset,controlledCampaigns:getPublicCampaigns(),workflowCampaign:getPublicWorkflow(),frameworkImpact:getPublicImpact(),decisionBench:getPublicDecisions()},null,2)],{type:'application/json'}));$('download').href=downloadURL;
   return true;
  }catch{$('announcement').textContent='Could not refresh evidence. Previously loaded results may be out of date.';return false;}
  finally{loading=false;$('refresh').disabled=false;}
