@@ -1,7 +1,8 @@
 # Framework Benchmark Dashboard
 
 [Live dashboard](https://framework-benchmarks-balaji.netlify.app) for synthetic
-Role-Aware Mockserver, Agentic Playwright, Agentic API and JEV benchmark evidence.
+Role-Aware Mockserver, Agentic Playwright and Agentic API benchmark evidence.
+The planned [Playwright Decision Bench](https://github.com/balajiregt/playwright-decision-bench) compares local Laya and OpenAI Decisions for requirement coverage and smoke selection; no model measurements are available yet.
 
 ## Framework impact: context, decisions and delivered work
 
@@ -45,7 +46,7 @@ is not silently invoked by a framework's ordinary `npm run benchmark` or by clou
 In any enrolled framework checkout, run **`npm run benchmark`**. Its complete
 protocol executes, validates source artifacts and publishes only sanitised
 aggregates to that repo's **`benchmark-results` branch**, in `latest.json`.
-The deployed dashboard reads all four public feeds directly and refreshes every
+The deployed dashboard reads all three public feeds directly and refreshes every
 minute while visible. GitHub CDN caching can add a few minutes. **No manual import
 or Netlify deployment is needed when results change.** Reloading or returning to
 the tab also refreshes. A disconnected feed is labelled, with previous evidence
@@ -56,7 +57,6 @@ retained rather than presented as a fresh success.
 | Mockserver | `balajiregt/plawright-role-aware-mockserver` | Relevant pushes to main; manual dispatch |
 | Playwright | `balajiregt/playwright-harness-framework` | Relevant pushes to main; manual dispatch |
 | API | `balajiregt/agentic-workspace` | Relevant pushes to main; manual dispatch |
-| JEV | `balajiregt/jev-scope-qa` | Manual dispatch only, because live evaluation calls a provider |
 
 Each framework documents dependencies, aliases and recovery in
 `benchmarks/AUTOMATIC-PUBLICATION.md`. Direct ad hoc test commands are not watched.
@@ -85,7 +85,7 @@ model output, credentials, absolute local paths and reviewer notes stay private.
 The public vocabulary names/check IDs are only from the already published synthetic
 protocol. New cases require a reviewed protocol/vocabulary update. Execution and
 source checks are self-reported; the browser cannot independently inspect raw files.
-Ordinary browser runtime does not establish AI productivity. Blocked JEV runs have
+Ordinary browser runtime does not establish AI productivity. Blocked decision-model evaluations have
 no accuracy result. Missing cost and human-effort measurements remain unavailable.
 
 ## Development and deployment
@@ -98,8 +98,8 @@ npm run preview
 
 Node 22, Python 3.10+ and Git are sufficient for dashboard validation. There are no
 browser runtime dependencies. `automation/` contains the common publisher/runner;
-`scripts/install-automation.py` synchronises it to four explicitly enrolled local
-checkouts at `../work/repos/{mockserver,harness,api,jev}`. Update that explicit mapping
+`scripts/install-automation.py` synchronises it to three explicitly enrolled local
+checkouts at `../work/repos/{mockserver,harness,api}`. Update that explicit mapping
 when maintaining from another checkout; do not scan arbitrary private projects.
 
 The original `npm run import` command and ignored `sources.local.json` remain for
@@ -126,6 +126,6 @@ work, not additional completed trials.
 
 The dashboard now has a separate **controlled model trial** view with interactive completion, quality, generation-time, token and API-equivalent-cost charts, all trial/check outcomes, hashes and a downloadable architecture diagram. See [the reproducible protocol](trials/README.md). This first pilot measures context-assisted test generation, not the complete autonomous workflow. Human corrections remain unmeasured. Actual spend is unavailable; token-derived API estimates are explicitly labelled.
 
-The two application repositories expose `npm run benchmark:trials`. This runs a complete paired campaign and publishes `benchmark-results/trials.json` plus a campaign archive in each repository. Existing runtime publishers preserve these separate files. The dashboard reads the two campaign feeds alongside the four existing execution feeds, every minute while visible. A failed campaign-feed fetch retains the last loaded campaign and shows an explicit stale warning. The bundled seed is a fallback, never presented as a successful live fetch.
+The two application repositories expose `npm run benchmark:trials`. This runs a complete paired campaign and publishes `benchmark-results/trials.json` plus a campaign archive in each repository. Existing runtime publishers preserve these separate files. The dashboard reads the two campaign feeds alongside the three existing execution feeds, every minute while visible. A failed campaign-feed fetch retains the last loaded campaign and shows an explicit stale warning. The bundled seed is a fallback, never presented as a successful live fetch.
 
 [Diagram (SVG)](public/benchmark-flow.svg) · [Editable Mermaid source](public/benchmark-flow.mmd)

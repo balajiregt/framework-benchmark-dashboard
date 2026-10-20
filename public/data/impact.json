@@ -1319,6 +1319,6 @@
     "Native-style tool names with confined execution; not an unrestricted production coding agent.",
     "Shared Apple M1 laptop; background load is not controlled. Human correction time and total operating cost remain unmeasured.",
     "All semantic decisions are reviewed by the supervising assistant against a frozen rubric, not certified by a human.",
-    "Mockserver and JEV are outside this campaign and retain separate evidence tracks."
+    "Mockserver and decision-model review are outside this campaign and retain separate evidence tracks."
   ]
 }

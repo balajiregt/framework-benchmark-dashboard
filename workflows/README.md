@@ -188,7 +188,7 @@ evaluate it separately. A final healthy pass alone is insufficient. Mutation
 checks are a downstream quality gate for relevant create/update tasks, not the
 definition of context quality. Validation decisions require independently reviewed
 evidence; until reviewed, mark them `pending-review`, not automatically correct.
-JEV may supply advisory findings but must not be the sole grader of itself or the
+Decision models may supply advisory findings but must not be the sole grader of itself or the
 agent. No human approval or assessment is fabricated.
 
 ## Measurements and denominators
@@ -231,7 +231,7 @@ time separate from task time. Initial context regeneration/capture needed during
 the assigned task counts toward task time. Record any pre-existing capture cache
 and its evidence timestamp/hash; warm and cold context are separate conditions.
 
-## Mockserver and JEV roles
+## Mockserver role
 
 The standalone Mockserver controls deterministic identity/backend conditions; it
 does not itself assemble agent prompts. For API-workspace UI routing experiments,
@@ -239,12 +239,6 @@ its real context path is `ui-context.yml` -> `resolved-ui-context.yml` -> the UI
 skill. Keep Mockserver runtime behaviour constant in both agent arms. Its separate
 runtime/environment comparison remains valid and separately reported.
 
-JEV v2 consumes explicit requirement sources, scenario inventories, actual code
-and helper evidence with completeness flags. It is a review stage, not a test
-generator or repair agent. Keep its existing planning/duplication/implementation
-evaluation separate. A later integration can ask whether adding JEV review helps
-the same agent; that is a new intervention and must include review latency/cost.
-Do not add JEV only to one arm of this context comparison.
 
 ## Dashboard contract
 

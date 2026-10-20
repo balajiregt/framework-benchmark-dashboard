@@ -32,7 +32,7 @@ class AutomationTests(unittest.TestCase):
     result=m.export(root,'harness');self.assertEqual(result['status'],'unavailable');self.assertEqual(result['integrity'],'invalid');self.assertEqual(result['metrics'],[])
   finally:m.HERE=oldhere
  def test_vendored_publishers_match_reviewed_source(self):
-  for project in ['api','mockserver','harness','jev']:
+  for project in ['api','mockserver','harness']:
    for name in ['publish.py','run.py','import_benchmarks.py','public-vocabulary.json']:
     path=ROOT.parent/'work/repos'/project/'benchmarks/dashboard'/name
     if path.exists():self.assertEqual(path.read_bytes(),(ROOT/'automation'/name).read_bytes())

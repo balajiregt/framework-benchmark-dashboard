@@ -697,7 +697,7 @@
     "One paired repeat per task; three tasks, descriptive engineering pilot.",
     "Nine prior started attempts across three campaigns are excluded and retained privately: three setup-invalid attempts (context-summary leakage/tool-discovery mismatch), then a six-attempt campaign with violated response/wall deadlines after host interruption. No comparative claim uses those attempts. This campaign adds pause detection and wall-clock watchdogs; tasks and model settings are unchanged.",
     "Pi host uses bounded repository tools and controlled Maven execution, not an unrestricted terminal.",
-    "The API context resolver and skill are exercised; UI capture and JEV review are outside this first batch.",
+    "The API context resolver and skill are exercised; UI capture and decision-model review review are outside this first batch.",
     "Human corrections and operating cost are unmeasured.",
     "Semantic task decisions require review; unreviewed outcomes remain pending.",
     "Compaction and retries are disabled; context-limit failures remain in the denominator."

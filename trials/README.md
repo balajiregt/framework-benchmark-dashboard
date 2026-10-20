@@ -25,7 +25,7 @@ CRM faults: viewer export returns 200, wrong denial JSON, enabled export button,
 - **Cost:** reported CLI input, cached-input and output tokens; standard API-equivalent USD estimate from dated official rates. Actual billed spend is unavailable for the signed-in CLI. This estimate does not include subscription allocation or infrastructure.
 - **Provenance:** prompt, source, response, event and evaluator hashes. Model alias is recorded; an immutable backend snapshot is not exposed by the CLI.
 
-This is a small context-assisted generation pilot. It does not measure the complete agentic planner/capture/repair workflow, JEV model quality, developer productivity, production reliability or financial return. Larger and harder tasks plus a timed human review are needed before those claims.
+This is a small context-assisted generation pilot. It does not measure the complete agentic planner/capture/repair workflow, decision-model review model quality, developer productivity, production reliability or financial return. Larger and harder tasks plus a timed human review are needed before those claims.
 
 ## Run locally
 

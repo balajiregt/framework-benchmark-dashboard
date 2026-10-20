@@ -1,7 +1,7 @@
 """Export allowlisted public aggregate evidence; raw reports never enter the site."""
 import argparse, datetime, hashlib, json, pathlib
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-REPOS={'mockserver':('Role-Aware Mockserver','plawright-role-aware-mockserver'),'harness':('Agentic Playwright','playwright-harness-framework'),'api':('Agentic API','agentic-workspace'),'jev':('JEV Review','jev-scope-qa')}
+REPOS={'mockserver':('Role-Aware Mockserver','plawright-role-aware-mockserver'),'harness':('Agentic Playwright','playwright-harness-framework'),'api':('Agentic API','agentic-workspace')}
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def iso(ts):return datetime.datetime.fromtimestamp(ts,datetime.timezone.utc).isoformat()
 def load(root,name):
@@ -68,10 +68,6 @@ def collect(kind,root):
     name=source['file'];p=root/'projects/microservices/qa-projects/xyz-service-api-tests/target/surefire-reports'/name
     ok=pathlib.Path(name).name==name and p.is_file() and sha(p.read_bytes())==source.get('sha256');base['checks'].append(check('JUnit source: '+name,ok,'XML hash checked locally; XML not published'))
    base['checks'].append(check('Oracle has test evidence',bool(rows),'Empty evidence cannot pass'));metric('Passed API cases',sum(r['status']=='passed' for r in rows),' / '+str(len(rows)));trials=trial_summary(root);base['agentTrials']=trials;base['checks'].append(check('Trial records consistent',trials['invalidRecords']==0,'Duplicate pairs or malformed records do not qualify'));metric('Paired live-agent trials',trials['pairedRepeats']);metric('Scripted collector checks',trials['scriptedValidations']);metric('Human corrections',None);metric('AI cost',None);base['status']='passed' if rows and all(r['status']=='passed' for r in rows) else 'failed';base['limitations']=['Synthetic sample API; no production result.','Timestamp is file provenance, not measured agent elapsed time.','Agent comparisons require matched task, model/version and target groups; scripted validation is separate.']
-  else:
-   report,h,t=evidence('artifacts/workflow-benchmark.json');metrics,_,_=evidence('artifacts/crm-benchmark-metrics.json');rows=report.get('rows',[]);ids=[c['id'] for c in report.get('checks',[])];evaluated=sum(r['status']=='evaluated' for r in rows);errors=sum(r['status']=='error' for r in rows);base['checks'] += [check('Metrics match source report',metrics.get('reportSha256')==h,'SHA256 comparison'),check('Unique valid check identities',len(ids)==len(set(ids)) and len(rows)==len(set(r['checkId'] for r in rows)) and all(r['checkId'] in ids for r in rows),'No duplicated or unknown checks'),check('Evaluation denominator',metrics.get('overall',{}).get('evaluated')==evaluated and metrics.get('overall',{}).get('requested')==len(ids),'Requested and evaluated remain separate')];base['runAt']=report.get('generatedAt',t);base['timeBasis']='evaluator report generated time';base['status']='blocked' if errors and not evaluated else 'partial' if evaluated<len(ids) else 'completed';base['mode']=report.get('mode');metric('Evaluated checks',evaluated,' / '+str(len(ids)));metric('Operational errors',errors);metric('Not evaluated',len(ids)-evaluated-errors);m=metrics.get('overall',{}).get('metrics') or {}
-   for label,key in [('Issue precision','precision'),('Issue recall','recall'),('Missed issue rate','missedIssueRate'),('False alarm rate','falseAlarmRate'),('Exact finding accuracy','exactFindingAccuracy')]:metric(label,m.get(key),'ratio')
-   metric('AI cost',None);base['limitations']=metrics.get('limitations',[]);base['cases']=[{'name':r['checkId'],'status':r['status'],'errorCode':r.get('errorCode')} for r in rows];base['stages']={k:{'requested':v.get('requested'),'evaluated':v.get('evaluated')} for k,v in metrics.get('stages',{}).items()};base['notice']='Provider HTTP 403 prevented live evaluation. No model quality result.' if any(r.get('errorCode')=='http_403' for r in rows) else 'Authored synthetic evaluation; inspect coverage before interpreting findings.'
   base['checks'].append(check('No expected-failure oracles',all(r.get('expectedStatus','passed')=='passed' for r in base['cases']),'Expected failures cannot qualify as successful oracle evidence'))
   base['checks'].append(check('No oracle retries',all(r.get('attempts',1)==1 for r in base['cases']),'Retry counts checked where browser/JUnit results are supplied'))
   base['integrity']='verified' if base['checks'] and all(c['ok'] for c in base['checks']) else 'invalid'
@@ -81,8 +77,8 @@ def collect(kind,root):
  return base
 
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--sources',type=pathlib.Path,required=True,help='JSON mapping of exactly four repo IDs to artifact-bearing checkout paths');parser.add_argument('--output',type=pathlib.Path,default=ROOT/'public/data/benchmarks.json');args=parser.parse_args();sources=json.loads(args.sources.read_text())
- if set(sources)!=set(REPOS):raise SystemExit('Sources must map exactly mockserver, harness, api and jev')
+ parser=argparse.ArgumentParser();parser.add_argument('--sources',type=pathlib.Path,required=True,help='JSON mapping of exactly three repo IDs to artifact-bearing checkout paths');parser.add_argument('--output',type=pathlib.Path,default=ROOT/'public/data/benchmarks.json');args=parser.parse_args();sources=json.loads(args.sources.read_text())
+ if set(sources)!=set(REPOS):raise SystemExit('Sources must map exactly mockserver, harness and api')
  runs=[collect(k,pathlib.Path(sources[k]).resolve()) for k in REPOS];history=[]
  if args.output.exists():history=json.loads(args.output.read_text()).get('history',[])
  known={r['runId'] for r in history}

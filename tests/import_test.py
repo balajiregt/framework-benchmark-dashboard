@@ -12,9 +12,7 @@ class EvidenceTests(unittest.TestCase):
  def test_tampered_mutation_hash_and_expected_failures_are_invalid(self):
   with tempfile.TemporaryDirectory() as d:
    root=pathlib.Path(d);self.write(root,'benchmark-results/oracle.json',self.browser());h=self.write(root,'benchmark-results/mutant.json',self.browser('failed'));self.write(root,'benchmark-results/mutation-summary.json',{'detected':True,'reportSha256':'0'*64});self.assertEqual(m.collect('harness',root)['integrity'],'invalid');self.write(root,'benchmark-results/mutation-summary.json',{'detected':True,'reportSha256':h});self.assertEqual(m.collect('harness',root)['integrity'],'verified');self.write(root,'benchmark-results/oracle.json',self.browser(expected='failed'));self.assertEqual(m.collect('harness',root)['integrity'],'invalid')
- def test_blocked_jev_never_leaks_gold_prompts_or_raw_errors(self):
-  with tempfile.TemporaryDirectory() as d:
-   root=pathlib.Path(d);report={'mode':'live','checks':[{'id':'check-1'}],'rows':[{'checkId':'check-1','status':'error','errorCode':'http_403','error':'PRIVATE_RAW_ERROR'}],'gold':['PRIVATE_GOLD'],'prompt':'PRIVATE_PROMPT'};h=self.write(root,'artifacts/workflow-benchmark.json',report);self.write(root,'artifacts/crm-benchmark-metrics.json',{'reportSha256':h,'overall':{'requested':1,'evaluated':0,'metrics':None}});r=m.collect('jev',root);self.assertEqual(r['status'],'blocked');self.assertEqual(r['integrity'],'verified');public=json.dumps(r);self.assertNotIn('PRIVATE_',public);self.assertNotIn(str(root),public);self.assertTrue(all(x['value'] is None for x in r['metrics'] if x['label']=='Issue precision'))
+
  def test_api_source_hash_mismatch_does_not_verify(self):
   with tempfile.TemporaryDirectory() as d:
    root=pathlib.Path(d);r=self.browser();r['sourceReports']=[{'file':'TEST.xml','sha256':'0'*64}];self.write(root,'benchmark-results/api-oracle.json',r);self.assertEqual(m.collect('api',root)['integrity'],'invalid')

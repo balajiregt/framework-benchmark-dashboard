@@ -1,5 +1,5 @@
 // Public, repository-scoped result feeds. No tokens and no browser-side writes.
-export const repos={mockserver:'plawright-role-aware-mockserver',harness:'playwright-harness-framework',api:'agentic-workspace',jev:'jev-scope-qa'};
+export const repos={mockserver:'plawright-role-aware-mockserver',harness:'playwright-harness-framework',api:'agentic-workspace'};
 export const feedURL=id=>`https://raw.githubusercontent.com/balajiregt/${repos[id]}/benchmark-results/latest.json`;
 export function validateRun(run,id){
   if(!run || run.project!==id || run.repository!==`https://github.com/balajiregt/${repos[id]}` || run.protocol!==run.repository+'/blob/main/benchmarks/README.md')throw Error('Feed identity or source link mismatch');
@@ -9,7 +9,6 @@ export function validateRun(run,id){
   if(run.integrity==='verified'&&!run.checks.every(c=>c.ok))throw Error('Contradictory integrity');
   if((run.evidence??[]).some(e=>!/^[a-f0-9]{64}$/.test(e.sha256)))throw Error('Invalid evidence fingerprint');
   if(run.runAt!==null&&!Number.isFinite(Date.parse(run.runAt)))throw Error('Invalid attempt timestamp');
-  if(id==='jev'&&['blocked','unavailable'].includes(run.status)&&run.metrics.some(m=>['Issue precision','Issue recall','Exact finding accuracy'].includes(m.label)&&m.value!==null))throw Error('Blocked evaluation cannot claim accuracy');
   if(run.agentTrials){
     const t=run.agentTrials,number=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0;
     if(!['liveTrials','scriptedValidations','pairedRepeats','invalidRecords'].every(k=>number(t[k]))||!Array.isArray(t.groups))throw Error('Invalid trial aggregates');

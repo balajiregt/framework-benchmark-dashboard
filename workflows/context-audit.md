@@ -11,7 +11,6 @@ new live runtime validation.
 | Agentic API workspace | `05307710c9568182507faedbceec5f2ce1c22c9f` |
 | Playwright harness | `2ac1d1a13ddd3aab9282edbb91349c78d690cb35` |
 | Role-Aware Mockserver | `9727b865bf8cb6d87cf7fb344c21cce95b0c5f13` |
-| JEV review | `2ab090805177fc36544a5fca5d8a4489a2690e50` |
 
 ## Agentic API: route from a small ticket to exact evidence
 
@@ -95,22 +94,6 @@ an agent context engine. Its existing environment benchmark remains separate.
 Source: [helper](https://github.com/balajiregt/plawright-role-aware-mockserver/blob/9727b865bf8cb6d87cf7fb344c21cce95b0c5f13/playwright/helpers/api-mock.ts),
 [UI skill](https://github.com/balajiregt/agentic-workspace/blob/05307710c9568182507faedbceec5f2ce1c22c9f/skills/playwright-ui-change/SKILL.md).
 
-## JEV: bounded review packets and uncertainty
-
-V2's `src/workflow.ts` constructs planning, duplication and implementation
-questions from explicitly supplied sources, scenario inventory, code and helper
-evidence. Completeness/conflict signals matter. Gold labels and reviewer decisions
-are excluded from model packets. The handoff is documented, but there is no
-automatic repository extraction, Jira connector or Playwright result import in
-this v2 workflow. Do not describe that handoff as already automated.
-
-JEV cannot create/repair tests or approve them for a lead. Evaluate its findings
-against independent reviewed expectations, separately from coding-agent task
-success. Existing live-provider failures must stay operational failures; no
-new review accuracy is inferred from this inspection.
-
-Source: [workflow](https://github.com/balajiregt/jev-scope-qa/blob/2ab090805177fc36544a5fca5d8a4489a2690e50/src/workflow.ts),
-[handoff](https://github.com/balajiregt/jev-scope-qa/blob/2ab090805177fc36544a5fca5d8a4489a2690e50/docs/agent-handoff.md).
 
 ## Consequence for the redesign
 

@@ -12,6 +12,7 @@ test('each successful feed replaces current data without a rebuild',async()=>{
 test('feed identity and unsafe links are rejected',()=>{
  const run=seed.runs[0];assert.throws(()=>validateFeed(envelope({...run,repository:'javascript:alert(1)'}),run.project));assert.throws(()=>validateFeed(envelope(run),'api'));
 });
-test('blocked evaluations cannot claim measured accuracy',()=>{
- const run=structuredClone(seed.runs.find(r=>r.project==='jev'));run.metrics.find(m=>m.label==='Issue precision').value=1;assert.throws(()=>validateFeed(envelope(run),'jev'));
+test('only current execution feeds are requested',async()=>{
+ const urls=[];await refreshFeeds(seed,async url=>{urls.push(url);throw Error('offline');});
+ assert.equal(urls.length,3);assert.deepEqual(seed.runs.map(r=>r.project).sort(),['api','harness','mockserver']);
 });

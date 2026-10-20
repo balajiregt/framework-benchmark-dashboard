@@ -15,8 +15,8 @@ words.update(['Expected JUnit source','Exact fixed API suite required','executio
 configs={
  'mockserver':{'steps':[['node','node_modules/@playwright/test/cli.js','test','--config=benchmarks/playwright.config.ts'],['node','benchmarks/summarize.mjs']], 'outputs':['benchmark-results/playwright.json','benchmark-results/summary.json']},
  'harness':{'steps':[['node','node_modules/@playwright/test/cli.js','test','--config=benchmarks/playwright.config.ts'],['node','benchmarks/mutation.mjs']],'outputs':['benchmark-results/oracle.json','benchmark-results/mutant.json','benchmark-results/mutation-summary.json']},
- 'api':{'steps':[['python3','benchmarks/dashboard/api-suite.py']],'outputs':['benchmark-results/api-oracle.json']},
- 'jev':{'steps':[['node','--import','tsx','src/workflow-cli.ts','benchmark','--input','benchmarks/crm-inputs.json','--gold','benchmarks/crm-gold.json'],['node','--import','tsx','src/benchmark-metrics.ts']],'outputs':['artifacts/workflow-benchmark.json','artifacts/crm-benchmark-metrics.json']}}
+ 'api':{'steps':[['python3','benchmarks/dashboard/api-suite.py']],'outputs':['benchmark-results/api-oracle.json']}}
+
 for project,config in configs.items():
  root=ROOT.parent/'work/repos'/project;dest=root/'benchmarks/dashboard';dest.mkdir(parents=True,exist_ok=True)
  for name in ['run.py','publish.py','import_benchmarks.py','public-vocabulary.json']+(['api-suite.py'] if project=='api' else []):shutil.copyfile(ROOT/'automation'/name,dest/name)
@@ -24,7 +24,6 @@ for project,config in configs.items():
  (dest/'config.json').write_text(json.dumps(config,indent=2)+'\n')
  package=root/'package.json';p=json.loads(package.read_text());s=p['scripts'];s['benchmark']='python3 benchmarks/dashboard/run.py';s['benchmark:publish']='python3 benchmarks/dashboard/publish.py'
  if project=='harness':s['benchmark:oracle']='npm run benchmark';s['benchmark:mutation']='npm run benchmark'
- if project=='jev':s['benchmark:crm:live']='npm run benchmark'
  if project in ('harness','api'):s['postbenchmark:collect']='python3 benchmarks/dashboard/publish.py --refresh-trials'
  package.write_text(json.dumps(p,indent=2)+'\n')
  ignore=root/'.gitignore';text=ignore.read_text();addition='\n# Private benchmark execution and publication state\nbenchmark-results/\nbenchmarks/dashboard/__pycache__/\n';ignore.write_text(text+addition) if 'benchmarks/dashboard/__pycache__/' not in text else None
@@ -33,15 +32,14 @@ for project,config in configs.items():
 Run `npm run benchmark`. The complete fixed protocol runs, validates source evidence,
 and publishes sanitised aggregates to this repository's `benchmark-results` branch.
 The shared [dashboard](https://framework-benchmarks-balaji.netlify.app) refreshes
-all four feeds every minute while visible. GitHub CDN caching can add a few minutes.
+all three execution feeds every minute while visible. GitHub CDN caching can add a few minutes.
 No dashboard import, source commit or Netlify deployment is needed for data updates.
 
 Requires Python 3.10+, Git with push access, and the project's existing benchmark
 runtime/dependencies. Browser projects need `npx playwright install chromium`;
-the API needs Java 17+ and Maven. JEV needs its existing provider configuration;
+the API needs Java 17+ and Maven. Decision-model integration is pending;
 missing credentials, provider errors and incomplete runs are visible as unavailable
-or blocked, never model accuracy. Only JEV's explicit manual CI dispatch attempts
-live evaluation; ordinary source pushes do not initiate paid model calls.
+or blocked, never model accuracy. No decision-model calls are made by these three execution feeds.
 
 `BENCHMARK_PUBLISH=0 npm run benchmark` runs privately and prepares the ignored
 public aggregate without sending it. Use this for forks, sensitive experiments
@@ -58,7 +56,7 @@ has stopped. There is no background daemon watching arbitrary files.
 
 The supported `npm run benchmark` entry point is the automatic path. Harness
 `benchmark:oracle` and `benchmark:mutation` now invoke the complete protocol so a
-partial rerun cannot mix old and new reports. JEV `benchmark:crm:live` is an alias.
+partial rerun cannot mix old and new reports.
 `benchmark:collect` in API/harness also republishes validated trial aggregates after
 a previous complete benchmark. Direct Playwright/Maven/evaluator commands, preview,
 unit tests and metrics-only commands do not publish. A standalone collector without
@@ -90,9 +88,9 @@ and synchronised to these checked-in copies with its `scripts/install-automation
 ''')
  readme=root/'benchmarks/README.md';t=readme.read_text();link='\nSee [automatic dashboard publication](AUTOMATIC-PUBLICATION.md) for the canonical runner, CI, privacy controls and retry behaviour.\n';readme.write_text(t+link) if link not in t else None
  workflow=root/'.github/workflows/benchmark.yml';workflow.parent.mkdir(parents=True,exist_ok=True)
- paths={'mockserver':['app/**','mockserver/**','playwright/**'],'harness':['examples/sample-crm-app/**','tests/**'],'api':['projects/microservices/**'],'jev':['src/**']}[project]
+ paths={'mockserver':['app/**','mockserver/**','playwright/**'],'harness':['examples/sample-crm-app/**','tests/**'],'api':['projects/microservices/**']}[project]
  trigger='  workflow_dispatch:\n'
- if project!='jev':trigger+='  push:\n    branches: [main]\n    paths: '+json.dumps(['benchmarks/**','package*.json','.github/workflows/benchmark.yml']+paths)+'\n'
+ trigger+='  push:\n    branches: [main]\n    paths: '+json.dumps(['benchmarks/**','package*.json','.github/workflows/benchmark.yml']+paths)+'\n'
  setup=''
  if project=='api':setup+='      - uses: actions/setup-java@v4\n        with:\n          distribution: temurin\n          java-version: "17"\n          cache: maven\n'
  else:setup+='      - run: npm ci\n'
@@ -121,10 +119,10 @@ jobs:
         run: npm run benchmark
         env:
           BENCHMARK_PUBLISH: '0'
-'''+("          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}\n" if project=='jev' else '')+'''      - name: Publish this attempt even if benchmark failed
+'''+'''      - name: Publish this attempt even if benchmark failed
         if: always() && steps.benchmark.outcome != 'skipped'
         run: npm run benchmark:publish
         env:
           GH_BENCHMARK_TOKEN: ${{ github.token }}
 ''')
-print('Synchronized automation to four enrolled repos')
+print('Synchronized automation to three enrolled repos')

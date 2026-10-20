@@ -102,7 +102,7 @@ into success. Independent grading time is outside the agent attempt clock.
 One pair per task cannot establish a general effect, model ranking or statistically
 reliable speedup. These are synthetic sample apps, and API tasks were used in an
 earlier pilot. The shared M1 laptop and small local model limit generalization.
-No new JEV or Mockserver outcome claim is made by this campaign.
+No new decision-model review or Mockserver outcome claim is made by this campaign.
 
 ## Reproduce and publish
 
