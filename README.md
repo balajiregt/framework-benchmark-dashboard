@@ -2,7 +2,22 @@
 
 [Live dashboard](https://framework-benchmarks-balaji.netlify.app) for synthetic
 Role-Aware Mockserver, Agentic Playwright and Agentic API benchmark evidence.
-The planned [Playwright Decision Bench](https://github.com/balajiregt/playwright-decision-bench) compares local Laya and OpenAI Decisions for requirement coverage and smoke selection; no model measurements are available yet.
+The [Playwright Decision Bench](https://github.com/balajiregt/playwright-decision-bench)
+includes a synthetic model pilot and a reusable local suite evaluator.
+
+## Evaluate a team's Playwright suite
+
+[Local setup and file templates](https://github.com/balajiregt/playwright-decision-bench/blob/main/docs/team-quickstart.md)
+cover JSON, XLS/XLSX and DOC/DOCX requirements, local Laya or Qwen inference,
+draft requirement coverage, and smoke proposals with dependency/runtime checks.
+Source, requirements and detailed reports stay on the team's machine.
+
+The [Team suite evaluations](https://framework-benchmarks-balaji.netlify.app/#team-evaluations)
+panel accepts only the closed `metrics.json` schema. File import stays in browser
+memory. Shared publication uses the evaluator's authenticated `qa publish` command
+and `benchmark-results/team-metrics.json` feed. Additional text or private fields
+are rejected. Unreviewed estimates, synthetic fixtures, provider failures and
+missing accuracy/runtime measurements remain explicitly labelled.
 
 ## Framework impact: context, decisions and delivered work
 
