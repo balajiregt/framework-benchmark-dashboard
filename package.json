@@ -14,7 +14,10 @@
     "impact:audit": "python3 impact/audit.py",
     "impact:prepare": "python3 impact/run.py prepare",
     "impact:run": "python3 impact/run.py run --publish",
-    "impact:publish": "python3 impact/publish.py"
+    "impact:publish": "python3 impact/publish.py",
+    "security:staged": "node scripts/security-gate.mjs",
+    "security:hooks": "node scripts/install-security-hook.mjs",
+    "security:check": "python3 scripts/security_audit.py"
   },
   "engines": {
     "node": ">=22"
