@@ -1,4 +1,5 @@
-const URL_FEED='https://raw.githubusercontent.com/balajiregt/agentic-workspace/benchmark-results/workflow-results.json';
+import {registeredSource} from './platform-registry.mjs';
+const URL_FEED=registeredSource('api-workflow-pilot','workflows').url;
 let campaign=null,connected=false;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const number=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0;

@@ -1,8 +1,11 @@
 // Public, repository-scoped result feeds. No tokens and no browser-side writes.
-export const repos={mockserver:'plawright-role-aware-mockserver',harness:'playwright-harness-framework',api:'agentic-workspace'};
-export const feedURL=id=>`https://raw.githubusercontent.com/balajiregt/${repos[id]}/benchmark-results/latest.json`;
+import {runtimeEntries} from './platform-registry.mjs';
+import {sourceURL} from './platform-contract.mjs';
+const entries=Object.fromEntries(runtimeEntries.map(entry=>[entry.source.legacyProject,entry]));
+export const repos=Object.fromEntries(runtimeEntries.map(({project,source})=>[source.legacyProject,project.repository.split('/').at(-1)]));
+export const feedURL=id=>{const e=entries[id];if(!e)throw Error('Unregistered runtime project');return sourceURL(e.project,e.source);};
 export function validateRun(run,id){
-  if(!run || run.project!==id || run.repository!==`https://github.com/balajiregt/${repos[id]}` || run.protocol!==run.repository+'/blob/main/benchmarks/README.md')throw Error('Feed identity or source link mismatch');
+  if(!run || run.project!==id || run.repository!==entries[id]?.project.repository || run.protocol!==run.repository+'/blob/main/benchmarks/README.md')throw Error('Feed identity or source link mismatch');
   if(!/^[a-f0-9]{16}$/.test(run.runId)||!['passed','failed','blocked','partial','completed','unavailable'].includes(run.status)||!['verified','invalid'].includes(run.integrity))throw Error('Invalid run identity or state');
   for(const key of ['checks','cases','metrics','limitations'])if(!Array.isArray(run[key])||run[key].length>2000)throw Error('Invalid result collection');
   if(!run.checks.every(c=>typeof c.ok==='boolean')||!run.metrics.every(m=>m.value===null||(typeof m.value==='number'&&Number.isFinite(m.value)&&m.value>=0)))throw Error('Invalid check or metric');

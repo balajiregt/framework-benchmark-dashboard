@@ -17,7 +17,11 @@
     "impact:publish": "python3 impact/publish.py",
     "security:staged": "node scripts/security-gate.mjs",
     "security:hooks": "node scripts/install-security-hook.mjs",
-    "security:check": "python3 scripts/security_audit.py"
+    "security:check": "python3 scripts/security_audit.py",
+    "platform:sync": "node scripts/sync-platform-contract.mjs",
+    "platform:check": "node scripts/sync-platform-contract.mjs --check && node .agents/skills/platform-publish/scripts/cli.mjs registry --input public/data/platform-registry.json && node scripts/package-platform-skill.mjs --check",
+    "platform:publish": "node .agents/skills/platform-publish/scripts/cli.mjs",
+    "platform:bundle": "node scripts/package-platform-skill.mjs"
   },
   "engines": {
     "node": ">=22"

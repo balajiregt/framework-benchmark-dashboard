@@ -1,3 +1,4 @@
+import {runtimeProjectIds} from './platform-registry.mjs';
 import {loadComparisonFeed,bindComparisonImport} from './comparisons.js';
 import {loadTeamEvaluations,bindTeamImport} from './team-evaluations.js';
 import {loadDecisions,getPublicDecisions} from './decisions.js';
@@ -6,17 +7,17 @@ import {loadWorkflows,getPublicWorkflow,validateWorkflow} from './workflows.js';
 import {loadTrials,getPublicCampaigns,validateCampaign} from './trials.js';
 import {refreshFeeds} from './feeds.js';
 let feedStates={},loading=false,downloadURL;
-let dataset,selected=['mockserver','harness','api'].includes(location.hash.slice(1))?location.hash.slice(1):'mockserver';const $=id=>document.getElementById(id);const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let dataset,selected=runtimeProjectIds.includes(location.hash.slice(1))?location.hash.slice(1):'mockserver';const $=id=>document.getElementById(id);const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const label={passed:'Passed execution',blocked:'Live evaluation blocked',failed:'Execution failed',partial:'Partial evaluation',completed:'Evaluation completed',unavailable:'Evidence unavailable',verified:'Import integrity verified',invalid:'Evidence needs attention'};
 const date=value=>value?new Date(value).toLocaleString(undefined,{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}):'Unavailable';
-function validate(data){const issues=[];if(data.schemaVersion!==1||!Array.isArray(data.runs)||data.runs.length!==3)return ['Require three benchmark records'];const ids=new Set;for(const r of data.runs){if(ids.has(r.project))issues.push('Duplicate project');ids.add(r.project);if(!['mockserver','harness','api'].includes(r.project))issues.push('Unknown project');if(!Array.isArray(r.checks)||!r.checks.length||!r.checks.every(c=>c.ok===true))issues.push(r.title+': import evidence checks need attention');if(r.integrity==='verified'&&!r.checks.every(c=>c.ok===true))issues.push(r.title+': contradictory integrity');if(!r.evidence?.every(e=>/^[a-f0-9]{64}$/.test(e.sha256)))issues.push(r.title+': invalid provenance hash');if(r.metrics?.some(m=>m.value!==null&&(typeof m.value!=='number'||!Number.isFinite(m.value)||m.value<0)))issues.push(r.title+': invalid metric value');}return issues;}
+function validate(data){const issues=[];if(data.schemaVersion!==1||!Array.isArray(data.runs)||data.runs.length!==runtimeProjectIds.length)return ['Require one record per registered runtime source'];const ids=new Set;for(const r of data.runs){if(ids.has(r.project))issues.push('Duplicate project');ids.add(r.project);if(!runtimeProjectIds.includes(r.project))issues.push('Unknown project');if(!Array.isArray(r.checks)||!r.checks.length||!r.checks.every(c=>c.ok===true))issues.push(r.title+': import evidence checks need attention');if(r.integrity==='verified'&&!r.checks.every(c=>c.ok===true))issues.push(r.title+': contradictory integrity');if(!r.evidence?.every(e=>/^[a-f0-9]{64}$/.test(e.sha256)))issues.push(r.title+': invalid provenance hash');if(r.metrics?.some(m=>m.value!==null&&(typeof m.value!=='number'||!Number.isFinite(m.value)||m.value<0)))issues.push(r.title+': invalid metric value');}return issues;}
 async function load(){
  if(loading)return false;loading=true;$('refresh').disabled=true;
  try{
   if(!dataset){const response=await fetch('/data/benchmarks.json',{cache:'no-store'});if(!response.ok)throw Error('Initial snapshot unavailable');dataset=await response.json();render();}
   const updated=await refreshFeeds(dataset);dataset=updated.dataset;feedStates=updated.states;render();await Promise.all([loadTrials(),loadWorkflows(),loadImpact(),loadDecisions(),loadTeamEvaluations(),loadComparisonFeed()]);
   const offline=Object.entries(feedStates).filter(([,s])=>!s.connected).map(([id])=>id);
-  $('announcement').textContent=offline.length?'Feed unavailable: '+offline.join(', ')+'. Showing previously loaded evidence for those projects; it may be out of date.':'All three runtime feeds connected. Automatically checks every minute while this page is visible; GitHub caching may delay new results a few minutes.';
+  $('announcement').textContent=offline.length?'Feed unavailable: '+offline.join(', ')+'. Showing previously loaded evidence for those projects; it may be out of date.':`All ${runtimeProjectIds.length} runtime feeds connected. Automatically checks every minute while this page is visible; GitHub caching may delay new results a few minutes.`;
   if(downloadURL)URL.revokeObjectURL(downloadURL);downloadURL=URL.createObjectURL(new Blob([JSON.stringify({...dataset,controlledCampaigns:getPublicCampaigns(),workflowCampaign:getPublicWorkflow(),frameworkImpact:getPublicImpact(),decisionBench:getPublicDecisions()},null,2)],{type:'application/json'}));$('download').href=downloadURL;
   return true;
  }catch{$('announcement').textContent='Could not refresh evidence. Previously loaded results may be out of date.';return false;}
@@ -34,4 +35,4 @@ await load();
 setInterval(()=>{if(!document.hidden)load();},60000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)load();});
 
-window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(['mockserver','harness','api'].includes(id)){selected=id;if(dataset)render();}});
+window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(runtimeProjectIds.includes(id)){selected=id;if(dataset)render();}});

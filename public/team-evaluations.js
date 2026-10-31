@@ -1,5 +1,6 @@
+import {registeredSource} from './platform-registry.mjs';
 import {validateTeamMetrics} from './team-metrics-schema.js';
-const FEED='https://raw.githubusercontent.com/balajiregt/playwright-decision-bench/benchmark-results/team-metrics.json';
+const FEED=registeredSource('playwright-decision-bench','team-evaluations').url;
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ms=v=>v===null?'Unavailable':Math.round(v).toLocaleString()+' ms';
 export function validateTeamFeed(d){if(!d||Object.keys(d).sort().join(',')!=='runs,schemaVersion'||d.schemaVersion!==1||!Array.isArray(d.runs)||d.runs.length>100)throw Error('Invalid team metrics feed');d.runs.forEach(validateTeamMetrics);if(new Set(d.runs.map(r=>r.runId)).size!==d.runs.length)throw Error('Duplicate runs');return d;}

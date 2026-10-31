@@ -1,4 +1,5 @@
-const FEED='https://raw.githubusercontent.com/balajiregt/playwright-decision-bench/benchmark-results/decision-bench.json';
+import {registeredSource} from './platform-registry.mjs';
+const FEED=registeredSource('playwright-decision-bench','decisions').url;
 const providers=['laya','openai','qwen'],tasks=['coverage','smoke'],splits=['development','heldout'];
 const esc=v=>String(v??'Unavailable').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const rate=v=>v===null?'Unavailable':(v*100).toFixed(1)+'%';

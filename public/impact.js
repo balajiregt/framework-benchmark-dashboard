@@ -1,4 +1,5 @@
-const FEED='https://raw.githubusercontent.com/balajiregt/agentic-workspace/benchmark-results/framework-impact.json';
+import {registeredSource} from './platform-registry.mjs';
+const FEED=registeredSource('framework-impact','impact').url;
 let current=null,connected=false;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const finite=x=>typeof x==='number'&&Number.isFinite(x)&&x>=0;

@@ -5,6 +5,14 @@ Role-Aware Mockserver, Agentic Playwright and Agentic API benchmark evidence.
 The [Playwright Decision Bench](https://github.com/balajiregt/playwright-decision-bench)
 includes a synthetic model pilot and a reusable local suite evaluator.
 
+## Reusable project publishing
+
+The [publishing architecture](docs/platform-publishing.md) defines the versioned
+metrics contract, project/analysis registry and portable `$platform-publish`
+skill. New integrations use a separate standard feed; existing benchmark
+producers and specialised validators remain compatible. The registry reserves
+project and analysis routes for the forthcoming routed UI.
+
 ## Evaluate a team's Playwright suite
 
 [Local setup and file templates](https://github.com/balajiregt/playwright-decision-bench/blob/main/docs/team-quickstart.md)

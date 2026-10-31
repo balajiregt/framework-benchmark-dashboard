@@ -1,5 +1,6 @@
+import {registeredSource} from './platform-registry.mjs';
 import {validateComparisonMetrics} from './comparison-metrics-schema.mjs';
-const FEED='https://raw.githubusercontent.com/balajiregt/playwright-decision-bench/benchmark-results/comparison-metrics.json';
+const FEED=registeredSource('playwright-decision-bench','comparison').url;
 const esc=x=>String(x??'Unavailable').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pct=x=>x===null?'Unavailable':(x*100).toFixed(1)+'%';
 const ms=x=>x===null?'Unavailable':Math.round(x)+' ms';

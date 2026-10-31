@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "projects": [
+    {
+      "id": "agentic-api",
+      "title": "Agentic API",
+      "description": "Context-aware API testing with Spring Boot and RestAssured.",
+      "kind": "framework",
+      "repository": "https://github.com/balajiregt/agentic-workspace",
+      "demoUrl": null,
+      "route": "/projects/agentic-api",
+      "sources": [
+        {
+          "id": "runtime",
+          "format": "legacy-runtime-v1",
+          "repository": "https://github.com/balajiregt/agentic-workspace",
+          "branch": "benchmark-results",
+          "path": "latest.json",
+          "legacyProject": "api"
+        }
+      ]
+    },
+    {
+      "id": "agentic-playwright",
+      "title": "Agentic Playwright",
+      "description": "Source-aware browser testing and capture workflows.",
+      "kind": "framework",
+      "repository": "https://github.com/balajiregt/playwright-harness-framework",
+      "demoUrl": null,
+      "route": "/projects/agentic-playwright",
+      "sources": [
+        {
+          "id": "runtime",
+          "format": "legacy-runtime-v1",
+          "repository": "https://github.com/balajiregt/playwright-harness-framework",
+          "branch": "benchmark-results",
+          "path": "latest.json",
+          "legacyProject": "harness"
+        }
+      ]
+    },
+    {
+      "id": "role-aware-mockserver",
+      "title": "Role-Aware Mockserver",
+      "description": "Controlled backend responses for role-based UI tests.",
+      "kind": "framework",
+      "repository": "https://github.com/balajiregt/plawright-role-aware-mockserver",
+      "demoUrl": null,
+      "route": "/projects/role-aware-mockserver",
+      "sources": [
+        {
+          "id": "runtime",
+          "format": "legacy-runtime-v1",
+          "repository": "https://github.com/balajiregt/plawright-role-aware-mockserver",
+          "branch": "benchmark-results",
+          "path": "latest.json",
+          "legacyProject": "mockserver"
+        }
+      ]
+    },
+    {
+      "id": "playwright-decision-bench",
+      "title": "Playwright Decision Bench",
+      "description": "Experiments in requirement coverage and smoke-suite selection.",
+      "kind": "experiment",
+      "repository": "https://github.com/balajiregt/playwright-decision-bench",
+      "demoUrl": null,
+      "route": "/projects/playwright-decision-bench",
+      "sources": [
+        {
+          "id": "decisions",
+          "format": "decision-bench-v1",
+          "repository": "https://github.com/balajiregt/playwright-decision-bench",
+          "branch": "benchmark-results",
+          "path": "decision-bench.json",
+          "legacyProject": null
+        },
+        {
+          "id": "team-evaluations",
+          "format": "team-metrics-v1",
+          "repository": "https://github.com/balajiregt/playwright-decision-bench",
+          "branch": "benchmark-results",
+          "path": "team-metrics.json",
+          "legacyProject": null
+        },
+        {
+          "id": "comparison",
+          "format": "comparison-metrics-v2",
+          "repository": "https://github.com/balajiregt/playwright-decision-bench",
+          "branch": "benchmark-results",
+          "path": "comparison-metrics.json",
+          "legacyProject": null
+        }
+      ]
+    }
+  ],
+  "analyses": [
+    {
+      "id": "framework-impact",
+      "title": "Framework context and delivered work",
+      "description": "Paired local experiments examining context, decisions and delivery.",
+      "repository": "https://github.com/balajiregt/framework-benchmark-dashboard",
+      "route": "/analyses/framework-impact",
+      "projectIds": [
+        "agentic-api",
+        "agentic-playwright"
+      ],
+      "sources": [
+        {
+          "id": "impact",
+          "format": "impact-v1",
+          "repository": "https://github.com/balajiregt/agentic-workspace",
+          "branch": "benchmark-results",
+          "path": "framework-impact.json",
+          "legacyProject": null
+        }
+      ]
+    },
+    {
+      "id": "api-workflow-pilot",
+      "title": "Earlier API workflow pilot",
+      "description": "Historical create, update and validation attempts, with interpretation limits.",
+      "repository": "https://github.com/balajiregt/framework-benchmark-dashboard",
+      "route": "/analyses/api-workflow-pilot",
+      "projectIds": [
+        "agentic-api"
+      ],
+      "sources": [
+        {
+          "id": "workflows",
+          "format": "workflow-v1",
+          "repository": "https://github.com/balajiregt/agentic-workspace",
+          "branch": "benchmark-results",
+          "path": "workflow-results.json",
+          "legacyProject": null
+        }
+      ]
+    },
+    {
+      "id": "generation-trials",
+      "title": "Controlled generation trials",
+      "description": "Earlier paired generation pilots, kept separate from runtime checks.",
+      "repository": "https://github.com/balajiregt/framework-benchmark-dashboard",
+      "route": "/analyses/generation-trials",
+      "projectIds": [
+        "agentic-api",
+        "agentic-playwright"
+      ],
+      "sources": [
+        {
+          "id": "api",
+          "format": "trials-v1",
+          "repository": "https://github.com/balajiregt/agentic-workspace",
+          "branch": "benchmark-results",
+          "path": "trials.json",
+          "legacyProject": null
+        },
+        {
+          "id": "harness",
+          "format": "trials-v1",
+          "repository": "https://github.com/balajiregt/playwright-harness-framework",
+          "branch": "benchmark-results",
+          "path": "trials.json",
+          "legacyProject": null
+        },
+        {
+          "id": "local",
+          "format": "trials-v1",
+          "repository": "https://github.com/balajiregt/agentic-workspace",
+          "branch": "benchmark-results",
+          "path": "local-trials.json",
+          "legacyProject": null
+        }
+      ]
+    },
+    {
+      "id": "jev-vs-laya",
+      "title": "Jev versus local Laya",
+      "description": "Metrics-only model comparisons; unavailable evidence remains explicit.",
+      "repository": "https://github.com/balajiregt/framework-benchmark-dashboard",
+      "route": "/analyses/jev-vs-laya",
+      "projectIds": [
+        "playwright-decision-bench"
+      ],
+      "sources": [
+        {
+          "id": "comparison",
+          "format": "comparison-metrics-v2",
+          "repository": "https://github.com/balajiregt/playwright-decision-bench",
+          "branch": "benchmark-results",
+          "path": "comparison-metrics.json",
+          "legacyProject": null
+        }
+      ]
+    }
+  ]
+}
